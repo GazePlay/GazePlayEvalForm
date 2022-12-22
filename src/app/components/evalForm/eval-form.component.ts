@@ -7,14 +7,17 @@ import { Component } from '@angular/core';
 })
 export class EvalFormComponent {
 
-  nameEval = "GazePlayEval";
-  isAnonymous = true;
-  lastName = "";
-  firstName = "";
-  gender = "";
-  age = "";
-  birthDate = "";
-  birthPlace = "";
+  index:number = 0;
+
+  nameEval:String = "GazePlayEval";
+  isAnonymous:boolean = true;
+  lastName:String = "";
+  firstName:String = "";
+  gender:String = "";
+  age:String = "";
+  birthDate:String = "";
+  birthPlace:String = "";
+  scores:String[][] = [["Total","tot1","1","10"]];
 
   getNameEval(value: any){
     this.nameEval = value.target.value;
@@ -48,6 +51,34 @@ export class EvalFormComponent {
     this.birthPlace = value.target.value;
   }
 
+  getNameScore(value: any, index: number){
+    this.scores[index][0] = value.target.value;
+    this.scores[index][1] = value.target.value.slice(0,3) + this.index;
+    this.index++;
+  }
+
+  getValueScore(value: any, index: number){
+    this.scores[index][2] = value.target.value;
+  }
+
+  getMaxValeScore(value: any, index: number){
+    this.scores[index][3] = value.target.value;
+  }
+
+  addOneMoreScore(){
+    this.scores.push(["", "", "", ""]);
+  }
+
+  removeOneMoreScore(index: number){
+    let tmp:String[][] = [];
+    for (let i=0; i<this.scores.length; i++){
+      if (i != index){
+        tmp.push(this.scores[i]);
+      }
+    }
+    this.scores = tmp;
+  }
+
   submit(){
     console.log("Nom évaluation : " + this.nameEval);
     console.log("Anonyme ? : " + this.isAnonymous);
@@ -59,5 +90,6 @@ export class EvalFormComponent {
       console.log("Date de naissance : " + this.birthDate);
       console.log("Lieu de naissance : " + this.birthPlace);
     }
+    console.log(this.scores);
   }
 }

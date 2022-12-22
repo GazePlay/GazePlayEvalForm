@@ -6,10 +6,10 @@
     <div class="card-body">
       <div class="mb-3">
         <label for="EvalName" class="form-label">Nom de l'évaluation</label>
-        <input type="text" class="form-control" id="EvalName" placeholder="Par exemple : GazePlayEval" (change)="getNameEval($event)">
+        <input type="text" class="form-control" id="EvalName" placeholder="Exemple : GazePlayEval" (change)="getNameEval($event)">
       </div>
       <div class="mb-3">
-        <label class="form-label">Informations du patient</label>
+        <label class="form-label">Patient anonyme</label>
         <select class="form-select" aria-label="Default select example" (change)="getIsAnonymous($event)">
           <option value="True">Oui</option>
           <option value="False">Non</option>
@@ -17,28 +17,57 @@
         <div *ngIf="!isAnonymous" class="mb-3" id="profil">
           <br>
           <label for="PatientLastName" class="form-label">Nom</label>
-          <input type="text" class="form-control" id="PatientLastName" placeholder="Par exemple : Jean" (change)="getLastName($event)">
+          <input type="text" class="form-control" id="PatientLastName" placeholder="Exemple : Jean" (change)="getLastName($event)">
           <br>
           <label for="PatientFirstName" class="form-label">Prénom</label>
-          <input type="text" class="form-control" id="PatientFirstName" placeholder="Par exemple : Pierre" (change)="getFirstName($event)">
+          <input type="text" class="form-control" id="PatientFirstName" placeholder="Exemple : Pierre" (change)="getFirstName($event)">
           <br>
           <label for="PatientGender" class="form-label">Genre</label>
-          <input type="text" class="form-control" id="PatientGender" placeholder="Par exemple : Homme" (change)="getGender($event)">
+          <input type="text" class="form-control" id="PatientGender" placeholder="Exemple : Homme" (change)="getGender($event)">
           <br>
           <label for="PatientAge" class="form-label">Age</label>
-          <input type="number" class="form-control" id="PatientAge" placeholder="Par exemple : 15" (change)="getAge($event)">
+          <input type="number" class="form-control" id="PatientAge" placeholder="Exemple : 15" (change)="getAge($event)">
           <br>
           <label for="PatientBirthDate" class="form-label">Date de naissance</label>
-          <input type="text" class="form-control" id="PatientBirthDate" placeholder="Par exemple : 07/07/1977" (change)="getBirthDate($event)">
+          <input type="text" class="form-control" id="PatientBirthDate" placeholder="Exemple : 07/07/1977" (change)="getBirthDate($event)">
           <br>
           <label for="PatientBirthPlace" class="form-label">Lieu de naissance</label>
-          <input type="text" class="form-control" id="PatientBirthPlace" placeholder="Par exemple : Paris" (change)="getBirthPlace($event)">
+          <input type="text" class="form-control" id="PatientBirthPlace" placeholder="Exemple : Paris" (change)="getBirthPlace($event)">
+        </div>
+      </div>
+      <label for="EvalName" class="form-label">Score de l'évaluation</label>
+      <div class="mb-3" id="scores">
+        <div *ngFor="let value of scores; let index = index">
+          <div class="mb-3">
+            <div class="row">
+              <div class="col">
+                <label for="ScoreName" class="form-label">Nom du score</label>
+                <input type="text" class="form-control" id="ScoreName" placeholder="Exemple : Total" (change)="getNameScore($event, index)">
+              </div>
+              <div class="col">
+                <label for="ScorePoint" class="form-label">Point du score</label>
+                <input type="text" class="form-control" id="ScorePoint" placeholder="Exemple : 1" (change)="getValueScore($event, index)">
+              </div>
+              <div class="col">
+                <label for="ScoreMaxPoint" class="form-label">Point max du score</label>
+                <input type="text" class="form-control" id="ScoreMaxPoint" placeholder="Exemple : 10" (change)="getMaxValeScore($event, index)">
+              </div>
+              <div class="col text-left border-end d-flex align-items-end">
+                <button type="button" class="btn btn-danger removeButton" (click)="removeOneMoreScore(index)">-</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3 text-center">
+          <button type="button" class="btn btn-secondary" (click)="addOneMoreScore()">+</button>
         </div>
       </div>
       <div class="mb-3">
-        <label for="EvalName" class="form-label">Images et son du l'évaluation</label>
+        <label for="EvalName" class="form-label">Images et son de l'évaluation</label>
       </div>
-      <button type="button" class="btn btn-secondary" (click)="submit()">Submit</button>
+      <div class="mb-3 text-center">
+        <button type="button" class="btn btn-secondary" (click)="submit()">Submit</button>
+      </div>
     </div>
   </div>
 </div>
