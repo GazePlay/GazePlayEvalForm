@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import * as FileSaver from "file-saver";
+import * as JSZip from "jszip";
 
 @Component({
   selector: 'app-eval-form',
@@ -91,5 +93,13 @@ export class EvalFormComponent {
       console.log("Lieu de naissance : " + this.birthPlace);
     }
     console.log(this.scores);
+
+    /*const zip = new JSZip();
+    let data = {"EvalName": this.nameEval, "Anonymous": String(this.isAnonymous)};
+    let jsonData = new Blob([JSON.stringify(data)], {type: 'application/json'});
+    zip.file("config.json", jsonData);
+    zip.generateAsync({type:"blob"}).then((content) => {
+      FileSaver.saveAs(content, this.nameEval.toString());
+    });*/
   }
 }
