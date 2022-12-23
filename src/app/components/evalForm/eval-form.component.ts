@@ -20,6 +20,9 @@ export class EvalFormComponent {
   birthDate:String = "";
   birthPlace:String = "";
   scores:String[][] = [["Total","tot1","1","10"]];
+  listTag:String[] = [];
+  output:String = "all";
+  assets:String[][] = [["assets/NeedImage.png", "", "assets/NeedImage.png", "", "", "", "", ""]];
 
   getNameEval(value: any){
     this.nameEval = value.target.value;
@@ -56,6 +59,7 @@ export class EvalFormComponent {
   getNameScore(value: any, index: number){
     this.scores[index][0] = value.target.value;
     this.scores[index][1] = value.target.value.slice(0,3) + this.index;
+    this.listTag.push(this.scores[index][0]);
     this.index++;
   }
 
@@ -79,27 +83,121 @@ export class EvalFormComponent {
       }
     }
     this.scores = tmp;
+    this.removeOneTag(index);
+  }
+
+  removeOneTag(index: number){
+    let tmp:String[]= [];
+    for (let i=0; i<this.listTag.length; i++){
+      if (i != index){
+        tmp.push(this.listTag[i]);
+      }
+    }
+    this.listTag = tmp;
+  }
+
+  getImageLeft(value: any, index: number){
+    const image = value.target.files[0];
+    const reader = new FileReader();
+    try {
+      reader.readAsDataURL(image);
+      reader.onload = () => {
+        this.assets[index][0] = String(reader.result);
+      };
+    }catch (e){
+      this.assets[index][0] = "assets/NeedImage.png";
+    }
+  }
+
+  getImageRight(value: any, index: number){
+    const image = value.target.files[0];
+    const reader = new FileReader();
+    try {
+      reader.readAsDataURL(image);
+      reader.onload = () => {
+        this.assets[index][2] = String(reader.result);
+      };
+    }catch (e){
+      this.assets[index][2] = "assets/NeedImage.png";
+    }
+  }
+
+  resetImageLeft(index: number){
+    this.assets[index][0] = "assets/NeedImage.png";
+  }
+
+  resetImageRight(index: number){
+    this.assets[index][2] = "assets/NeedImage.png";
+  }
+
+  getSound(value: any, index:number){
+    const son = value.target.files[0];
+    const reader = new FileReader();
+    try {
+      reader.readAsDataURL(son);
+      reader.onload = () => {
+        this.assets[index][4] = String(reader.result);
+      };
+    }catch (e){
+      this.assets[index][4] = "";
+    }
+  }
+
+  resetSound(index: number){
+    this.assets[index][4] = "";
+  }
+
+  getDescriptionImageLeft(value: any, index: number){
+    this.assets[index][1] = value.target.value;
+  }
+
+  getDescriptionImageRight(value: any, index: number){
+    this.assets[index][3] = value.target.value;
+  }
+
+  getDescriptionSound(value: any, index: number){
+    this.assets[index][5] = value.target.value;
+  }
+
+  getGoodImage(value: String, index: number){
+    this.assets[index][6] = value;
+  }
+
+  addOneMoreItem(){
+    this.assets.push(["assets/NeedImage.png", "", "assets/NeedImage.png", "", "", "", "", ""]);
+  }
+
+  removeOneMoreItem(index: number){
+    let tmp:String[][] = [];
+    for (let i=0; i<this.assets.length; i++){
+      if (i != index){
+        tmp.push(this.assets[i]);
+      }
+    }
+    this.assets = tmp;
+  }
+
+  addRemoveTag(value: Event, index: number){
+  }
+
+  getOutput(value: any){
+    this.output = value.target.value;
   }
 
   submit(){
-    console.log("Nom évaluation : " + this.nameEval);
-    console.log("Anonyme ? : " + this.isAnonymous);
-    if (!this.isAnonymous){
-      console.log("Nom : " + this.lastName);
-      console.log("Prénom : " + this.firstName);
-      console.log("Genre : " + this.gender);
-      console.log("Age : " + this.age);
-      console.log("Date de naissance : " + this.birthDate);
-      console.log("Lieu de naissance : " + this.birthPlace);
-    }
-    console.log(this.scores);
-
-    /*const zip = new JSZip();
-    let data = {"EvalName": this.nameEval, "Anonymous": String(this.isAnonymous)};
+    const zip = new JSZip();
+    let data = {
+      "EvalName": this.nameEval,
+      "Anonymous": String(this.isAnonymous),
+      "Profil": [this.lastName, this.firstName, this.gender, this.age, this.birthDate, this.birthPlace],
+      "Scores": [this.scores],
+      "Assets": [this.assets],
+      "Output": this.output
+    };
     let jsonData = new Blob([JSON.stringify(data)], {type: 'application/json'});
     zip.file("config.json", jsonData);
     zip.generateAsync({type:"blob"}).then((content) => {
       FileSaver.saveAs(content, this.nameEval.toString());
-    });*/
+    });
   }
 }

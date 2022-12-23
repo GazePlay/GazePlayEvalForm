@@ -46,27 +46,107 @@
               </div>
               <div class="col">
                 <label for="ScorePoint" class="form-label">Point du score</label>
-                <input type="text" class="form-control" id="ScorePoint" placeholder="Exemple : 1" (change)="getValueScore($event, index)">
+                <input type="number" class="form-control" id="ScorePoint" placeholder="Exemple : 1" (change)="getValueScore($event, index)">
               </div>
               <div class="col">
                 <label for="ScoreMaxPoint" class="form-label">Point max du score</label>
-                <input type="text" class="form-control" id="ScoreMaxPoint" placeholder="Exemple : 10" (change)="getMaxValeScore($event, index)">
+                <input type="number" class="form-control" id="ScoreMaxPoint" placeholder="Exemple : 10" (change)="getMaxValeScore($event, index)">
               </div>
-              <div class="col text-left border-end d-flex align-items-end">
-                <button type="button" class="btn btn-danger removeButton" (click)="removeOneMoreScore(index)">-</button>
+              <div class="col text-left border-end d-flex align-items-end removeButton">
+                <button type="button" class="btn btn-danger" (click)="removeOneMoreScore(index)">-</button>
               </div>
             </div>
           </div>
         </div>
         <div class="mb-3 text-center">
-          <button type="button" class="btn btn-secondary" (click)="addOneMoreScore()">+</button>
+          <button type="button" class="btn btn-secondary" id="addScoreButton" (click)="addOneMoreScore()">+</button>
+        </div>
+      </div>
+      <label for="EvalName" class="form-label">Images et son de l'évaluation</label>
+      <div class="mb-3">
+        <div *ngFor="let value of assets; let index = index">
+          <div class="mb-3">
+            <div class="row">
+              <div class="col">
+                <label class="form-label d-grid gap-2 col-6 mx-auto title">Image 1</label>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                  <button type="button" class="btn-close" aria-label="Close" (click)="resetImageLeft(index)"></button>
+                </div>
+                <img [src]="assets[index][0]" class="rounded mx-auto d-block" alt="Image choisie par l'utilisateur">
+                <input type="file" class="form-control" accept=".jpg, .jpeg, .png" (change)="getImageLeft($event, index)">
+                <div class="mb-3 textArea">
+                  <label for="descriptionImageLeft" class="form-label d-grid gap-2 col-6 mx-auto title">Description de l'image</label>
+                  <textarea class="form-control" id="descriptionImageLeft" rows="2" (change)="getDescriptionImageLeft($event, index)"></textarea>
+                </div>
+                <div class="radioDiv">
+                  <input type="radio" name="chooseImage" id="leftImage" (change)="getGoodImage('First', index)">
+                  <label class="radioLabel" for="leftImage">
+                    Bonne image
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <label class="form-label d-grid gap-2 col-6 mx-auto title">Image 2</label>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                  <button type="button" class="btn-close" aria-label="Close" (click)="resetImageRight(index)"></button>
+                </div>
+                <img [src]="assets[index][2]" class="rounded mx-auto d-block" alt="Image choisie par l'utilisateur">
+                <input type="file" class="form-control" accept=".jpg, .jpeg, .png" (change)="getImageRight($event, index)">
+                <div class="mb-3 textArea">
+                  <label for="descriptionImageRight" class="form-label d-grid gap-2 col-6 mx-auto title">Description de l'image</label>
+                  <textarea class="form-control" id="descriptionImageRight" rows="2" (change)="getDescriptionImageRight($event, index)"></textarea>
+                </div>
+                <div class="radioDiv">
+                  <input class="form-check-input" type="radio" name="chooseImage" id="rightImage" (change)="getGoodImage('Second', index)">
+                  <label class="radioLabel" for="rightImage">
+                    Bonne image
+                  </label>
+                </div>
+              </div>
+              <div class="col">
+                <label class="form-label d-grid gap-2 col-6 mx-auto title">Son</label>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                  <button type="button" class="btn-close" aria-label="Close" (click)="resetSound(index)"></button>
+                </div>
+                <div class="audioElem">
+                  <audio [src]="assets[index][4]" controls></audio>
+                </div>
+                <input type="file" class="form-control" accept=".mp3, .wav" (change)="getSound($event, index)">
+                <div class="mb-3 textArea">
+                  <label for="descriptionSound" class="form-label d-grid gap-2 col-6 mx-auto title">Description du son</label>
+                  <textarea class="form-control" id="descriptionSound" rows="2" (change)="getDescriptionSound($event, index)"></textarea>
+                </div>
+              </div>
+              <div class="col">
+                <div *ngFor="let value of listTag; let index = index">
+                  <div class="radioDiv">
+                    <input class="form-check-input" type="checkbox" value="" id="chooseTag" (change)="addRemoveTag($event, index)">
+                    <label class="form-check-label radioLabel" for="chooseTag">
+                      {{listTag[index]}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col border-end d-flex justify-content-center align-items-center removeButton">
+                <button type="button" class="btn btn-danger" (click)="removeOneMoreItem(index)">-</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3 text-center">
+          <button type="button" class="btn btn-secondary" (click)="addOneMoreItem()">+</button>
         </div>
       </div>
       <div class="mb-3">
-        <label for="EvalName" class="form-label">Images et son de l'évaluation</label>
+        <label class="form-label">Résultat</label>
+        <select class="form-select" aria-label="Default select example" (change)="getOutput($event)">
+          <option value="all">Csv & Xlsx</option>
+          <option value="csv">Csv</option>
+          <option value="xlsx">Xlsx</option>
+        </select>
       </div>
       <div class="mb-3 text-center">
-        <button type="button" class="btn btn-secondary" (click)="submit()">Submit</button>
+        <button type="button" class="btn btn-secondary" (click)="submit()">Créer son évaluation</button>
       </div>
     </div>
   </div>
