@@ -59,7 +59,7 @@ export class EvalFormComponent {
   getNameScore(value: any, index: number){
     this.scores[index][0] = value.target.value;
     this.scores[index][1] = value.target.value.slice(0,3) + this.index;
-    this.listTag.push(this.scores[index][0]);
+    this.listTag[index] = this.scores[index][0];
     this.index++;
   }
 
@@ -177,7 +177,28 @@ export class EvalFormComponent {
     this.assets = tmp;
   }
 
-  addRemoveTag(value: Event, index: number){
+  addTag(value: Event, index: number, tagIndex: number){
+    console.log("Previous tag = " + this.assets[index][7]);
+    if (this.assets[index][7].includes(this.listTag[tagIndex].toString())){
+      let tmp:String[] = this.assets[index][7].split(",");
+      this.assets[index][7] = "";
+      tmp.forEach(value => {
+        if (value != this.listTag[tagIndex]){
+          if (this.assets[index][7] == ""){
+            this.assets[index][7] = this.assets[index][7].toString() + value;
+          }else {
+            this.assets[index][7] = this.assets[index][7] + "," + value;
+          }
+        }
+      });
+    }else {
+      if ( this.assets[index][7] == ""){
+        this.assets[index][7] = this.listTag[tagIndex];
+      }else {
+        this.assets[index][7] = this.assets[index][7] + "," + this.listTag[tagIndex];
+      }
+    }
+    console.log("Current tag = " + this.assets[index][7]);
   }
 
   getOutput(value: any){

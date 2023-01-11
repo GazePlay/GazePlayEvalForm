@@ -118,11 +118,11 @@
                 </div>
               </div>
               <div class="col">
-                <div *ngFor="let value of listTag; let index = index">
+                <div *ngFor="let value of listTag; let tagIndex = index">
                   <div class="radioDiv">
-                    <input class="form-check-input" type="checkbox" value="" id="chooseTag" (change)="addRemoveTag($event, index)">
+                    <input class="form-check-input" type="checkbox" value="" id="chooseTag" (change)="addTag($event, index, tagIndex)">
                     <label class="form-check-label radioLabel" for="chooseTag">
-                      {{listTag[index]}}
+                      {{listTag[tagIndex]}}
                     </label>
                   </div>
                 </div>
