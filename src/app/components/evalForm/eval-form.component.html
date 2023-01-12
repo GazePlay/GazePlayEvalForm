@@ -64,7 +64,7 @@
       </div>
       <label for="EvalName" class="form-label">Images et son de l'évaluation</label>
       <div class="mb-3">
-        <div *ngFor="let value of assets; let index = index">
+        <div *ngFor="let value of imgAndSongToDisplay; let index = index">
           <div class="mb-3">
             <div class="row">
               <div class="col">
@@ -72,15 +72,15 @@
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                   <button type="button" class="btn-close" aria-label="Close" (click)="resetImageLeft(index)"></button>
                 </div>
-                <img [src]="assets[index][0]" class="rounded mx-auto d-block" alt="Image choisie par l'utilisateur">
+                <img [src]="imgAndSongToDisplay[index][0]" class="rounded mx-auto d-block" alt="Image choisie par l'utilisateur">
                 <input type="file" class="form-control" accept=".jpg, .jpeg, .png" (change)="getImageLeft($event, index)">
                 <div class="mb-3 textArea">
                   <label for="descriptionImageLeft" class="form-label d-grid gap-2 col-6 mx-auto title">Description de l'image</label>
                   <textarea class="form-control" id="descriptionImageLeft" rows="2" (change)="getDescriptionImageLeft($event, index)"></textarea>
                 </div>
                 <div class="radioDiv">
-                  <input type="radio" name="chooseImage" id="leftImage" (change)="getGoodImage('First', index)">
-                  <label class="radioLabel" for="leftImage">
+                  <input class="form-check-input" type="radio" [name]="index" [id]="'leftRadioButton'+index" (change)="getGoodImage('First', index)">
+                  <label class="radioLabel" [for]="'leftRadioButton'+index">
                     Bonne image
                   </label>
                 </div>
@@ -90,15 +90,15 @@
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                   <button type="button" class="btn-close" aria-label="Close" (click)="resetImageRight(index)"></button>
                 </div>
-                <img [src]="assets[index][2]" class="rounded mx-auto d-block" alt="Image choisie par l'utilisateur">
+                <img [src]="imgAndSongToDisplay[index][1]" class="rounded mx-auto d-block" alt="Image choisie par l'utilisateur">
                 <input type="file" class="form-control" accept=".jpg, .jpeg, .png" (change)="getImageRight($event, index)">
                 <div class="mb-3 textArea">
                   <label for="descriptionImageRight" class="form-label d-grid gap-2 col-6 mx-auto title">Description de l'image</label>
                   <textarea class="form-control" id="descriptionImageRight" rows="2" (change)="getDescriptionImageRight($event, index)"></textarea>
                 </div>
                 <div class="radioDiv">
-                  <input class="form-check-input" type="radio" name="chooseImage" id="rightImage" (change)="getGoodImage('Second', index)">
-                  <label class="radioLabel" for="rightImage">
+                  <input class="form-check-input" type="radio" [name]="index" [id]="'rightRadioButton'+index" (change)="getGoodImage('Second', index)">
+                  <label class="radioLabel" [for]="'rightRadioButton'+index">
                     Bonne image
                   </label>
                 </div>
@@ -109,7 +109,7 @@
                   <button type="button" class="btn-close" aria-label="Close" (click)="resetSound(index)"></button>
                 </div>
                 <div class="audioElem">
-                  <audio [src]="assets[index][4]" controls></audio>
+                  <audio [src]="imgAndSongToDisplay[index][2]" controls></audio>
                 </div>
                 <input type="file" class="form-control" accept=".mp3, .wav" (change)="getSound($event, index)">
                 <div class="mb-3 textArea">
@@ -118,11 +118,11 @@
                 </div>
               </div>
               <div class="col">
-                <div *ngFor="let value of listTag; let tagIndex = index">
+                <div *ngFor="let value of scores; let tagIndex = index">
                   <div class="radioDiv">
                     <input class="form-check-input" type="checkbox" value="" id="chooseTag" (change)="addTag($event, index, tagIndex)">
                     <label class="form-check-label radioLabel" for="chooseTag">
-                      {{listTag[tagIndex]}}
+                      {{scores[tagIndex][0]}}
                     </label>
                   </div>
                 </div>
