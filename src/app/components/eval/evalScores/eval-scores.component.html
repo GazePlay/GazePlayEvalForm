@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header text-center bg-secondary">
+      <h1>Scores évaluation</h1>
+    </div>
+    <div class="card-body">
+      <div class="mb-3" id="scores">
+        <div *ngFor="let value of scores; let index = index">
+          <div class="mb-3">
+            <div class="row">
+              <div class="col">
+                <label for="ScoreName" class="form-label">Nom du score</label>
+                <input type="text" class="form-control" id="ScoreName" placeholder="Exemple : Total" (change)="setNameScore($event, index)">
+              </div>
+              <div class="col">
+                <label for="ScorePoint" class="form-label">Point du score</label>
+                <input type="number" class="form-control" id="ScorePoint" placeholder="Exemple : 1" (change)="setValueScore($event, index)">
+              </div>
+              <div class="col">
+                <label for="ScoreMaxPoint" class="form-label">Point max du score</label>
+                <input type="number" class="form-control" id="ScoreMaxPoint" placeholder="Exemple : 10" (change)="setMaxValeScore($event, index)">
+              </div>
+              <div class="col text-left border-end d-flex align-items-end removeButton">
+                <button type="button" class="btn btn-danger" (click)="removeOneMoreScore(index)">-</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3 text-center">
+          <button type="button" class="btn btn-secondary" id="addScoreButton" (click)="addOneMoreScore()">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3 text-center">
+      <button type="button" class="btn btn-secondary" (click)="previous()">Précédent</button>
+      <button type="button" class="btn btn-secondary" (click)="next()">Suivant</button>
+    </div>
+  </div>
+</div>

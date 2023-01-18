@@ -1,0 +1,26 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header text-center bg-secondary">
+      <h1>Informations Evaluation</h1>
+    </div>
+    <div class="card-body">
+      <div class="mb-3">
+        <label for="EvalName" class="form-label">Nom de l'évaluation</label>
+        <input type="text" class="form-control" id="EvalName" placeholder="Exemple : GazePlayEval" (change)="getNameEval($event)">
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="mb-3">
+        <label class="form-label">Résultat</label>
+        <select class="form-select" aria-label="Default select example" (change)="getOutput($event)">
+          <option value="all">Csv & Xlsx</option>
+          <option value="csv">Csv</option>
+          <option value="xlsx">Xlsx</option>
+        </select>
+      </div>
+    </div>
+    <div class="mb-3 text-center">
+      <button type="button" class="btn btn-secondary" (click)="next()">Suivant</button>
+    </div>
+  </div>
+</div>

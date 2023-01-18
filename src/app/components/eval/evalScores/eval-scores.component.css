@@ -1,0 +1,19 @@
+button {
+  margin-right: 1%;
+}
+
+.container-fluid {
+  width: 50%;
+}
+
+.mb-3 {
+  --bs-border-width: 0!important;
+}
+
+#scores {
+  margin-left: 5%;
+}
+
+#addScoreButton {
+  margin-left: -5%;
+}

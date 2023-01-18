@@ -1,0 +1,97 @@
+<div class="container-fluid main">
+  <div class="card">
+    <div class="card-header text-center bg-secondary">
+      <h1>Images & Sons</h1>
+    </div>
+    <div class="card-body">
+      <div class="mb-3">
+        <div *ngFor="let value of imgAndSongToDisplay; let index = index">
+          <div class="container-fluid second">
+            <div class="card">
+              <div class="card-header text-center bg-secondary">
+                <h2>Item {{index+1}}</h2>
+              </div>
+              <div class="card-body">
+                <div class="mb-3">
+                  <div class="row">
+                    <div class="col">
+                      <label class="form-label d-grid gap-2 col-6 mx-auto title">Image 1</label>
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="button" class="btn-close" aria-label="Close" (click)="resetImageLeft(index)"></button>
+                      </div>
+                      <img [src]="imgAndSongToDisplay[index][0]" class="rounded mx-auto d-block" alt="Image choisie par l'utilisateur">
+                      <input type="file" class="form-control" accept=".jpg, .jpeg, .png" (change)="setImageLeft($event, index)">
+                      <div class="mb-3 textArea">
+                        <label for="descriptionImageLeft" class="form-label d-grid gap-2 col-6 mx-auto title">Description de l'image</label>
+                        <textarea class="form-control" id="descriptionImageLeft" rows="2" (change)="setDescriptionImageLeft($event, index)"></textarea>
+                      </div>
+                      <div class="radioDiv">
+                        <input class="form-check-input" type="radio" [name]="index" [id]="'leftRadioButton'+index" (change)="setGoodImage('First', index)">
+                        <label class="radioLabel" [for]="'leftRadioButton'+index">
+                          Bonne image
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <label class="form-label d-grid gap-2 col-6 mx-auto title">Image 2</label>
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="button" class="btn-close" aria-label="Close" (click)="resetImageRight(index)"></button>
+                      </div>
+                      <img [src]="imgAndSongToDisplay[index][1]" class="rounded mx-auto d-block" alt="Image choisie par l'utilisateur">
+                      <input type="file" class="form-control" accept=".jpg, .jpeg, .png" (change)="setImageRight($event, index)">
+                      <div class="mb-3 textArea">
+                        <label for="descriptionImageRight" class="form-label d-grid gap-2 col-6 mx-auto title">Description de l'image</label>
+                        <textarea class="form-control" id="descriptionImageRight" rows="2" (change)="setDescriptionImageRight($event, index)"></textarea>
+                      </div>
+                      <div class="radioDiv">
+                        <input class="form-check-input" type="radio" [name]="index" [id]="'rightRadioButton'+index" (change)="setGoodImage('Second', index)">
+                        <label class="radioLabel" [for]="'rightRadioButton'+index">
+                          Bonne image
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <label class="form-label d-grid gap-2 col-6 mx-auto title">Son</label>
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="button" class="btn-close" aria-label="Close" (click)="resetSound(index)"></button>
+                      </div>
+                      <div class="audioElem">
+                        <audio [src]="imgAndSongToDisplay[index][2]" controls></audio>
+                      </div>
+                      <!--<input type="file" class="form-control" accept=".mp3, .wav" (change)="setSound($event, index)">-->
+                      <button type="button" class="btn sound" (click)="openChooseSoundDialog()">Choisir le son</button>
+                      <div class="mb-3 textArea">
+                        <label for="descriptionSound" class="form-label d-grid gap-2 col-6 mx-auto title">Description du son</label>
+                        <textarea class="form-control" id="descriptionSound" rows="2" (change)="setDescriptionSound($event, index)"></textarea>
+                      </div>
+                    </div>
+                    <div class="col-1">
+                      <div *ngFor="let value of scores; let tagIndex = index">
+                        <div class="radioDiv align-middle">
+                          <input class="form-check-input" type="checkbox" value="" id="chooseTag" (change)="addTag($event, index, tagIndex)">
+                          <label class="form-check-label radioLabel" for="chooseTag">
+                            {{scores[tagIndex][0]}}
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col border-end d-flex justify-content-center align-items-center removeButton">
+                      <button type="button" class="btn btn-danger" (click)="removeOneMoreItem(index)">-</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3 text-center">
+          <button type="button" class="btn btn-secondary" (click)="addOneMoreItem()">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3 text-center">
+      <button type="button" class="btn btn-secondary" (click)="previous()">Précédent</button>
+      <button type="button" class="btn btn-secondary" (click)="next()">Suivant</button>
+    </div>
+  </div>
+</div>
