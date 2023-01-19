@@ -30,14 +30,15 @@ export class EvalImagesAndSoundsComponent implements OnInit{
     this.orderProgressBarService.setupOrderProgressBar();
   }
 
-  openChooseSoundDialog(){
+  openChooseSoundDialog(index:number){
     let dialogRef = this.dialog.open(ChooseSoundComponent,{
       width: '500px',
-      height: '500px',
+      height: '300px',
       position: {
-        top: '-60vh',
-        left: '30ch'
-      }
+        top: '-25%',
+        left: '35%'
+      },
+      data: {index: index}
     });
     dialogRef.afterClosed().subscribe(() => {
       this.updateImgAndSongToDisplay();

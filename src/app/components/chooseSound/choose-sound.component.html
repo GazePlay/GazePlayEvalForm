@@ -1,2 +1,24 @@
-<p>choose-sound works!</p>
-<button (click)="close()">Test</button>
+<h1 mat-dialog-title>Ajouter un son</h1>
+<mat-dialog-content class="mat-typography">
+  <mat-dialog-actions>
+    <button type="button" id="file" class="btn btn-light choiceButton active" (click)="activeButton('file', 'record',true)">Ajouter un fichier</button>
+    <button type="button" id="record" class="btn btn-light choiceButton" (click)="activeButton('record', 'file', false)">Enregistrer un son</button>
+  </mat-dialog-actions>
+  <input *ngIf="buttonFileActivate" type="file" class="form-control" accept=".mp3, .wav" (change)="getSound($event)">
+  <div *ngIf="!buttonFileActivate" class="btn-group" role="group">
+    <button type="button" class="btn btn-light choiceButton">
+      <img [src]="imgRecord" alt="Record" class="buttonimg">
+    </button>
+    <button type="button" class="btn btn-light choiceButton">
+      <img src="assets/stop.png" alt="Stop" class="buttonimg">
+    </button>
+    <button type="button" class="btn btn-light choiceButton">
+      <img src="assets/play.png" alt="Play" class="buttonimg">
+    </button>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button type="button" class="btn btn-secondary" (click)="close()">Fermer</button>
+  <button type="button" class="btn btn-secondary" (click)="add()">Ajouter</button>
+</mat-dialog-actions>
+

@@ -11,6 +11,7 @@ import { EvalScoresComponent } from './components/eval/evalScores/eval-scores.co
 import {EvalImagesAndSoundsComponent} from "./components/eval/evalImagesAndSounds/eval-images-and-sounds.component";
 import { ChooseSoundComponent } from './components/chooseSound/choose-sound.component';
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -23,11 +24,12 @@ import {MatDialog, MatDialogModule} from "@angular/material/dialog";
     EvalImagesAndSoundsComponent,
     ChooseSoundComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatDialogModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MatDialogModule,
+        MatButtonModule
+    ],
   providers: [
     MatDialog
   ],
