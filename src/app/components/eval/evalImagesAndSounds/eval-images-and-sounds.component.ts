@@ -185,8 +185,12 @@ export class EvalImagesAndSoundsComponent implements OnInit{
     this.imgAndSongToDisplay = this.evalJsonService.imgAndSongToDisplay;
   }
 
+  home(){
+    this.router.navigate(['/home']);
+  }
+
   next(){
-    //this.router.navigate(['/assets']);
+    this.router.navigate(['/zip']);
   }
 
   previous(){

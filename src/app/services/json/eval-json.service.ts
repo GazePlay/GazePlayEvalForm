@@ -51,4 +51,22 @@ export class EvalJsonService {
       zip.file(this.nameEval + "/sounds/" + this.assets[i][4], this.imgAndSongToZip[i][2]);
     }
   }
+
+  resetJson(){
+    this.index = 0;
+    this.nameEval = "GazePlayEval";
+    this.isAnonymous = true;
+    this.lastName = "";
+    this.firstName = "";
+    this.gender = "";
+    this.age = "";
+    this.birthDate = "";
+    this.birthPlace = "";
+    this.scores = [["Total","tot1","1","10"]];
+    this.listTag = [];
+    this.output = "all";
+    this.imgAndSongToDisplay = [["assets/NeedImage.png", "assets/NeedImage.png", ""]];
+    this.imgAndSongToZip = [["", "", ""]];
+    this.assets = [["", "", "", "", "", "", "", ""]];
+  }
 }

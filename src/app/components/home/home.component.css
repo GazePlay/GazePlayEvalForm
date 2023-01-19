@@ -2,6 +2,18 @@ button {
   margin-top: 1%;
 }
 
+p{
+  margin-left: 10%;
+}
+
+ul{
+  margin-left: 20%;
+}
+
 .container-fluid {
   width: 50%;
+}
+
+.explanation{
+  margin-top: 2%;
 }

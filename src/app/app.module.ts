@@ -12,6 +12,7 @@ import {EvalImagesAndSoundsComponent} from "./components/eval/evalImagesAndSound
 import { ChooseSoundComponent } from './components/chooseSound/choose-sound.component';
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
+import { EvalGetZipComponent } from './components/eval/evalGetZip/eval-get-zip.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {MatButtonModule} from "@angular/material/button";
     EvalUserComponent,
     EvalScoresComponent,
     EvalImagesAndSoundsComponent,
-    ChooseSoundComponent
+    ChooseSoundComponent,
+    EvalGetZipComponent
   ],
     imports: [
         BrowserModule,

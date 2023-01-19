@@ -3,5 +3,9 @@ button {
 }
 
 .container-fluid {
-  width: 50%;
+  width: 75%;
+}
+
+#recap{
+  margin-left: 3%;
 }

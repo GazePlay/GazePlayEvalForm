@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {EvalJsonService} from "../../services/json/eval-json.service";
 
 @Component({
   selector: 'app-home',
@@ -10,12 +11,14 @@ export class HomeComponent implements OnInit{
 
   orderProgress: any;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private evalJsonService: EvalJsonService) {
   }
 
   ngOnInit(): void {
     this.orderProgress = document.getElementById("orderProgressBar");
     this.orderProgress.style = "position: absolute; visibility: hidden";
+    this.evalJsonService.resetJson();
   }
 
   start(){

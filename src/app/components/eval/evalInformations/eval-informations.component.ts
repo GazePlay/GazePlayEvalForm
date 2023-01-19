@@ -31,6 +31,10 @@ export class EvalInformationsComponent implements OnInit{
     this.evalJsonService.output = value.target.value;
   }
 
+  home(){
+    this.router.navigate(['/home']);
+  }
+
   next(){
     this.router.navigate(['/user']);
   }

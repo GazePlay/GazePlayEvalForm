@@ -1,0 +1,67 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header text-center bg-secondary">
+      <h1>Finalisation</h1>
+    </div>
+    <div class="card-body">
+      <div class="mb-3">
+        <label class="form-label">Récapitulatif</label>
+        <dl id="recap" class="row">
+
+          <dt class="col-sm-3">Nom de l'évaluation</dt>
+          <dd class="col-sm-9">{{getName()}}</dd>
+
+          <dt class="col-sm-3">Anonyme</dt>
+          <dd class="col-sm-9">{{getIsAnonymous()}}</dd>
+
+          <dt *ngIf="!isAnonymous" class="col-sm-3">Profil</dt>
+          <dd *ngIf="!isAnonymous" class="col-sm-9">
+            <p></p>
+            <dl class="row">
+              <dt class="col-sm-2">Nom</dt>
+              <dd class="col-sm-8">{{getLastname()}}</dd>
+            </dl>
+            <dl class="row">
+              <dt class="col-sm-2">Prénom</dt>
+              <dd class="col-sm-8">{{getFirstName()}}</dd>
+            </dl>
+            <dl class="row">
+              <dt class="col-sm-2">Genre</dt>
+              <dd class="col-sm-8">{{getGender()}}</dd>
+            </dl>
+            <dl class="row">
+              <dt class="col-sm-2">Age</dt>
+              <dd class="col-sm-8">{{getAge()}}</dd>
+            </dl>
+            <dl class="row">
+              <dt class="col-sm-4">Date de naissance</dt>
+              <dd class="col-sm-8">{{getBirthDate()}}</dd>
+            </dl>
+            <dl class="row">
+              <dt class="col-sm-4">Lieu de naissance</dt>
+              <dd class="col-sm-8">{{getBirthPlace()}}</dd>
+            </dl>
+          </dd>
+
+          <dt class="col-sm-3">Scores</dt>
+          <dd class="col-sm-9" *ngFor="let value of scores; let index = index">
+            <dl class="row">
+              <dt class="col-sm-3">Nom du score : </dt>
+              <dd class="col-sm-1">{{this.scores[index][0]}}</dd>
+              <dt class="col-sm-3">Point du score : </dt>
+              <dd class="col-sm-1">{{this.scores[index][1]}}</dd>
+              <dt class="col-sm-3">Point max du score : </dt>
+              <dd class="col-sm-1">{{this.scores[index][2]}}</dd>
+            </dl>
+          </dd>
+
+        </dl>
+      </div>
+    </div>
+    <div class="mb-3 text-center">
+      <button type="button" class="btn btn-secondary" (click)="previous()">Précédent</button>
+      <button type="button" class="btn btn-secondary" (click)="home()">Accueil</button>
+      <button type="button" class="btn btn-secondary" (click)="getZip()">Récupérer son évaluation</button>
+    </div>
+  </div>
+</div>

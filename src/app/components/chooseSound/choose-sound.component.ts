@@ -23,6 +23,8 @@ export class ChooseSoundComponent {
   soundToZip: any;
   isRecording: boolean = false;
 
+  sound: any;
+
   constructor(
     private dialogRef: MatDialogRef<ChooseSoundComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -46,16 +48,17 @@ export class ChooseSoundComponent {
     if (!this.isRecording) {
       this.isRecording = true;
       this.imgRecord = "assets/rec_active.png";
-      this.audioRecorderService.startRecording();
     }
   }
 
   stopRecording() {
     if (this.isRecording) {
-      this.audioRecorderService.stopRecording();
       this.isRecording = false;
       this.imgRecord = "assets/rec_inactive.png";
     }
+  }
+
+  listenRecording(){
   }
 
   getSound(value: any){

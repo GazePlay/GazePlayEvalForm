@@ -71,6 +71,10 @@ export class EvalScoresComponent implements OnInit{
     this.scores = this.evalJsonService.scores;
   }
 
+  home(){
+    this.router.navigate(['/home']);
+  }
+
   next(){
     this.router.navigate(['/assets']);
   }

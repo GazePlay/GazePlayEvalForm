@@ -55,6 +55,10 @@ export class EvalUserComponent implements OnInit{
     this.evalJsonService.birthPlace = value.target.value;
   }
 
+  home(){
+    this.router.navigate(['/home']);
+  }
+
   next(){
     this.router.navigate(['/scores']);
   }
