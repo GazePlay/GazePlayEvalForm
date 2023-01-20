@@ -77,6 +77,7 @@ export class EvalUserComponent implements OnInit{
   }
 
   setBirthDate(value: any){
+    console.log(value.target.value);
     this.evalJsonService.birthDate = value.target.value;
   }
 
