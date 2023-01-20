@@ -44,7 +44,7 @@
           </dd>
 
           <dt class="col-sm-3">Scores</dt>
-          <dd class="col-sm-9" *ngFor="let value of scores; let index = index">
+          <div class="col-sm-9" *ngFor="let value of scores; let index = index">
             <dl class="row">
               <dt class="col-sm-3">Nom du score : </dt>
               <dd class="col-sm-1">{{this.scores[index][0]}}</dd>
@@ -53,7 +53,29 @@
               <dt class="col-sm-3">Point max du score : </dt>
               <dd class="col-sm-1">{{this.scores[index][2]}}</dd>
             </dl>
-          </dd>
+          </div>
+
+          <dt class="col-sm-3">Images & Sons</dt>
+          <dd class="col-sm-9"></dd>
+          <div class="col-sm-3 assets" *ngFor="let value of assets; let index = index">
+            <dt class="col-sm-3 item">Item {{index+1}}</dt>
+            <dl class="row">
+              <dt class="col-sm-3 img">Image 1 :</dt>
+              <dd class="col-sm-1">
+                <img [src]="assets[index][0]">
+              </dd>
+              <dt class="col-sm-1">Image 2 :</dt>
+              <dd class="col-sm-1">
+                <img [src]="assets[index][1]">
+              </dd>
+              <dt class="col-sm-1">Son :</dt>
+              <dd class="col-sm-1">
+                <button type="button" class="btn btn-light sound" (click)="playAudio(index)">
+                  <img src="assets/play.png" alt="Play" class="buttonimg">
+                </button>
+              </dd>
+            </dl>
+          </div>
 
         </dl>
       </div>

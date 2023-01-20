@@ -2,8 +2,43 @@ button {
   margin-right: 1%;
 }
 
+img{
+  max-width: 50px;
+  max-height: 50px;
+  margin-top: -20%;
+  margin-left: 10%;
+}
+
+.sound{
+  width: 50px;
+  height: 40px;
+  margin-top: -10%;
+  margin-left: -50%;
+}
+
 .container-fluid {
   width: 75%;
+}
+
+.item{
+  text-align: center;
+}
+
+.img{
+  text-align: end;
+}
+
+.assets{
+  width: 100%;
+}
+
+.buttonimg {
+  height: 0.7cm;
+  width: 0.7cm;
+  min-width: 0.4cm;
+  min-height: 0.4cm;
+  margin-top: 1px;
+  margin-left: -1px;
 }
 
 #recap{

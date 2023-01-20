@@ -13,6 +13,7 @@ export class EvalGetZipComponent implements OnInit{
   actualStep:number = 5;
   isAnonymous: Boolean = true;
   scores:String[][] = [];
+  assets:String[][] = [];
 
   constructor(
     private router: Router,
@@ -25,6 +26,7 @@ export class EvalGetZipComponent implements OnInit{
     this.orderProgressBarService.setupOrderProgressBar();
     this.isAnonymous = this.evalJsonService.isAnonymous;
     this.scores = this.evalJsonService.scores;
+    this.assets = this.evalJsonService.imgAndSongToDisplay;
   }
 
   getName(){
@@ -39,6 +41,10 @@ export class EvalGetZipComponent implements OnInit{
     }
   }
 
+  playAudio(index:number){
+    const audio = new Audio(this.assets[index][2].toString());
+    audio.play();
+  }
 
   getLastname(){
     return this.evalJsonService.lastName;
