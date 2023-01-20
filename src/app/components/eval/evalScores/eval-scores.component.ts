@@ -11,18 +11,18 @@ import {EvalJsonService} from "../../../services/json/eval-json.service";
 export class EvalScoresComponent implements OnInit{
 
   actualStep:number = 3;
-  scores:String[][];
+  scores:String[][] = [];
 
   constructor(
     private router: Router,
     private orderProgressBarService: OrderProgressBarService,
     private evalJsonService: EvalJsonService) {
-    this.scores = this.evalJsonService.scores;
   }
 
   ngOnInit(): void {
     this.orderProgressBarService.setStepOrderProgressBar(this.actualStep);
     this.orderProgressBarService.setupOrderProgressBar();
+    this.scores = this.evalJsonService.scores;
   }
 
   setNameScore(value: any, index: number){

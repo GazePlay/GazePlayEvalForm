@@ -9,7 +9,7 @@ export class EvalJsonService {
 
   index:number = 0;
 
-  nameEval:String = "GazePlayEval";
+  nameEval:String = "";
   isAnonymous:boolean = true;
   lastName:String = "";
   firstName:String = "";
@@ -18,7 +18,7 @@ export class EvalJsonService {
   birthDate:String = "";
   birthPlace:String = "";
   scores:String[][] = [["Total","tot1","1","10"]];
-  listTag:String[] = [];
+  listTag:String[] = ["tot1"];
   output:String = "all";
   imgAndSongToDisplay:String[][] = [["assets/NeedImage.png", "assets/NeedImage.png", ""]];
   imgAndSongToZip:any[][] = [["", "", ""]];
@@ -27,6 +27,7 @@ export class EvalJsonService {
   constructor() { }
 
   createEval(){
+    this.checkEval();
     const zip = new JSZip();
     let data = {
       "EvalName": this.nameEval,
@@ -42,6 +43,12 @@ export class EvalJsonService {
     zip.generateAsync({type:"blob"}).then((content) => {
       FileSaver.saveAs(content, this.nameEval.toString());
     });
+  }
+
+  checkEval(){
+    if (this.nameEval == ""){
+      this.nameEval = "GazePlayEval";
+    }
   }
 
   addImgAndSongToZip(zip: any){

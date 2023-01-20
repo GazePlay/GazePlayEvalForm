@@ -6,29 +6,29 @@
     <div class="card-body">
       <div class="mb-3">
         <label class="form-label">Patient anonyme</label>
-        <select class="form-select" aria-label="Default select example" (change)="setIsAnonymous($event)">
-          <option value="True">Oui</option>
-          <option value="False">Non</option>
+        <select class="form-select" aria-label="Default select example" (change)="getIsAnonymous($event)">
+          <option id="oui" value="True" [selected]="yesOption">Oui</option>
+          <option id="non" value="False" [selected]="noOption">Non</option>
         </select>
-        <div *ngIf="!this.getIsAnonymous()" class="mb-3" id="profil">
+        <div *ngIf="!isAnonymous" class="mb-3" id="profil">
           <br>
           <label for="PatientLastName" class="form-label">Nom</label>
-          <input type="text" class="form-control" id="PatientLastName" placeholder="Exemple : Jean" (change)="setLastName($event)">
+          <input type="text" class="form-control" id="PatientLastName" placeholder="Défaut : Jean" [value]="lastName" (change)="setLastName($event)">
           <br>
           <label for="PatientFirstName" class="form-label">Prénom</label>
-          <input type="text" class="form-control" id="PatientFirstName" placeholder="Exemple : Pierre" (change)="setFirstName($event)">
+          <input type="text" class="form-control" id="PatientFirstName" placeholder="Défaut : Pierre" [value]="firstName" (change)="setFirstName($event)">
           <br>
           <label for="PatientGender" class="form-label">Genre</label>
-          <input type="text" class="form-control" id="PatientGender" placeholder="Exemple : Homme" (change)="setGender($event)">
+          <input type="text" class="form-control" id="PatientGender" placeholder="Défaut : Homme" [value]="gender" (change)="setGender($event)">
           <br>
           <label for="PatientAge" class="form-label">Age</label>
-          <input type="number" class="form-control" id="PatientAge" placeholder="Exemple : 15" (change)="setAge($event)">
+          <input type="number" class="form-control" id="PatientAge" placeholder="Défaut : 15" [value]="age" (change)="setAge($event)">
           <br>
           <label for="PatientBirthDate" class="form-label">Date de naissance</label>
-          <input type="text" class="form-control" id="PatientBirthDate" placeholder="Exemple : 07/07/1977" (change)="setBirthDate($event)">
+          <input type="text" class="form-control" id="PatientBirthDate" placeholder="Défaut : 07/07/1977" [value]="birthDate" (change)="setBirthDate($event)">
           <br>
           <label for="PatientBirthPlace" class="form-label">Lieu de naissance</label>
-          <input type="text" class="form-control" id="PatientBirthPlace" placeholder="Exemple : Paris" (change)="setBirthPlace($event)">
+          <input type="text" class="form-control" id="PatientBirthPlace" placeholder="Défaut : Paris" [value]="birthPlace" (change)="setBirthPlace($event)">
         </div>
       </div>
     </div>

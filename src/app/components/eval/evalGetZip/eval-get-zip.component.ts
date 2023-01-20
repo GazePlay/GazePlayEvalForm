@@ -14,6 +14,9 @@ export class EvalGetZipComponent implements OnInit{
   isAnonymous: Boolean = true;
   scores:String[][] = [];
   assets:String[][] = [];
+  imgAndSongToDisplay:String[][] = [];
+  listTag:String[] = [];
+  displayScore: Boolean = true;
 
   constructor(
     private router: Router,
@@ -26,7 +29,10 @@ export class EvalGetZipComponent implements OnInit{
     this.orderProgressBarService.setupOrderProgressBar();
     this.isAnonymous = this.evalJsonService.isAnonymous;
     this.scores = this.evalJsonService.scores;
-    this.assets = this.evalJsonService.imgAndSongToDisplay;
+    this.imgAndSongToDisplay = this.evalJsonService.imgAndSongToDisplay;
+    this.assets = this.evalJsonService.assets;
+    this.listTag = this.evalJsonService.listTag;
+    this.checkScore();
   }
 
   getName(){
@@ -39,6 +45,10 @@ export class EvalGetZipComponent implements OnInit{
     }else {
       return "Non";
     }
+  }
+
+  checkScore(){
+    this.displayScore = this.scores.length != 0;
   }
 
   playAudio(index:number){
@@ -68,6 +78,24 @@ export class EvalGetZipComponent implements OnInit{
 
   getBirthPlace(){
     return this.evalJsonService.birthPlace;
+  }
+
+  getScore(index: number){
+    let tag = this.assets[index][7].split(",");
+    let result = "";
+    for (let i=0; i<tag.length; i++){
+      for (let j=0; j<this.scores.length; j++){
+        if (tag[i] == this.scores[j][1]){
+          if (result == ""){
+            result += this.scores[j][0];
+          }else {
+            result += ", " + this.scores[j][0];
+          }
+          break;
+        }
+      }
+    }
+    return result;
   }
 
   getZip(){

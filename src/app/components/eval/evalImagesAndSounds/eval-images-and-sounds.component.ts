@@ -14,8 +14,9 @@ import {DomSanitizer} from "@angular/platform-browser";
 export class EvalImagesAndSoundsComponent implements OnInit{
 
   actualStep:number = 4;
-  imgAndSongToDisplay:String[][];
-  scores:String[][];
+  imgAndSongToDisplay:String[][] = [];
+  scores:String[][] = [];
+  assets:String[][] = [];
 
   constructor(
     private router: Router,
@@ -23,13 +24,14 @@ export class EvalImagesAndSoundsComponent implements OnInit{
     private evalJsonService: EvalJsonService,
     private dialog: MatDialog,
     public sanitizer: DomSanitizer) {
-    this.imgAndSongToDisplay = this.evalJsonService.imgAndSongToDisplay;
-    this.scores = this.evalJsonService.scores;
   }
 
   ngOnInit(): void {
     this.orderProgressBarService.setStepOrderProgressBar(this.actualStep);
     this.orderProgressBarService.setupOrderProgressBar();
+    this.imgAndSongToDisplay = this.evalJsonService.imgAndSongToDisplay;
+    this.scores = this.evalJsonService.scores;
+    this.assets = this.evalJsonService.assets;
   }
 
   openChooseSoundDialog(index:number){
@@ -45,6 +47,18 @@ export class EvalImagesAndSoundsComponent implements OnInit{
     dialogRef.afterClosed().subscribe(() => {
       this.updateImgAndSongToDisplay();
     })
+  }
+
+  updateLeftImageDescription(index: number){
+    return this.assets[index][1];
+  }
+
+  updateRightImageDescription(index: number){
+    return this.assets[index][3];
+  }
+
+  updateSongDescription(index: number){
+    return this.assets[index][5];
   }
 
   setImageLeft(value: any, index: number){
@@ -117,6 +131,18 @@ export class EvalImagesAndSoundsComponent implements OnInit{
     this.evalJsonService.assets[index][6] = value;
   }
 
+  checkGoodImage(value: String, index: number){
+    if (this.evalJsonService.assets[index][6] == ""){
+      return value == "leftImg";
+    } else {
+      if (value == "leftImg"){
+        return this.evalJsonService.assets[index][6] == "First";
+      }else {
+        return this.evalJsonService.assets[index][6] == "Second";
+      }
+    }
+  }
+
   addOneMoreItem(){
     this.imgAndSongToDisplay.push(["assets/NeedImage.png", "assets/NeedImage.png", ""]);
     this.evalJsonService.imgAndSongToZip.push(["","",""]);
@@ -164,6 +190,17 @@ export class EvalImagesAndSoundsComponent implements OnInit{
       }
     }
     this.updateImgAndSongToDisplay();
+  }
+
+  checkTag(tagIndex: number){
+    let result = false;
+    for (let i=0; i<this.evalJsonService.assets.length; i++){
+      if (this.evalJsonService.assets[i][7].includes(this.evalJsonService.listTag[tagIndex].toString())){
+        result = true;
+        break;
+      }
+    }
+    return result;
   }
 
   updateImgAndSongToDisplay(){

@@ -11,6 +11,10 @@ import {EvalJsonService} from "../../../services/json/eval-json.service";
 export class EvalInformationsComponent implements OnInit{
 
   actualStep:number = 1;
+  nameEval: String = "";
+  allOption: Boolean = true;
+  csvOption: Boolean = false;
+  xlsxOption: Boolean = false;
 
   constructor(
     private router: Router,
@@ -21,6 +25,30 @@ export class EvalInformationsComponent implements OnInit{
   ngOnInit(): void {
     this.orderProgressBarService.setStepOrderProgressBar(this.actualStep);
     this.orderProgressBarService.setupOrderProgressBar();
+    this.nameEval = this.evalJsonService.nameEval;
+    this.setOption();
+  }
+
+  setOption(){
+    switch (this.evalJsonService.output){
+      case "all":
+        this.allOption = true;
+        this.csvOption = false;
+        this.xlsxOption = false
+        break;
+      case "csv":
+        this.allOption = false;
+        this.csvOption = true;
+        this.xlsxOption = false
+        break;
+      case "xlsx":
+        this.allOption = false;
+        this.csvOption = false;
+        this.xlsxOption = true
+        break;
+      default:
+        break;
+    }
   }
 
   getNameEval(value: any){

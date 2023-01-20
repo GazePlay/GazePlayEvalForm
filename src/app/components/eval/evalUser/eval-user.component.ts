@@ -11,6 +11,15 @@ import {EvalJsonService} from "../../../services/json/eval-json.service";
 export class EvalUserComponent implements OnInit{
 
   actualStep:number = 2;
+  yesOption: Boolean = true;
+  noOption:Boolean = false;
+  isAnonymous:Boolean = true;
+  lastName: String = "";
+  firstName: String  = "";
+  gender: String  = "";
+  age: String  = "";
+  birthDate: String  = "";
+  birthPlace: String  = "";
 
   constructor(
     private router: Router,
@@ -21,14 +30,34 @@ export class EvalUserComponent implements OnInit{
   ngOnInit(): void {
     this.orderProgressBarService.setStepOrderProgressBar(this.actualStep);
     this.orderProgressBarService.setupOrderProgressBar();
+    this.setIsAnonymous();
   }
 
-  setIsAnonymous(value: any){
+
+  setUser(){
+    this.lastName = this.evalJsonService.lastName;
+    this.firstName = this.evalJsonService.firstName;
+    this.gender = this.evalJsonService.gender;
+    this.age = this.evalJsonService.age;
+    this.birthDate = this.evalJsonService.birthDate;
+    this.birthPlace = this.evalJsonService.birthPlace;
+  }
+
+  getIsAnonymous(value: any){
     this.evalJsonService.isAnonymous = value.target.value === 'True';
+    this.setIsAnonymous();
   }
 
-  getIsAnonymous(){
-    return this.evalJsonService.isAnonymous;
+  setIsAnonymous(){
+    this.isAnonymous = this.evalJsonService.isAnonymous;
+    if (!this.isAnonymous){
+      this.yesOption = false;
+      this.noOption = true;
+      this.setUser()
+    }else {
+      this.yesOption = true;
+      this.noOption = false;
+    }
   }
 
   setLastName(value: any){

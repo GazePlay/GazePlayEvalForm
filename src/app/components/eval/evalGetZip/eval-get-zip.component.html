@@ -15,58 +15,58 @@
           <dd class="col-sm-9">{{getIsAnonymous()}}</dd>
 
           <dt *ngIf="!isAnonymous" class="col-sm-3">Profil</dt>
-          <dd *ngIf="!isAnonymous" class="col-sm-9">
-            <p></p>
+          <dd *ngIf="!isAnonymous"  class="col-sm-9"></dd>
+          <div *ngIf="!isAnonymous" class="col-sm-12">
             <dl class="row">
-              <dt class="col-sm-2">Nom</dt>
-              <dd class="col-sm-8">{{getLastname()}}</dd>
+              <dt class="col-sm-3 user">Nom</dt>
+              <dd class="col">{{getLastname()}}</dd>
             </dl>
             <dl class="row">
-              <dt class="col-sm-2">Prénom</dt>
-              <dd class="col-sm-8">{{getFirstName()}}</dd>
+              <dt class="col-sm-3 user">Prénom</dt>
+              <dd class="col">{{getFirstName()}}</dd>
             </dl>
             <dl class="row">
-              <dt class="col-sm-2">Genre</dt>
-              <dd class="col-sm-8">{{getGender()}}</dd>
+              <dt class="col-sm-3 user">Genre</dt>
+              <dd class="col">{{getGender()}}</dd>
             </dl>
             <dl class="row">
-              <dt class="col-sm-2">Age</dt>
-              <dd class="col-sm-8">{{getAge()}}</dd>
+              <dt class="col-sm-3 user">Age</dt>
+              <dd class="col">{{getAge()}}</dd>
             </dl>
             <dl class="row">
-              <dt class="col-sm-4">Date de naissance</dt>
-              <dd class="col-sm-8">{{getBirthDate()}}</dd>
+              <dt class="col-sm-3 user">Date de naissance</dt>
+              <dd class="col">{{getBirthDate()}}</dd>
             </dl>
             <dl class="row">
-              <dt class="col-sm-4">Lieu de naissance</dt>
-              <dd class="col-sm-8">{{getBirthPlace()}}</dd>
+              <dt class="col-sm-3 user">Lieu de naissance</dt>
+              <dd class="col">{{getBirthPlace()}}</dd>
             </dl>
-          </dd>
+          </div>
 
-          <dt class="col-sm-3">Scores</dt>
-          <div class="col-sm-9" *ngFor="let value of scores; let index = index">
-            <dl class="row">
-              <dt class="col-sm-3">Nom du score : </dt>
+          <dt *ngIf="displayScore" class="col-sm-3">Scores</dt>
+          <div class="col-sm-12" *ngFor="let value of scores; let index = index">
+            <dl *ngIf="displayScore" class="row">
+              <dt class="col-sm-3 score">Nom du score : </dt>
               <dd class="col-sm-1">{{this.scores[index][0]}}</dd>
-              <dt class="col-sm-3">Point du score : </dt>
-              <dd class="col-sm-1">{{this.scores[index][1]}}</dd>
-              <dt class="col-sm-3">Point max du score : </dt>
+              <dt class="col-sm-3 score">Point du score : </dt>
               <dd class="col-sm-1">{{this.scores[index][2]}}</dd>
+              <dt class="col-sm-3 score">Point max du score : </dt>
+              <dd class="col-sm-1">{{this.scores[index][3]}}</dd>
             </dl>
           </div>
 
           <dt class="col-sm-3">Images & Sons</dt>
           <dd class="col-sm-9"></dd>
-          <div class="col-sm-3 assets" *ngFor="let value of assets; let index = index">
+          <div class="col-sm-12 assets" *ngFor="let value of imgAndSongToDisplay; let index = index">
             <dt class="col-sm-3 item">Item {{index+1}}</dt>
             <dl class="row">
               <dt class="col-sm-3 img">Image 1 :</dt>
               <dd class="col-sm-1">
-                <img [src]="assets[index][0]">
+                <img [src]="imgAndSongToDisplay[index][0]">
               </dd>
               <dt class="col-sm-1">Image 2 :</dt>
               <dd class="col-sm-1">
-                <img [src]="assets[index][1]">
+                <img [src]="imgAndSongToDisplay[index][1]">
               </dd>
               <dt class="col-sm-1">Son :</dt>
               <dd class="col-sm-1">
@@ -75,8 +75,27 @@
                 </button>
               </dd>
             </dl>
+            <div class="col-sm-12 assets">
+              <dl class="row">
+                <dt class="col-sm-6 description">Description image 1 :</dt>
+                <dd class="col-sm-6">
+                  <p>{{assets[index][1]}}</p>
+                </dd>
+                <dt class="col-sm-6 description">Description image 2 :</dt>
+                <dd class="col-sm-6">
+                  <p>{{assets[index][3]}}</p>
+                </dd>
+                <dt class="col-sm-6 description">Description son :</dt>
+                <dd class="col-sm-6">
+                  <p>{{assets[index][5]}}</p>
+                </dd>
+                <dt class="col-sm-6 description">Liste score :</dt>
+                <dd class="col-sm-6">
+                  <p>{{getScore(index)}}</p>
+                </dd>
+              </dl>
+            </div>
           </div>
-
         </dl>
       </div>
     </div>

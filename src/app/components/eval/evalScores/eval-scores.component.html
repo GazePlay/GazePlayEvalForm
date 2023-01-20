@@ -10,15 +10,15 @@
             <div class="row">
               <div class="col">
                 <label for="ScoreName" class="form-label">Nom du score</label>
-                <input type="text" class="form-control" id="ScoreName" placeholder="Exemple : Total" (change)="setNameScore($event, index)">
+                <input type="text" class="form-control" id="ScoreName" placeholder="Défaut : Total" [value]="scores[index][0]" (change)="setNameScore($event, index)">
               </div>
               <div class="col">
                 <label for="ScorePoint" class="form-label">Point du score</label>
-                <input type="number" class="form-control" id="ScorePoint" placeholder="Exemple : 1" (change)="setValueScore($event, index)">
+                <input type="number" class="form-control" id="ScorePoint" placeholder="Défaut : 1" [value]="scores[index][2]" (change)="setValueScore($event, index)">
               </div>
               <div class="col">
                 <label for="ScoreMaxPoint" class="form-label">Point max du score</label>
-                <input type="number" class="form-control" id="ScoreMaxPoint" placeholder="Exemple : 10" (change)="setMaxValeScore($event, index)">
+                <input type="number" class="form-control" id="ScoreMaxPoint" placeholder="Défaut : 10" [value]="scores[index][3]" (change)="setMaxValeScore($event, index)">
               </div>
               <div class="col text-left border-end d-flex align-items-end removeButton">
                 <button type="button" class="btn btn-danger" (click)="removeOneMoreScore(index)">-</button>

@@ -3,10 +3,10 @@ button {
 }
 
 img{
-  max-width: 50px;
-  max-height: 50px;
-  margin-top: -20%;
-  margin-left: 10%;
+  max-width: 100px;
+  max-height: 100px;
+  margin-top: -50%;
+  margin-left: -10%;
 }
 
 .sound{
@@ -26,6 +26,18 @@ img{
 
 .img{
   text-align: end;
+}
+
+.user{
+  text-align: center;
+}
+
+.score{
+  text-align: end;
+}
+
+.description{
+  text-align: center;
 }
 
 .assets{
