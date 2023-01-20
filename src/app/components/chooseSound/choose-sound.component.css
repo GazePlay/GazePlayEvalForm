@@ -8,8 +8,12 @@ mat-dialog-content > mat-dialog-actions{
   margin-bottom: .25em;
 }
 
-input{
-  margin-top: 10%;
+.audioFile{
+  margin-top: 7%;
+}
+
+.nameRecord{
+  margin-top: 5%;
 }
 
 .btn-secondary{
@@ -32,5 +36,5 @@ input{
 
 .btn-group{
   width: -webkit-fill-available;
-  margin-top: 10%;
+  margin-top: 5%;
 }

@@ -4,6 +4,7 @@ import {OrderProgressBarService} from "../../../services/orderProgressBar/order-
 import {EvalJsonService} from "../../../services/json/eval-json.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ChooseSoundComponent} from "../../chooseSound/choose-sound.component";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-eval-images-and-sounds',
@@ -20,7 +21,8 @@ export class EvalImagesAndSoundsComponent implements OnInit{
     private router: Router,
     private orderProgressBarService: OrderProgressBarService,
     private evalJsonService: EvalJsonService,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    public sanitizer: DomSanitizer) {
     this.imgAndSongToDisplay = this.evalJsonService.imgAndSongToDisplay;
     this.scores = this.evalJsonService.scores;
   }
@@ -33,7 +35,7 @@ export class EvalImagesAndSoundsComponent implements OnInit{
   openChooseSoundDialog(index:number){
     let dialogRef = this.dialog.open(ChooseSoundComponent,{
       width: '500px',
-      height: '300px',
+      height: '350px',
       position: {
         top: '-25%',
         left: '35%'
@@ -91,23 +93,6 @@ export class EvalImagesAndSoundsComponent implements OnInit{
     this.evalJsonService.imgAndSongToZip[index][1] = "";
     this.evalJsonService.assets[index][2] = "";
     this.updateImgAndSongToDisplay();
-  }
-
-  setSound(value: any, index:number){
-    const song = value.target.files[0];
-    const reader = new FileReader();
-    try {
-      reader.readAsDataURL(song);
-      reader.onload = () => {
-        this.evalJsonService.imgAndSongToDisplay[index][2] = String(reader.result);
-        this.evalJsonService.imgAndSongToZip[index][2] = song;
-        this.evalJsonService.assets[index][4] = song.name;
-      };
-    }catch (e){
-      this.evalJsonService.imgAndSongToDisplay[index][3] = "";
-    }finally {
-      this.updateImgAndSongToDisplay();
-    }
   }
 
   resetSound(index: number){
@@ -183,6 +168,10 @@ export class EvalImagesAndSoundsComponent implements OnInit{
 
   updateImgAndSongToDisplay(){
     this.imgAndSongToDisplay = this.evalJsonService.imgAndSongToDisplay;
+  }
+
+  getSrcFile(index:number){
+    return this.sanitizer.bypassSecurityTrustResourceUrl(String(this.imgAndSongToDisplay[index][2]));
   }
 
   home(){

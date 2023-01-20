@@ -4,7 +4,7 @@
     <button type="button" id="file" class="btn btn-light choiceButton active" (click)="activeButton('file', 'record',true)">Ajouter un fichier</button>
     <button type="button" id="record" class="btn btn-light choiceButton" (click)="activeButton('record', 'file', false)">Enregistrer un son</button>
   </mat-dialog-actions>
-  <input *ngIf="buttonFileActivate" type="file" class="form-control" accept=".mp3, .wav" (change)="getSound($event)">
+  <input *ngIf="buttonFileActivate" type="file" class="form-control audioFile" accept=".mp3, .wav" (change)="getSound($event)">
   <div *ngIf="!buttonFileActivate" class="btn-group" role="group">
     <button type="button" class="btn btn-light choiceButton" (click)="startRecording()">
       <img [src]="imgRecord" alt="Record" class="buttonimg">
@@ -16,8 +16,9 @@
       <img src="assets/play.png" alt="Play" class="buttonimg">
     </button>
   </div>
-  <div class="audioElem">
-    <audio [src]="sound" controls></audio>
+  <div class="mb-3 nameRecord" *ngIf="!buttonFileActivate">
+    <label for="SoundName" class="form-label">Nom du son enregistré</label>
+    <input type="text" class="form-control" id="SoundName" placeholder="Exemple : Record1" (change)="getNameRecord($event)">
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="center">

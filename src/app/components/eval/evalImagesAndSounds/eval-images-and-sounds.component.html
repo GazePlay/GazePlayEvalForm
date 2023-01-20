@@ -56,7 +56,7 @@
                         <button type="button" class="btn-close" aria-label="Close" (click)="resetSound(index)"></button>
                       </div>
                       <div class="audioElem">
-                        <audio [src]="imgAndSongToDisplay[index][2]" controls></audio>
+                        <audio [src]="getSrcFile(index)" controls></audio>
                       </div>
                       <button type="button" class="btn sound" (click)="openChooseSoundDialog(index)">Choisir le son</button>
                       <div class="mb-3 textArea">

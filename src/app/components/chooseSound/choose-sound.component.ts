@@ -48,17 +48,33 @@ export class ChooseSoundComponent {
     if (!this.isRecording) {
       this.isRecording = true;
       this.imgRecord = "assets/rec_active.png";
+      this.audioRecorderService.startRecording();
     }
   }
 
   stopRecording() {
     if (this.isRecording) {
+      this.audioRecorderService.stopRecording();
       this.isRecording = false;
       this.imgRecord = "assets/rec_inactive.png";
     }
   }
 
   listenRecording(){
+    this.audioRecorderService.listenRecording();
+  }
+
+  getNameRecord(value: any){
+    this.soundName = value.target.value + ".wav";
+  }
+
+  setRecord(){
+    this.soundToZip = this.audioRecorderService.audioBlob;
+    this.soundToListen = this.audioRecorderService.audioUrl;
+
+    this.evalJsonService.imgAndSongToDisplay[this.data.index][2] = this.soundToListen;
+    this.evalJsonService.imgAndSongToZip[this.data.index][2] = this.soundToZip;
+    this.evalJsonService.assets[this.data.index][4] = this.soundName;
   }
 
   getSound(value: any){
@@ -86,7 +102,13 @@ export class ChooseSoundComponent {
   }
 
   add(){
-    this.setSound();
+    if (this.buttonFileActivate){
+      this.setSound();
+    }else {
+      setTimeout(() => {
+        this.setRecord();
+      }, 1000);
+    }
     this.close();
   }
 
