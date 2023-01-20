@@ -17,8 +17,8 @@ export class EvalJsonService {
   age:String = "";
   birthDate:String = "";
   birthPlace:String = "";
-  scores:String[][] = [["Total","tot1","1","10"]];
-  listTag:String[] = ["tot1"];
+  scores:String[][] = [];
+  listTag:String[] = [];
   output:String = "all";
   imgAndSongToDisplay:String[][] = [["assets/NeedImage.png", "assets/NeedImage.png", ""]];
   imgAndSongToZip:any[][] = [["", "", ""]];

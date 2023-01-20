@@ -13,6 +13,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "file-saver",
+              "jszip"
+            ],
             "outputPath": "dist/gaze-play-eval-form",
             "index": "src/index.html",
             "main": "src/main.ts",

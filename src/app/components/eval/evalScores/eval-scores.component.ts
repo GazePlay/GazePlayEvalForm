@@ -41,8 +41,13 @@ export class EvalScoresComponent implements OnInit{
   }
 
   addOneMoreScore(){
-    this.evalJsonService.scores.push(["", "", "", ""]);
+    this.evalJsonService.scores.push(["", "default", "", ""]);
+    this.addOneTag();
     this.updateScores();
+  }
+
+  addOneTag(){
+    this.evalJsonService.listTag.push("default");
   }
 
   removeOneMoreScore(index: number){
