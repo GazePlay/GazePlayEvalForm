@@ -69,7 +69,7 @@ export class EvalJsonService {
     this.age = "";
     this.birthDate = "";
     this.birthPlace = "";
-    this.scores = [["Total","tot1","1","10"]];
+    this.scores = [];
     this.listTag = [];
     this.output = "all";
     this.imgAndSongToDisplay = [["assets/NeedImage.png", "assets/NeedImage.png", ""]];

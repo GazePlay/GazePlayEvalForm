@@ -22,7 +22,6 @@ export class HomeComponent implements OnInit{
   }
 
   start(){
-    this.orderProgress = document.getElementById("orderProgressBar");
     this.orderProgress.style = "";
     this.router.navigate(['/informations']);
   }
