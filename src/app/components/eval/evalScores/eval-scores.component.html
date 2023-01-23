@@ -8,19 +8,21 @@
         <div *ngFor="let value of scores; let index = index">
           <div class="mb-3">
             <div class="row">
-              <div class="col">
-                <label for="ScoreName" class="form-label">Nom du score</label>
-                <input type="text" class="form-control" id="ScoreName" placeholder="Défaut : Total" [value]="scores[index][0]" (change)="setNameScore($event, index)">
+              <div class="col-4">
+                <label [for]="'ScoreName' + index" class="form-label">Nom du score</label>
+                <input type="text" class="form-control" [id]="'ScoreName' + index" placeholder="Par exemple : Total" [value]="scores[index][0]" (change)="setNameScore($event, index)">
+                <p [id]="'ErrorScoreName' + index" class="error" style="visibility: hidden">{{errorNameScore}}</p>
               </div>
-              <div class="col">
+              <div class="col-4">
                 <label for="ScorePoint" class="form-label">Point du score</label>
-                <input type="number" class="form-control" id="ScorePoint" placeholder="Défaut : 1" [value]="scores[index][2]" (change)="setValueScore($event, index)">
+                <input type="number" class="form-control" id="ScorePoint" placeholder="Par exemple : 1" [value]="scores[index][2]" (change)="setValueScore($event, index)">
+                <p [id]="'ErrorScorePoint' + index" class="error" style="visibility: hidden">Le point du score est manquant</p>
               </div>
-              <div class="col">
+              <div class="col-3">
                 <label for="ScoreMaxPoint" class="form-label">Point max du score</label>
-                <input type="number" class="form-control" id="ScoreMaxPoint" placeholder="Défaut : 10" [value]="scores[index][3]" (change)="setMaxValeScore($event, index)">
+                <input type="number" class="form-control" id="ScoreMaxPoint" placeholder="Par exemple : 10" [value]="scores[index][3]" (change)="setMaxValeScore($event, index)">
               </div>
-              <div class="col text-left border-end d-flex align-items-end removeButton">
+              <div class="col-1 d-flex align-items-center removeButton">
                 <button type="button" class="btn btn-danger" (click)="removeOneMoreScore(index)">-</button>
               </div>
             </div>

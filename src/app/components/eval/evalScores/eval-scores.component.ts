@@ -12,6 +12,8 @@ export class EvalScoresComponent implements OnInit{
 
   actualStep:number = 3;
   scores:String[][] = [];
+  errorElem: any;
+  errorNameScore = "";
 
   constructor(
     private router: Router,
@@ -26,10 +28,13 @@ export class EvalScoresComponent implements OnInit{
   }
 
   setNameScore(value: any, index: number){
-    this.evalJsonService.scores[index][0] = value.target.value;
-    this.evalJsonService.scores[index][1] = value.target.value.slice(0,3) + this.evalJsonService.index;
-    this.evalJsonService.listTag[index] = this.scores[index][1];
-    this.evalJsonService.index++;
+    let nameScore = value.target.value;
+    if (!this.checkNameAlreadyExist(nameScore, index)){
+      this.evalJsonService.scores[index][0] = nameScore;
+      this.evalJsonService.scores[index][1] = nameScore.slice(0,3) + this.evalJsonService.index;
+      this.evalJsonService.listTag[index] = this.evalJsonService.scores[index][1];
+      this.evalJsonService.index++;
+    }
   }
 
   setValueScore(value: any, index: number){
@@ -41,7 +46,7 @@ export class EvalScoresComponent implements OnInit{
   }
 
   addOneMoreScore(){
-    this.evalJsonService.scores.push(["", "default", "", ""]);
+    this.evalJsonService.scores.push(["", "", "", ""]);
     this.addOneTag();
     this.updateScores();
   }
@@ -81,10 +86,65 @@ export class EvalScoresComponent implements OnInit{
   }
 
   next(){
-    this.router.navigate(['/assets']);
+    if (this.checkValues()){
+      this.router.navigate(['/assets']);
+    }
   }
 
   previous(){
     this.router.navigate(['/user']);
+  }
+
+  checkValues(){
+    if (this.checkNameScore()){
+      return false;
+    }else return !this.checkScorePoint();
+  }
+
+  checkNameAlreadyExist(name: String, index: number){
+    let alreadyExist = false;
+    for (let i=0; i<this.evalJsonService.scores.length; i++) {
+      this.errorElem = document.getElementById('ErrorScoreName' + index);
+      if (name == this.evalJsonService.scores[i][0]){
+        alreadyExist = true;
+        this.errorNameScore = "Le nom du score existe déjà !";
+        this.errorElem.style = "position: absolute";
+        break;
+      }else {
+        this.errorElem.style = "visibility: hidden";
+      }
+    }
+    return alreadyExist;
+  }
+
+  checkNameScore(){
+    let nameError = false;
+    for (let i=0; i<this.evalJsonService.scores.length; i++) {
+      this.errorElem = document.getElementById('ErrorScoreName' + i);
+      if (this.evalJsonService.scores[i][0] == "") {
+        nameError = true;
+        this.errorNameScore = "Le nom du score est manquant !";
+        this.errorElem.style = "position: absolute";
+        break
+      }else {
+        this.errorElem.style = "visibility: hidden";
+      }
+    }
+    return nameError;
+  }
+
+  checkScorePoint(){
+    let scoreError = false;
+    for (let i=0; i<this.evalJsonService.scores.length; i++) {
+      this.errorElem = document.getElementById('ErrorScorePoint' + i);
+      if (this.evalJsonService.scores[i][2] == "") {
+        scoreError = true;
+        this.errorElem.style = "position: absolute";
+        break
+      }else {
+        this.errorElem.style = "visibility: hidden";
+      }
+    }
+    return scoreError;
   }
 }

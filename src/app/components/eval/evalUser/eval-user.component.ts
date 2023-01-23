@@ -20,6 +20,8 @@ export class EvalUserComponent implements OnInit{
   age: String  = "";
   birthDate: String  = "";
   birthPlace: String  = "";
+  minDate: String = "1960-01-01";
+  maxDate: String = "2022-12-31";
 
   constructor(
     private router: Router,
@@ -77,8 +79,18 @@ export class EvalUserComponent implements OnInit{
   }
 
   setBirthDate(value: any){
-    console.log(value.target.value);
-    this.evalJsonService.birthDate = value.target.value;
+      this.evalJsonService.birthDate = this.checkDate(value.target.value);
+  }
+
+  checkDate(value: any){
+    let date = Number(value.split("-", 1));
+    let maximumDate = Number(this.maxDate.split("-", 1));
+    if (date > maximumDate){
+      this.birthDate = this.maxDate;
+      return this.maxDate;
+    }else {
+      return value;
+    }
   }
 
   setBirthPlace(value: any){

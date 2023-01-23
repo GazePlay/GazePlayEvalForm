@@ -10,6 +10,14 @@ button {
   --bs-border-width: 0!important;
 }
 
+.error{
+  color: red;
+}
+
+.removeButton{
+  margin-bottom: 7px;
+}
+
 #scores {
   margin-left: 5%;
 }
