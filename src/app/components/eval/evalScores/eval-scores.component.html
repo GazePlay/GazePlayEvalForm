@@ -16,7 +16,7 @@
               <div class="col-4">
                 <label for="ScorePoint" class="form-label">Point du score</label>
                 <input type="number" class="form-control" id="ScorePoint" placeholder="Par exemple : 1" [value]="scores[index][2]" (change)="setValueScore($event, index)">
-                <p [id]="'ErrorScorePoint' + index" class="error" style="visibility: hidden">Le point du score est manquant</p>
+                <p [id]="'ErrorScorePoint' + index" class="error" style="visibility: hidden">{{errorPointScore}}</p>
               </div>
               <div class="col-3">
                 <label for="ScoreMaxPoint" class="form-label">Point max du score</label>

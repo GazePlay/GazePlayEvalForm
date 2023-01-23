@@ -14,6 +14,7 @@ export class EvalScoresComponent implements OnInit{
   scores:String[][] = [];
   errorElem: any;
   errorNameScore = "";
+  errorPointScore = "Le point du score est manquant !";
 
   constructor(
     private router: Router,

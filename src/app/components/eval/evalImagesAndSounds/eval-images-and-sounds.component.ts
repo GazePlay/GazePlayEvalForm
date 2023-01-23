@@ -37,11 +37,7 @@ export class EvalImagesAndSoundsComponent implements OnInit{
   openChooseSoundDialog(index:number){
     let dialogRef = this.dialog.open(ChooseSoundComponent,{
       width: '500px',
-      height: '350px',
-      position: {
-        top: '-25%',
-        left: '35%'
-      },
+      height: '375px',
       data: {index: index}
     });
     dialogRef.afterClosed().subscribe(() => {
