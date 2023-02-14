@@ -64,17 +64,6 @@
                         <textarea class="form-control" id="descriptionSound" rows="2" [value]="updateSongDescription(index)" (change)="setDescriptionSound($event, index)"></textarea>
                       </div>
                     </div>
-                    <div class="col-1">
-                      <label class="form-label d-grid gap-2 col-6 mx-auto title">Scores associés</label>
-                      <div *ngFor="let value of scores; let tagIndex = index">
-                        <div class="radioDiv align-middle">
-                          <input class="form-check-input" type="checkbox" value="" id="chooseTag" [checked]="checkTag(tagIndex)" (change)="addTag($event, index, tagIndex)">
-                          <label class="form-check-label radioLabel" for="chooseTag">
-                            {{scores[tagIndex][0]}}
-                          </label>
-                        </div>
-                      </div>
-                    </div>
                     <div class="col d-flex justify-content-center align-items-center removeButton">
                       <button type="button" class="btn btn-danger" (click)="removeOneMoreItem(index)">-</button>
                     </div>

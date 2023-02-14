@@ -2,26 +2,19 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {OrderProgressBarService} from "../../../services/orderProgressBar/order-progress-bar.service";
 import {EvalJsonService} from "../../../services/json/eval-json.service";
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-eval-user',
   templateUrl: './eval-user.component.html',
   styleUrls: ['./eval-user.component.css']
 })
-export class EvalUserComponent implements OnInit{
+export class EvalUserComponent implements OnInit {
 
-  actualStep:number = 2;
-  yesOption: Boolean = true;
-  noOption:Boolean = false;
-  isAnonymous:Boolean = true;
-  lastName: String = "";
-  firstName: String  = "";
-  gender: String  = "";
-  age: String  = "";
-  birthDate: String  = "";
-  birthPlace: String  = "";
-  minDate: String = "1960-01-01";
-  maxDate: String = "2022-12-31";
+  actualStep: number = 2;
+  info: any[][] = [];
+  options: Boolean[][] = [[true, false, false, false]];
+  type: String[] = ["none"];
 
   constructor(
     private router: Router,
@@ -32,80 +25,87 @@ export class EvalUserComponent implements OnInit{
   ngOnInit(): void {
     this.orderProgressBarService.setStepOrderProgressBar(this.actualStep);
     this.orderProgressBarService.setupOrderProgressBar();
-    this.setIsAnonymous();
+    this.updateInfo();
   }
 
-
-  setUser(){
-    this.lastName = this.evalJsonService.lastName;
-    this.firstName = this.evalJsonService.firstName;
-    this.gender = this.evalJsonService.gender;
-    this.age = this.evalJsonService.age;
-    this.birthDate = this.evalJsonService.birthDate;
-    this.birthPlace = this.evalJsonService.birthPlace;
+  getNameInfo(value: any, index: number) {
+    this.evalJsonService.info[index][0] = value.target.value;
+    this.updateInfo();
   }
 
-  getIsAnonymous(value: any){
-    this.evalJsonService.isAnonymous = value.target.value === 'True';
-    this.setIsAnonymous();
+  getValueInfo(value: any, index: number) {
+    this.evalJsonService.info[index][1] = String(value.target.value);
+    this.updateInfo();
   }
 
-  setIsAnonymous(){
-    this.isAnonymous = this.evalJsonService.isAnonymous;
-    if (!this.isAnonymous){
-      this.yesOption = false;
-      this.noOption = true;
-      this.setUser()
-    }else {
-      this.yesOption = true;
-      this.noOption = false;
+  getOutput(value: any, index: number) {
+    this.evalJsonService.type[index] = value.target.value;
+
+    switch (this.type[index]) {
+      case "none":
+        this.evalJsonService.options[index] = [true, false, false, false];
+        break;
+      case "text":
+        this.evalJsonService.options[index] = [false, true, false, false];
+        break;
+      case "number":
+        this.evalJsonService.options[index] = [false, false, true, false];
+        break;
+      case "date":
+        this.evalJsonService.options[index] = [false, false, false, true];
+        break;
+      default:
+        break;
     }
+    this.updateInfo();
   }
 
-  setLastName(value: any){
-    this.evalJsonService.lastName = value.target.value;
+  addOneMoreInfo() {
+    this.evalJsonService.info.push(["", ""]);
+    this.evalJsonService.options.push([true, false, false, false]);
+    this.evalJsonService.type.push("");
+    this.updateInfo();
   }
 
-  setFirstName(value: any){
-    this.evalJsonService.firstName = value.target.value;
-  }
-
-  setGender(value: any){
-    this.evalJsonService.gender = value.target.value;
-  }
-
-  setAge(value: any){
-    this.evalJsonService.age = value.target.value;
-  }
-
-  setBirthDate(value: any){
-      this.evalJsonService.birthDate = this.checkDate(value.target.value);
-  }
-
-  checkDate(value: any){
-    let date = Number(value.split("-", 1));
-    let maximumDate = Number(this.maxDate.split("-", 1));
-    if (date > maximumDate){
-      this.birthDate = this.maxDate;
-      return this.maxDate;
-    }else {
-      return value;
+  removeInfo(index: number) {
+    let tmpInfo: String[][] = [];
+    let tmpOption: Boolean[][] = [];
+    let tmpType: String[] = [];
+    for (let i = 0; i < this.evalJsonService.info.length; i++) {
+      if (i != index) {
+        tmpInfo.push(this.evalJsonService.info[i]);
+        tmpOption.push(this.evalJsonService.options[i]);
+        tmpType.push(this.evalJsonService.type[i]);
+      }
     }
+    this.evalJsonService.info = tmpInfo;
+    this.evalJsonService.options = tmpOption;
+    this.evalJsonService.type = tmpType;
+    this.updateInfo();
   }
 
-  setBirthPlace(value: any){
-    this.evalJsonService.birthPlace = value.target.value;
+  updateInfo() {
+    this.info = this.evalJsonService.info;
+    this.options = this.evalJsonService.options;
+    this.type = this.evalJsonService.type;
   }
 
-  home(){
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.evalJsonService.info, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.evalJsonService.options, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.evalJsonService.type, event.previousIndex, event.currentIndex);
+    this.updateInfo();
+  }
+
+  home() {
     this.router.navigate(['/home']);
   }
 
-  next(){
-    this.router.navigate(['/scores']);
+  next() {
+    this.router.navigate(['/assets']);
   }
 
-  previous(){
+  previous() {
     this.router.navigate(['/informations']);
   }
 }

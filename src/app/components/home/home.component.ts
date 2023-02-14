@@ -7,7 +7,7 @@ import {EvalJsonService} from "../../services/json/eval-json.service";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
 
   orderProgress: any;
 
@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit{
     this.evalJsonService.resetJson();
   }
 
-  start(){
+  start() {
     this.orderProgress.style = "";
     this.router.navigate(['/informations']);
   }

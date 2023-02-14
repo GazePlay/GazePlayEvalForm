@@ -10,7 +10,7 @@ import {EvalJsonService} from "../../../services/json/eval-json.service";
 })
 export class EvalGetZipComponent implements OnInit{
 
-  actualStep:number = 5;
+  actualStep:number = 4;
   isAnonymous: Boolean = true;
   scores:String[][] = [];
   assets:String[][] = [];
@@ -27,11 +27,8 @@ export class EvalGetZipComponent implements OnInit{
   ngOnInit(): void {
     this.orderProgressBarService.setStepOrderProgressBar(this.actualStep);
     this.orderProgressBarService.setupOrderProgressBar();
-    this.isAnonymous = this.evalJsonService.isAnonymous;
-    this.scores = this.evalJsonService.scores;
     this.imgAndSongToDisplay = this.evalJsonService.imgAndSongToDisplay;
     this.assets = this.evalJsonService.assets;
-    this.listTag = this.evalJsonService.listTag;
     this.checkScore();
   }
 
@@ -57,45 +54,21 @@ export class EvalGetZipComponent implements OnInit{
   }
 
   getLastname(){
-    return this.evalJsonService.lastName;
   }
 
   getFirstName(){
-    return this.evalJsonService.firstName;
   }
 
   getGender(){
-    return this.evalJsonService.gender;
   }
 
   getAge(){
-    return this.evalJsonService.age;
   }
 
   getBirthDate(){
-    return this.evalJsonService.birthDate;
   }
 
   getBirthPlace(){
-    return this.evalJsonService.birthPlace;
-  }
-
-  getScore(index: number){
-    let tag = this.assets[index][7].split(",");
-    let result = "";
-    for (let i=0; i<tag.length; i++){
-      for (let j=0; j<this.scores.length; j++){
-        if (tag[i] == this.scores[j][1]){
-          if (result == ""){
-            result += this.scores[j][0];
-          }else {
-            result += ", " + this.scores[j][0];
-          }
-          break;
-        }
-      }
-    }
-    return result;
   }
 
   getZip(){

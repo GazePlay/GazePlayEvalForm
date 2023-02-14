@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { OrderProgressBarService } from './order-progress-bar.service';
+import {OrderProgressBarService} from './order-progress-bar.service';
 
 describe('OrderProgressBarService', () => {
   let service: OrderProgressBarService;

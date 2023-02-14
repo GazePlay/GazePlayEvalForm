@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -6,27 +6,28 @@ import { Injectable } from '@angular/core';
 export class OrderProgressBarService {
 
   orderProgress: any;
-  actualStep:number = 1;
-  maxStep:number = 5;
+  actualStep: number = 1;
+  maxStep: number = 4;
 
-  constructor() { }
+  constructor() {
+  }
 
-  setStepOrderProgressBar(step: number){
+  setStepOrderProgressBar(step: number) {
     this.actualStep = step;
   }
 
-  setupOrderProgressBar(){
+  setupOrderProgressBar() {
     this.resetOrderProgressBar();
     this.orderProgress = document.getElementById("orderProgressBar");
     this.orderProgress.style = "";
-    for (let i=1; i<=this.actualStep; i++){
+    for (let i = 1; i <= this.actualStep; i++) {
       this.orderProgress = document.getElementById(String(i));
       this.orderProgress.className = "step active";
     }
   }
 
-  resetOrderProgressBar(){
-    for (let i=1; i<=this.maxStep; i++){
+  resetOrderProgressBar() {
+    for (let i = 1; i <= this.maxStep; i++) {
       this.orderProgress = document.getElementById(String(i));
       this.orderProgress.className = "step";
     }

@@ -13,9 +13,8 @@ import {DomSanitizer} from "@angular/platform-browser";
 })
 export class EvalImagesAndSoundsComponent implements OnInit{
 
-  actualStep:number = 4;
+  actualStep:number = 3;
   imgAndSongToDisplay:String[][] = [];
-  scores:String[][] = [];
   assets:String[][] = [];
 
   constructor(
@@ -30,7 +29,6 @@ export class EvalImagesAndSoundsComponent implements OnInit{
     this.orderProgressBarService.setStepOrderProgressBar(this.actualStep);
     this.orderProgressBarService.setupOrderProgressBar();
     this.imgAndSongToDisplay = this.evalJsonService.imgAndSongToDisplay;
-    this.scores = this.evalJsonService.scores;
     this.assets = this.evalJsonService.assets;
   }
 
@@ -165,40 +163,6 @@ export class EvalImagesAndSoundsComponent implements OnInit{
     this.updateImgAndSongToDisplay();
   }
 
-  addTag(value: Event, index: number, tagIndex: number){
-    if (this.evalJsonService.assets[index][7].includes(this.evalJsonService.listTag[tagIndex].toString())){
-      let tmp:String[] = this.evalJsonService.assets[index][7].split(",");
-      this.evalJsonService.assets[index][7] = "";
-      tmp.forEach(value => {
-        if (value != this.evalJsonService.listTag[tagIndex]){
-          if (this.evalJsonService.assets[index][7] == ""){
-            this.evalJsonService.assets[index][7] = this.evalJsonService.assets[index][7].toString() + value;
-          }else {
-            this.evalJsonService.assets[index][7] = this.evalJsonService.assets[index][7] + "," + value;
-          }
-        }
-      });
-    }else {
-      if (this.evalJsonService.assets[index][7] == ""){
-        this.evalJsonService.assets[index][7] = this.evalJsonService.listTag[tagIndex];
-      }else {
-        this.evalJsonService.assets[index][7] = this.evalJsonService.assets[index][7] + "," + this.evalJsonService.listTag[tagIndex];
-      }
-    }
-    this.updateImgAndSongToDisplay();
-  }
-
-  checkTag(tagIndex: number){
-    let result = false;
-    for (let i=0; i<this.evalJsonService.assets.length; i++){
-      if (this.evalJsonService.assets[i][7].includes(this.evalJsonService.listTag[tagIndex].toString())){
-        result = true;
-        break;
-      }
-    }
-    return result;
-  }
-
   updateImgAndSongToDisplay(){
     this.imgAndSongToDisplay = this.evalJsonService.imgAndSongToDisplay;
   }
@@ -216,6 +180,6 @@ export class EvalImagesAndSoundsComponent implements OnInit{
   }
 
   previous(){
-    this.router.navigate(['/scores']);
+    this.router.navigate(['/user']);
   }
 }

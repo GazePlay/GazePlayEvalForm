@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { EvalJsonService } from './eval-json.service';
+import {EvalJsonService} from './eval-json.service';
 
 describe('EvalJsonService', () => {
   let service: EvalJsonService;

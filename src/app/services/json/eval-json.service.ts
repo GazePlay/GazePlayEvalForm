@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import * as FileSaver from "file-saver";
 import * as JSZip from "jszip";
 
@@ -7,70 +7,62 @@ import * as JSZip from "jszip";
 })
 export class EvalJsonService {
 
-  index:number = 0;
+  index: number = 0;
 
-  nameEval:String = "";
-  isAnonymous:boolean = true;
-  lastName:String = "";
-  firstName:String = "";
-  gender:String = "";
-  age:String = "";
-  birthDate:String = "";
-  birthPlace:String = "";
-  scores:String[][] = [];
-  listTag:String[] = [];
-  output:String = "all";
-  imgAndSongToDisplay:String[][] = [["assets/NeedImage.png", "assets/NeedImage.png", ""]];
-  imgAndSongToZip:any[][] = [["", "", ""]];
-  assets:String[][] = [["", "", "", "", "", "", "", ""]];
+  nameEval: String = "";
+  info: any[][] = [];
+  options: Boolean[][] = [];
+  type: String[] = [];
+  output: String = "all";
+  imgAndSongToDisplay: String[][] = [["assets/NeedImage.png", "assets/NeedImage.png", ""]];
+  imgAndSongToZip: any[][] = [["", "", ""]];
+  assets: String[][] = [["", "", "", "", "", "", "", ""]];
 
-  constructor() { }
+  constructor() {
+  }
 
-  createEval(){
+  createEval() {
     this.checkEval();
     const zip = new JSZip();
-    let data = {
+    let info = {
       "EvalName": this.nameEval,
-      "Anonymous": String(this.isAnonymous),
-      "Profil": [this.lastName, this.firstName, this.gender, this.age, this.birthDate, this.birthPlace],
-      "Scores": this.scores,
-      "Assets": this.assets,
+      "User": this.info,
       "Output": this.output
     };
-    let jsonData = new Blob([JSON.stringify(data)], {type: 'application/json'});
-    zip.file(this.nameEval + "/config.json", jsonData);
+    let config = {
+      "Profil": [],
+      "Assets": this.assets,
+    };
+    let infoData = new Blob([JSON.stringify(info)], {type: 'application/json'});
+    let configData = new Blob([JSON.stringify(config)], {type: 'application/json'});
+    zip.file(this.nameEval + "/info.json", infoData);
+    zip.file(this.nameEval + "/config.json", configData);
     this.addImgAndSongToZip(zip);
-    zip.generateAsync({type:"blob"}).then((content) => {
+    zip.generateAsync({type: "blob"}).then((content) => {
       FileSaver.saveAs(content, this.nameEval.toString());
     });
   }
 
-  checkEval(){
-    if (this.nameEval == ""){
+  checkEval() {
+    if (this.nameEval == "") {
       this.nameEval = "GazePlayEval";
     }
   }
 
-  addImgAndSongToZip(zip: any){
-    for (let i=0; i<this.imgAndSongToDisplay.length; i++){
+  addImgAndSongToZip(zip: any) {
+    for (let i = 0; i < this.imgAndSongToDisplay.length; i++) {
       zip.file(this.nameEval + "/images/" + this.assets[i][0], this.imgAndSongToZip[i][0]);
       zip.file(this.nameEval + "/images/" + this.assets[i][2], this.imgAndSongToZip[i][1]);
       zip.file(this.nameEval + "/sounds/" + this.assets[i][4], this.imgAndSongToZip[i][2]);
     }
   }
 
-  resetJson(){
+  resetJson() {
     this.index = 0;
     this.nameEval = "GazePlayEval";
-    this.isAnonymous = true;
-    this.lastName = "";
-    this.firstName = "";
-    this.gender = "";
-    this.age = "";
-    this.birthDate = "";
-    this.birthPlace = "";
-    this.scores = [];
-    this.listTag = [];
+    this.info = [];
+    this.options = [];
+    this.type = [];
     this.output = "all";
     this.imgAndSongToDisplay = [["assets/NeedImage.png", "assets/NeedImage.png", ""]];
     this.imgAndSongToZip = [["", "", ""]];

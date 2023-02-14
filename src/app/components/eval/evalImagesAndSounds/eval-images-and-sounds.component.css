@@ -16,7 +16,7 @@ textarea {
   resize: none;
 }
 
-div.col{
+div.col {
   text-align: -webkit-center;
 }
 
@@ -58,7 +58,7 @@ Class
   padding-top: 8%;
 }
 
-.sound{
+.sound {
   background: #E9ECEF;
   border-color: #CED4DA;
 }
@@ -77,6 +77,6 @@ Id
   margin-left: 5%;
 }
 
-#descriptionSound{
+#descriptionSound {
   margin-top: 4%;
 }
