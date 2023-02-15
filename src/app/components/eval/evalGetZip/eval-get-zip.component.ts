@@ -10,7 +10,7 @@ import {EvalJsonService} from "../../../services/json/eval-json.service";
 })
 export class EvalGetZipComponent implements OnInit{
 
-  actualStep:number = 4;
+  actualStep:number = 5;
   isAnonymous: Boolean = true;
   scores:String[][] = [];
   assets:String[][] = [];

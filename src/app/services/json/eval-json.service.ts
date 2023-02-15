@@ -13,6 +13,8 @@ export class EvalJsonService {
   info: any[][] = [];
   options: Boolean[][] = [];
   type: String[] = [];
+  scores:String[][] = [];
+  errorsScores:Boolean[] = [];
   output: String = "all";
   imgAndSongToDisplay: String[][] = [["assets/NeedImage.png", "assets/NeedImage.png", ""]];
   imgAndSongToZip: any[][] = [["", "", ""]];
@@ -63,6 +65,8 @@ export class EvalJsonService {
     this.info = [];
     this.options = [];
     this.type = [];
+    this.scores = [];
+    this.errorsScores = [];
     this.output = "all";
     this.imgAndSongToDisplay = [["assets/NeedImage.png", "assets/NeedImage.png", ""]];
     this.imgAndSongToZip = [["", "", ""]];

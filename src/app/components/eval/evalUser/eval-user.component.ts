@@ -102,7 +102,7 @@ export class EvalUserComponent implements OnInit {
   }
 
   next() {
-    this.router.navigate(['/assets']);
+    this.router.navigate(['/scores']);
   }
 
   previous() {

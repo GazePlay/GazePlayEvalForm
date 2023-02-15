@@ -13,7 +13,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 })
 export class EvalImagesAndSoundsComponent implements OnInit{
 
-  actualStep:number = 3;
+  actualStep:number = 4;
   imgAndSongToDisplay:String[][] = [];
   assets:String[][] = [];
 
@@ -180,6 +180,6 @@ export class EvalImagesAndSoundsComponent implements OnInit{
   }
 
   previous(){
-    this.router.navigate(['/user']);
+    this.router.navigate(['/scores']);
   }
 }

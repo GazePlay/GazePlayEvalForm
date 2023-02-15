@@ -13,6 +13,7 @@ import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import {EvalGetZipComponent} from './components/eval/evalGetZip/eval-get-zip.component';
 import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
+import { EvalScoresComponent } from './components/eval/evalScores/eval-scores.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
     EvalUserComponent,
     EvalImagesAndSoundsComponent,
     ChooseSoundComponent,
-    EvalGetZipComponent
+    EvalGetZipComponent,
+    EvalScoresComponent
   ],
   imports: [
     BrowserModule,

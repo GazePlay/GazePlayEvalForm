@@ -1,0 +1,27 @@
+button {
+  margin-right: 1%;
+}
+
+.container-fluid {
+  width: 50%;
+}
+
+.mb-3 {
+  --bs-border-width: 0 !important;
+}
+
+.error {
+  color: red;
+}
+
+.removeButton {
+  margin-bottom: 7px;
+}
+
+#scores {
+  margin-left: 5%;
+}
+
+#addScoreButton {
+  margin-left: -5%;
+}

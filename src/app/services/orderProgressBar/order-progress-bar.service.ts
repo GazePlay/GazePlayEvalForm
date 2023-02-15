@@ -7,7 +7,7 @@ export class OrderProgressBarService {
 
   orderProgress: any;
   actualStep: number = 1;
-  maxStep: number = 4;
+  maxStep: number = 5;
 
   constructor() {
   }
