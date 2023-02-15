@@ -20,6 +20,10 @@ div.col {
   text-align: -webkit-center;
 }
 
+mat-grid-tile {
+  border-color: black;
+  border-style: solid;
+}
 
 /**
 Class

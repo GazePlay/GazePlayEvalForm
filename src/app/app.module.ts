@@ -14,6 +14,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {EvalGetZipComponent} from './components/eval/evalGetZip/eval-get-zip.component';
 import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
 import { EvalScoresComponent } from './components/eval/evalScores/eval-scores.component';
+import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { EvalScoresComponent } from './components/eval/evalScores/eval-scores.co
     MatDialogModule,
     MatButtonModule,
     CdkDropList,
-    CdkDrag
+    CdkDrag,
+    MatGridListModule
   ],
   providers: [
     MatDialog

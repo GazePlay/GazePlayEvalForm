@@ -14,60 +14,34 @@
               <div class="card-body">
                 <div class="mb-3">
                   <div class="row">
-                    <div class="col">
-                      <label class="form-label d-grid gap-2 col-6 mx-auto title">Image 1</label>
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button type="button" class="btn-close" aria-label="Close" (click)="resetImageLeft(index)"></button>
-                      </div>
-                      <img [src]="imgAndSongToDisplay[index][0]" class="rounded mx-auto d-block" alt="Image choisie par l'utilisateur">
-                      <input type="file" class="form-control" accept=".jpg, .jpeg, .png" (change)="setImageLeft($event, index)">
-                      <div class="mb-3 textArea">
-                        <label for="descriptionImageLeft" class="form-label d-grid gap-2 col-6 mx-auto title">Description de l'image</label>
-                        <textarea class="form-control" id="descriptionImageLeft" rows="2" [value]="updateLeftImageDescription(index)" (change)="setDescriptionImageLeft($event, index)"></textarea>
-                      </div>
-                      <div class="radioDiv">
-                        <input class="form-check-input" type="radio" [name]="index" [id]="'leftRadioButton'+index" [checked]="checkGoodImage('leftImg', index)" (change)="setGoodImage('First', index)">
-                        <label class="radioLabel" [for]="'leftRadioButton'+index">
-                          Bonne image
-                        </label>
-                      </div>
+                    <div class="col-4">
+                      <label class="form-label">Nombre de lignes</label>
+                      <input class="form-control"
+                             placeholder="Par exemple : 2" type="number" min="0" step="1">
                     </div>
-                    <div class="col">
-                      <label class="form-label d-grid gap-2 col-6 mx-auto title">Image 2</label>
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button type="button" class="btn-close" aria-label="Close" (click)="resetImageRight(index)"></button>
-                      </div>
-                      <img [src]="imgAndSongToDisplay[index][1]" class="rounded mx-auto d-block" alt="Image choisie par l'utilisateur">
-                      <input type="file" class="form-control" accept=".jpg, .jpeg, .png" (change)="setImageRight($event, index)">
-                      <div class="mb-3 textArea">
-                        <label for="descriptionImageRight" class="form-label d-grid gap-2 col-6 mx-auto title">Description de l'image</label>
-                        <textarea class="form-control" id="descriptionImageRight" rows="2" [value]="updateRightImageDescription(index)" (change)="setDescriptionImageRight($event, index)"></textarea>
-                      </div>
-                      <div class="radioDiv">
-                        <input class="form-check-input" type="radio" [name]="index" [id]="'rightRadioButton'+index" [checked]="checkGoodImage('rigthImg', index)" (change)="setGoodImage('Second', index)">
-                        <label class="radioLabel" [for]="'rightRadioButton'+index">
-                          Bonne image
-                        </label>
-                      </div>
+                    <div class="col-4">
+                      <label class="form-label">Nombre de colonnes</label>
+                      <input class="form-control"
+                             placeholder="Par exemple : 2" type="number" min="0" step="1">
                     </div>
-                    <div class="col">
-                      <label class="form-label d-grid gap-2 col-6 mx-auto title">Son</label>
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button type="button" class="btn-close" aria-label="Close" (click)="resetSound(index)"></button>
+                    <div class="col-4">
+                      <label class="form-label">Temps de fixation</label>
+                      <div class="input-group">
+                        <input type="number" min="0" step="0.1" class="form-control" placeholder="Par exemple : 2">
+                        <div class="input-group-append">
+                          <span class="input-group-text">secondes</span>
+                        </div>
                       </div>
-                      <div class="audioElem">
-                        <audio [src]="getSrcFile(index)" controls></audio>
-                      </div>
-                      <button type="button" class="btn sound" (click)="openChooseSoundDialog(index)">Choisir le son</button>
-                      <div class="mb-3 textArea">
-                        <label for="descriptionSound" class="form-label d-grid gap-2 col-6 mx-auto title">Description du son</label>
-                        <textarea class="form-control" id="descriptionSound" rows="2" [value]="updateSongDescription(index)" (change)="setDescriptionSound($event, index)"></textarea>
-                      </div>
-                    </div>
-                    <div class="col d-flex justify-content-center align-items-center removeButton">
-                      <button type="button" class="btn btn-danger" (click)="removeOneMoreItem(index)">-</button>
                     </div>
                   </div>
+                  <br>
+                  <mat-grid-list cols="2">
+                    <mat-grid-tile
+                      *ngFor="let item of [].constructor(4)"
+                      [colspan]="1"
+                      [rowspan]="1">
+                    </mat-grid-tile>
+                  </mat-grid-list>
                 </div>
               </div>
             </div>
