@@ -8,6 +8,7 @@ import * as JSZip from "jszip";
 export class EvalJsonService {
 
   index: number = 0;
+  nbItem: number = 0;
 
   nameEval: String = "";
   info: any[][] = [];
@@ -16,9 +17,13 @@ export class EvalJsonService {
   scores:String[][] = [];
   errorsScores:Boolean[] = [];
   output: String = "all";
-  imgAndSongToDisplay: String[][] = [["assets/NeedImage.png", "assets/NeedImage.png", ""]];
+  imgToDisplay: String[][][] = [];
+  songToDisplay: String[] = [];
+  cols:number[] = [];
+  rows:number[] = [];
+  fixationLength:number[] = [];
+  nbImgToSee:number[] = [];
   imgAndSongToZip: any[][] = [["", "", ""]];
-  assets: String[][] = [["", "", "", "", "", "", "", ""]];
 
   constructor() {
   }
@@ -32,8 +37,7 @@ export class EvalJsonService {
       "Output": this.output
     };
     let config = {
-      "Profil": [],
-      "Assets": this.assets,
+      "Profil": []
     };
     let infoData = new Blob([JSON.stringify(info)], {type: 'application/json'});
     let configData = new Blob([JSON.stringify(config)], {type: 'application/json'});
@@ -52,15 +56,16 @@ export class EvalJsonService {
   }
 
   addImgAndSongToZip(zip: any) {
-    for (let i = 0; i < this.imgAndSongToDisplay.length; i++) {
+    /*for (let i = 0; i < this.imgToDisplay.length; i++) {
       zip.file(this.nameEval + "/images/" + this.assets[i][0], this.imgAndSongToZip[i][0]);
       zip.file(this.nameEval + "/images/" + this.assets[i][2], this.imgAndSongToZip[i][1]);
       zip.file(this.nameEval + "/sounds/" + this.assets[i][4], this.imgAndSongToZip[i][2]);
-    }
+    }*/
   }
 
   resetJson() {
     this.index = 0;
+    this.nbItem = 0;
     this.nameEval = "GazePlayEval";
     this.info = [];
     this.options = [];
@@ -68,8 +73,12 @@ export class EvalJsonService {
     this.scores = [];
     this.errorsScores = [];
     this.output = "all";
-    this.imgAndSongToDisplay = [["assets/NeedImage.png", "assets/NeedImage.png", ""]];
+    this.imgToDisplay = [];
+    this.songToDisplay = [];
+    this.cols = [];
+    this.rows = [];
+    this.fixationLength = [];
+    this.nbImgToSee = [];
     this.imgAndSongToZip = [["", "", ""]];
-    this.assets = [["", "", "", "", "", "", "", ""]];
   }
 }

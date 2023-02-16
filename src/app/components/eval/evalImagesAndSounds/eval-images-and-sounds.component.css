@@ -29,7 +29,7 @@ mat-grid-tile {
 Class
 **/
 .main {
-  width: 75%;
+  width: 100%;
 }
 
 .second {
@@ -40,8 +40,13 @@ Class
   text-align: center;
 }
 
+.tileSize {
+  width: -webkit-fill-available;
+  height: inherit;
+}
+
 .removeButton {
-  flex: 0;
+  text-align: center;
 }
 
 .radioLabel {
@@ -57,20 +62,48 @@ Class
 }
 
 .audioElem {
-  height: 100px;
-  margin-bottom: 1.2%;
-  padding-top: 8%;
+  min-width: 340px;
 }
 
-.sound {
+.audioPos {
+  text-align: center;
+}
+
+.imgAndSound {
   background: #E9ECEF;
   border-color: #CED4DA;
+}
+
+.addImg {
+  margin: auto;
+}
+
+.addSong {
+  text-align: center;
+  margin-top: 2%;
 }
 
 .form-control[type=file] {
   overflow: hidden;
   min-width: 145px;
   max-width: 145px;
+}
+
+.closeButton {
+  text-align: end;
+}
+
+.imgSize {
+  min-width: 150px;
+  min-height: 150px;
+}
+
+.leftInput {
+  margin-left: 1%;
+}
+
+.rigthInput {
+  margin-left: -1%;
 }
 
 /**

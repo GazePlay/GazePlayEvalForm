@@ -27,8 +27,6 @@ export class EvalGetZipComponent implements OnInit{
   ngOnInit(): void {
     this.orderProgressBarService.setStepOrderProgressBar(this.actualStep);
     this.orderProgressBarService.setupOrderProgressBar();
-    this.imgAndSongToDisplay = this.evalJsonService.imgAndSongToDisplay;
-    this.assets = this.evalJsonService.assets;
     this.checkScore();
   }
 

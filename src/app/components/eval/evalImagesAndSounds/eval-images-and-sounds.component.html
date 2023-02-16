@@ -5,57 +5,120 @@
     </div>
     <div class="card-body">
       <div class="mb-3">
-        <div *ngFor="let value of imgAndSongToDisplay; let index = index">
+        <div *ngFor="let item of [].constructor(this.nbItem); let indexItem = index">
           <div class="container-fluid second">
             <div class="card">
               <div class="card-header text-center bg-secondary">
-                <h2>Item {{index+1}}</h2>
+                <h2>Item {{indexItem + 1}}</h2>
               </div>
               <div class="card-body">
                 <div class="mb-3">
                   <div class="row">
                     <div class="col-4">
                       <label class="form-label">Nombre de lignes</label>
-                      <input class="form-control"
-                             placeholder="Par exemple : 2" type="number" min="0" step="1">
+                      <input (change)="setRows($event, indexItem)"
+                             [value]="this.rows[indexItem]" class="form-control" min="0" step="1"
+                             type="number">
                     </div>
                     <div class="col-4">
                       <label class="form-label">Nombre de colonnes</label>
-                      <input class="form-control"
-                             placeholder="Par exemple : 2" type="number" min="0" step="1">
+                      <input (change)="setCols($event, indexItem)"
+                             [value]="this.cols[indexItem]" class="form-control" min="0" step="1"
+                             type="number">
+                    </div>
+                    <div class="col-4">
+                      <label class="form-label">Nombre d'image à regarder</label>
+                      <input (change)="setNbImgToSee($event, indexItem)"
+                             [value]="this.nbImgToSee[indexItem]" class="form-control" min="0" step="1"
+                             type="number">
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <label class="form-label">Son</label>
+                    <div class="col-4 addSong">
+                      <button type="button" class="btn imgAndSound" (click)="openChooseSoundDialog(indexItem)">Choisir le son</button>
+                    </div>
+                    <div class="col-4 audioElem">
+                      <div class="closeButton">
+                        <button type="button" class="btn-close" aria-label="Close"></button>
+                      </div>
+                      <div class="audioPos">
+                        <audio [src]="getSrcAudioFile(indexItem)" controls></audio>
+                      </div>
                     </div>
                     <div class="col-4">
                       <label class="form-label">Temps de fixation</label>
                       <div class="input-group">
-                        <input type="number" min="0" step="0.1" class="form-control" placeholder="Par exemple : 2">
+                        <input (change)="setFixationLength($event, indexItem)" [value]="this.fixationLength[indexItem]" class="form-control" min="0"
+                               step="0.1" type="number">
                         <div class="input-group-append">
                           <span class="input-group-text">secondes</span>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <br>
-                  <mat-grid-list cols="2">
+                </div>
+                  <mat-grid-list [cols]="this.cols[indexItem]" [rowHeight]="this.rowHeight">
                     <mat-grid-tile
-                      *ngFor="let item of [].constructor(4)"
+                      *ngFor="let grid of this.imgToDisplay[indexItem]; let indexGrid = index"
                       [colspan]="1"
                       [rowspan]="1">
+                      <div class="tileSize">
+                        <div class="row">
+                          <div class="col-4"></div>
+                          <div class="col-2">
+                            <div class="closeButton">
+                              <button (click)="resetImg(indexItem, indexGrid)" type="button" class="btn-close" aria-label="Close"></button>
+                            </div>
+                            <img class="imgSize" [src]="this.imgToDisplay[indexItem][indexGrid][0]" alt="Pas d'image">
+                          </div>
+                          <div class="col-2 addImg">
+                            <button class="btn imgAndSound" type="button" (click)="inputImport.click()">
+                              <input hidden type="file" (change)="addImg($event, indexItem, indexGrid)" accept=".jpg, .jpeg, .png" #inputImport>
+                              Importer une image
+                            </button>
+                          </div>
+                          <div class="col-4"></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 leftInput">
+                            <label class="form-label">Nombre de score associé</label>
+                            <input  class="form-control" type="number" min="0" step="1">
+                          </div>
+                          <div class="col-4 rigthInput">
+                            <label [for]="'InfoType' + indexGrid" class="form-label">Type</label>
+                            <select [id]="'InfoType' + indexGrid" aria-label="Default select example"
+                                    class="form-select">
+                              <option value="none">Choisir le score</option>
+                              <option *ngFor="let score of this.listScores; let indexScore = index" value="none">{{this.listScores[indexScore][0]}}</option>
+                            </select>
+                          </div>
+                          <div class="col-4 rigthInput">
+                            <label class="form-label">Valeur du score</label>
+                            <input  class="form-control" type="number" min="0" step="1">
+                          </div>
+                        </div>
+                      </div>
                     </mat-grid-tile>
                   </mat-grid-list>
+                <br>
+                <div class="removeButton">
+                  <button (click)="removeOneItem(indexItem)" class="btn btn-danger" type="button">-</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div class="mb-3 text-center">
-          <button type="button" class="btn btn-secondary" (click)="addOneMoreItem()">+</button>
+          <button (click)="addOneMoreItem()" class="btn btn-secondary" type="button">+</button>
         </div>
       </div>
     </div>
     <div class="mb-3 text-center">
-      <button type="button" class="btn btn-secondary" (click)="previous()">Précédent</button>
-      <button type="button" class="btn btn-secondary" (click)="home()">Accueil</button>
-      <button type="button" class="btn btn-secondary" (click)="next()">Suivant</button>
+      <button (click)="previous()" class="btn btn-secondary" type="button">Précédent</button>
+      <button (click)="home()" class="btn btn-secondary" type="button">Accueil</button>
+      <button (click)="next()" class="btn btn-secondary" type="button">Suivant</button>
     </div>
   </div>
 </div>
