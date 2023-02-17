@@ -72,8 +72,9 @@ export class ChooseSoundComponent {
     this.soundToZip = this.audioRecorderService.audioBlob;
     this.soundToListen = this.audioRecorderService.audioUrl;
 
-    this.evalJsonService.imgToDisplay[this.data.index][2] = this.soundToListen;
-    this.evalJsonService.imgAndSongToZip[this.data.index][2] = this.soundToZip;
+    this.evalJsonService.songToDisplay[this.data.index][0] = this.soundName;
+    this.evalJsonService.songToDisplay[this.data.index][1] = this.soundToListen;
+    this.evalJsonService.songToDisplay[this.data.index][2] = this.soundToZip;
   }
 
   getSound(value: any){
@@ -95,8 +96,9 @@ export class ChooseSoundComponent {
   }
 
   setSound(){
-    this.evalJsonService.imgToDisplay[this.data.index][2] = this.soundToListen;
-    this.evalJsonService.imgAndSongToZip[this.data.index][2] = this.soundToZip;
+    this.evalJsonService.songToDisplay[this.data.index][0] = this.soundName;
+    this.evalJsonService.songToDisplay[this.data.index][1] = this.soundToListen;
+    this.evalJsonService.songToDisplay[this.data.index][2] = this.soundToZip;
   }
 
   add(){
