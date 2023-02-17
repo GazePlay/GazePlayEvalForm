@@ -17,12 +17,13 @@ export class EvalJsonService {
   scores:String[][] = [];
   errorsScores:Boolean[] = [];
   output: String = "all";
-  imgToDisplay: String[][][] = [];
+  imgToDisplay: any[][][] = [];
   songToDisplay: String[] = [];
   cols:number[] = [];
   rows:number[] = [];
   fixationLength:number[] = [];
   nbImgToSee:number[] = [];
+  rowHeight: number[] = [];
   imgAndSongToZip: any[][] = [["", "", ""]];
 
   constructor() {
@@ -66,6 +67,7 @@ export class EvalJsonService {
   resetJson() {
     this.index = 0;
     this.nbItem = 0;
+
     this.nameEval = "GazePlayEval";
     this.info = [];
     this.options = [];
@@ -79,6 +81,7 @@ export class EvalJsonService {
     this.rows = [];
     this.fixationLength = [];
     this.nbImgToSee = [];
+    this.rowHeight = [];
     this.imgAndSongToZip = [["", "", ""]];
   }
 }

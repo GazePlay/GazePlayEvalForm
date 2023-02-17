@@ -59,44 +59,42 @@
                     </div>
                   </div>
                 </div>
-                  <mat-grid-list [cols]="this.cols[indexItem]" [rowHeight]="this.rowHeight">
+                  <mat-grid-list [cols]="this.cols[indexItem]" [rowHeight]="this.rowHeight[indexItem]">
                     <mat-grid-tile
                       *ngFor="let grid of this.imgToDisplay[indexItem]; let indexGrid = index"
                       [colspan]="1"
                       [rowspan]="1">
                       <div class="tileSize">
                         <div class="row">
-                          <div class="col-4"></div>
-                          <div class="col-2">
+                          <div class="col-6 imgTile">
                             <div class="closeButton">
                               <button (click)="resetImg(indexItem, indexGrid)" type="button" class="btn-close" aria-label="Close"></button>
                             </div>
                             <img class="imgSize" [src]="this.imgToDisplay[indexItem][indexGrid][0]" alt="Pas d'image">
                           </div>
-                          <div class="col-2 addImg">
+                          <div class="col-6 addImg">
                             <button class="btn imgAndSound" type="button" (click)="inputImport.click()">
                               <input hidden type="file" (change)="addImg($event, indexItem, indexGrid)" accept=".jpg, .jpeg, .png" #inputImport>
                               Importer une image
                             </button>
                           </div>
-                          <div class="col-4"></div>
                         </div>
                         <div class="row">
                           <div class="col-4 leftInput">
                             <label class="form-label">Nombre de score associé</label>
-                            <input  class="form-control" type="number" min="0" step="1">
+                            <input class="form-control" type="number" min="0" step="1" [value]="this.imgToDisplay[indexItem][indexGrid][1]" (change)="setNbScore($event, indexItem, indexGrid)">
                           </div>
-                          <div class="col-4 rigthInput">
+                          <div *ngIf="this.imgToDisplay[indexItem][indexGrid][1]>0" class="col-4 rigthInput">
                             <label [for]="'InfoType' + indexGrid" class="form-label">Type</label>
-                            <select [id]="'InfoType' + indexGrid" aria-label="Default select example"
+                            <select *ngFor="let choiceScore of [].constructor(this.imgToDisplay[indexItem][indexGrid][1]); let indexChoice = index" (change)="setChoiceOption($event, indexItem, indexGrid, indexChoice)" [id]="'InfoType' + indexGrid" aria-label="Default select example"
                                     class="form-select">
-                              <option value="none">Choisir le score</option>
-                              <option *ngFor="let score of this.listScores; let indexScore = index" value="none">{{this.listScores[indexScore][0]}}</option>
+                              <option value="">Choisir le score</option>
+                              <option *ngFor="let score of this.listScores; let indexScore = index" [value]="this.listScores[indexScore][0]" [selected]="choiceIsSelected(this.listScores[indexScore][0], indexItem, indexGrid, indexChoice)">{{this.listScores[indexScore][0]}}</option>
                             </select>
                           </div>
-                          <div class="col-4 rigthInput">
+                          <div *ngIf="this.imgToDisplay[indexItem][indexGrid][1]>0" class="col-4 rigthInput">
                             <label class="form-label">Valeur du score</label>
-                            <input  class="form-control" type="number" min="0" step="1">
+                            <input *ngFor="let valueScore of [].constructor(this.imgToDisplay[indexItem][indexGrid][1]); let indexValueScore = index" (change)="setValueScore($event, indexItem, indexGrid, indexValueScore)" [value]="this.imgToDisplay[indexItem][indexGrid][3 + (indexValueScore * 2)]" class="form-control" type="number" step="1">
                           </div>
                         </div>
                       </div>

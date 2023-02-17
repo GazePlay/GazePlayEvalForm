@@ -15,12 +15,12 @@ export class EvalImagesAndSoundsComponent implements OnInit{
 
   actualStep:number = 4;
   nbItem: number = 0;
-  rowHeight: number = 0;
+  rowHeight: number[] = [];
   cols:number[] = [];
   rows:number[] = [];
   fixationLength:number[] = [];
   nbImgToSee:number[] = [];
-  imgToDisplay: String[][][] = [];
+  imgToDisplay: any[][][] = [];
   songToDisplay: String[] = [];
   listScores:String[][] = [];
 
@@ -58,6 +58,7 @@ export class EvalImagesAndSoundsComponent implements OnInit{
     this.evalJsonService.fixationLength.push(0);
     this.evalJsonService.nbImgToSee.push(0);
     this.evalJsonService.songToDisplay.push("");
+    this.evalJsonService.rowHeight.push(0);
     this.updateImgAndSong();
   }
 
@@ -75,7 +76,7 @@ export class EvalImagesAndSoundsComponent implements OnInit{
 
   updateGrid(index: number){
     let gridSize = this.evalJsonService.cols[index] * this.evalJsonService.rows[index];
-    this.updateRowHeightGrid(gridSize);
+    this.updateRowHeightGrid(gridSize, index);
     if (gridSize >= 0){
       let sizeDifference = this.evalJsonService.imgToDisplay[index].length - gridSize;
       if (sizeDifference > 0){
@@ -84,18 +85,20 @@ export class EvalImagesAndSoundsComponent implements OnInit{
         }
       }else {
         for (let j=0; j<Math.abs(sizeDifference); j++){
-          this.evalJsonService.imgToDisplay[index].push(["../../../../assets/NeedImage.png"]);
+          this.evalJsonService.imgToDisplay[index].push(["../../../../assets/NeedImage.png", 0]);
         }
       }
     }
     this.updateImgAndSong();
   }
 
-  updateRowHeightGrid(value: number){
+  updateRowHeightGrid(value: number, index: number){
     if (value == 0){
-      this.rowHeight = 0;
+      this.evalJsonService.rowHeight[index] = 0;
     }else {
-      this.rowHeight = 300;
+      if(this.evalJsonService.rowHeight[index] < 280){
+        this.evalJsonService.rowHeight[index] = 280;
+      }
     }
   }
 
@@ -106,6 +109,58 @@ export class EvalImagesAndSoundsComponent implements OnInit{
 
   setNbImgToSee(value: any, index: number){
     this.evalJsonService.nbImgToSee[index] = this.checkValue(value.target.value);
+    this.updateImgAndSong();
+  }
+
+  setNbScore(value: any, indexItem: number, indexGrid: number){
+    let nbScore;
+    if (Number(value.target.value)<0){
+      nbScore = 0 - this.evalJsonService.imgToDisplay[indexItem][indexGrid][1];
+    }else {
+      nbScore = Number(value.target.value) - this.evalJsonService.imgToDisplay[indexItem][indexGrid][1];
+    }
+
+    if (this.evalJsonService.imgToDisplay[indexItem][indexGrid][1]<Number(value.target.value)){
+      for (let i=0; i<nbScore; i++){
+        this.evalJsonService.imgToDisplay[indexItem][indexGrid].push("",0);
+      }
+    }else {
+      for (let i=0; i<Math.abs(nbScore); i++){
+        this.evalJsonService.imgToDisplay[indexItem][indexGrid].pop();
+        this.evalJsonService.imgToDisplay[indexItem][indexGrid].pop();
+      }
+    }
+
+    this.evalJsonService.imgToDisplay[indexItem][indexGrid][1] = Number(value.target.value);
+    this.resizeRowHeightGrid(Number(value.target.value), nbScore, indexItem);
+    this.updateImgAndSong();
+  }
+
+  resizeRowHeightGrid(value: number, nbScore: number, indexItem: number){
+    if ((value != 1) || (nbScore < 0)){
+      if ((this.evalJsonService.rowHeight[indexItem] + nbScore * 40) < 280){
+        this.evalJsonService.rowHeight[indexItem] = 280;
+      }else {
+        this.evalJsonService.rowHeight[indexItem] += nbScore * 40;
+      }
+    }
+  }
+
+  setChoiceOption(value: any, indexItem: number, indexGrid: number, indexChoice: number){
+    let calculIndex = 2 + (indexChoice * 2);
+    this.evalJsonService.imgToDisplay[indexItem][indexGrid][calculIndex] = value.target.value;
+    this.updateImgAndSong();
+    console.log(this.evalJsonService.imgToDisplay[indexItem][indexGrid]);
+  }
+
+  choiceIsSelected(value: any, indexItem: number, indexGrid: number, indexChoice: number){
+    let calculIndex = 2 + (indexChoice * 2);
+    return value == this.imgToDisplay[indexItem][indexGrid][calculIndex];
+  }
+
+  setValueScore(value: any, indexItem: number, indexGrid: number, indexValueScore: number){
+    let calculIndex = 3 + (indexValueScore * 2);
+    this.evalJsonService.imgToDisplay[indexItem][indexGrid][calculIndex] = Number(value.target.value);
     this.updateImgAndSong();
   }
 
@@ -174,6 +229,7 @@ export class EvalImagesAndSoundsComponent implements OnInit{
     this.nbImgToSee = this.evalJsonService.nbImgToSee;
     this.imgToDisplay = this.evalJsonService.imgToDisplay;
     this.songToDisplay = this.evalJsonService.songToDisplay;
+    this.rowHeight = this.evalJsonService.rowHeight;
   }
 
   getSrcAudioFile(index:number){
