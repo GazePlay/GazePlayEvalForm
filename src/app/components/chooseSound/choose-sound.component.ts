@@ -32,12 +32,12 @@ export class ChooseSoundComponent {
     private audioRecorderService: AudioRecorderService) {
   }
 
-  activeButton(id1: String, id2: String, buttonActivated: Boolean){
+  activeButton(id1: String, id2: String, buttonActivated: Boolean) {
     this.buttonClicked = document.getElementById(id1.toString());
     this.buttonToDesactivate = document.getElementById(id2.toString());
-    if (this.buttonClicked.className.includes("active")){
+    if (this.buttonClicked.className.includes("active")) {
       this.buttonToDesactivate.className = "btn btn-light choiceButton";
-    }else {
+    } else {
       this.buttonClicked.className = "btn btn-light choiceButton active";
       this.buttonToDesactivate.className = "btn btn-light choiceButton";
     }
@@ -60,15 +60,15 @@ export class ChooseSoundComponent {
     }
   }
 
-  listenRecording(){
+  listenRecording() {
     this.audioRecorderService.listenRecording();
   }
 
-  getNameRecord(value: any){
+  getNameRecord(value: any) {
     this.soundName = value.target.value + ".wav";
   }
 
-  setRecord(){
+  setRecord() {
     this.soundToZip = this.audioRecorderService.audioBlob;
     this.soundToListen = this.audioRecorderService.audioUrl;
 
@@ -77,7 +77,7 @@ export class ChooseSoundComponent {
     this.evalJsonService.songToDisplay[this.data.index][2] = this.soundToZip;
   }
 
-  getSound(value: any){
+  getSound(value: any) {
     const song = value.target.files[0];
     const reader = new FileReader();
     try {
@@ -87,7 +87,7 @@ export class ChooseSoundComponent {
         this.soundToListen = String(reader.result);
         this.soundToZip = song;
       };
-    }catch (e){
+    } catch (e) {
       this.soundName = "";
       this.soundToListen = "";
       this.soundToZip = "";
@@ -95,16 +95,16 @@ export class ChooseSoundComponent {
     }
   }
 
-  setSound(){
+  setSound() {
     this.evalJsonService.songToDisplay[this.data.index][0] = this.soundName;
     this.evalJsonService.songToDisplay[this.data.index][1] = this.soundToListen;
     this.evalJsonService.songToDisplay[this.data.index][2] = this.soundToZip;
   }
 
-  add(){
-    if (this.buttonFileActivate){
+  add() {
+    if (this.buttonFileActivate) {
       this.setSound();
-    }else {
+    } else {
       setTimeout(() => {
         this.setRecord();
       }, 1000);
@@ -112,7 +112,7 @@ export class ChooseSoundComponent {
     this.close();
   }
 
-  close(){
+  close() {
     this.dialogRef.close();
   }
 }

@@ -1,22 +1,22 @@
-mat-dialog-content{
+mat-dialog-content {
   overflow: hidden;
 }
 
-mat-dialog-content > mat-dialog-actions{
+mat-dialog-content > mat-dialog-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-bottom: .25em;
 }
 
-.audioFile{
+.audioFile {
   margin-top: 7%;
 }
 
-.nameRecord{
+.nameRecord {
   margin-top: 5%;
 }
 
-.btn-secondary{
+.btn-secondary {
   margin-right: 1%;
 }
 
@@ -34,7 +34,7 @@ mat-dialog-content > mat-dialog-actions{
   margin: -5px -5px;
 }
 
-.btn-group{
+.btn-group {
   width: -webkit-fill-available;
   margin-top: 5%;
 }

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EvalInformationsComponent } from './eval-informations.component';
+import {EvalInformationsComponent} from './eval-informations.component';
 
 describe('EvalInformationsComponent', () => {
   let component: EvalInformationsComponent;
@@ -8,9 +8,9 @@ describe('EvalInformationsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EvalInformationsComponent ]
+      declarations: [EvalInformationsComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(EvalInformationsComponent);
     component = fixture.componentInstance;

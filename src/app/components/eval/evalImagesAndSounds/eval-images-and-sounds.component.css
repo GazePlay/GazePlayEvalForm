@@ -110,6 +110,14 @@ Class
   text-align: end;
 }
 
+.itemTile {
+  text-align: end;
+}
+
+.order {
+  text-align: left;
+}
+
 /**
 Id
 **/

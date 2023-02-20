@@ -12,12 +12,14 @@
                 <label class="form-label">{{"Information " + (index + 1)}}</label>
                 <div class="col-4">
                   <label [for]="'InfoName' + index" class="form-label">Nom</label>
-                  <input (change)="getNameInfo($event, index)" [id]="'InfoName' + index" [value]="info[index][0]" class="form-control"
+                  <input (change)="getNameInfo($event, index)" [id]="'InfoName' + index" [value]="info[index][0]"
+                         class="form-control"
                          placeholder="Nom de l'information" type="text">
                 </div>
                 <div class="col-3">
                   <label [for]="'InfoType' + index" class="form-label">Type</label>
-                  <select (change)="getOutput($event, index)" [id]="'InfoType' + index" aria-label="Default select example"
+                  <select (change)="getOutput($event, index)" [id]="'InfoType' + index"
+                          aria-label="Default select example"
                           class="form-select">
                     <option [selected]="options[index][0]" value="none">Choisir</option>
                     <option [selected]="options[index][1]" value="text">Texte</option>
@@ -27,7 +29,8 @@
                 </div>
                 <div *ngIf="!options[index][0]" class="col-4">
                   <label [for]="'InfoValue' + index" class="form-label">Valeur</label>
-                  <input (change)="getValueInfo($event, index)" [id]="'InfoValue' + index" [type]="type[index]" [value]="info[index][1]"
+                  <input (change)="getValueInfo($event, index)" [id]="'InfoValue' + index" [type]="type[index]"
+                         [value]="info[index][1]"
                          class="form-control" placeholder="Valeur de l'information">
                 </div>
                 <div class="col-1 d-flex align-items-center removeButton">

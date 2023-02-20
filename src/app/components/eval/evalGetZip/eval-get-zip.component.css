@@ -2,14 +2,14 @@ button {
   margin-right: 1%;
 }
 
-img{
+img {
   max-width: 100px;
   max-height: 100px;
   margin-top: -50%;
   margin-left: -10%;
 }
 
-.sound{
+.sound {
   width: 50px;
   height: 40px;
   margin-top: -10%;
@@ -20,27 +20,27 @@ img{
   width: 75%;
 }
 
-.item{
+.item {
   text-align: center;
 }
 
-.img{
+.img {
   text-align: end;
 }
 
-.user{
+.user {
   text-align: center;
 }
 
-.score{
+.score {
   text-align: end;
 }
 
-.description{
+.description {
   text-align: center;
 }
 
-.assets{
+.assets {
   width: 100%;
 }
 
@@ -53,6 +53,6 @@ img{
   margin-left: -1px;
 }
 
-#recap{
+#recap {
   margin-left: 3%;
 }

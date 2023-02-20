@@ -9,7 +9,15 @@
           <div class="container-fluid second">
             <div class="card">
               <div class="card-header text-center bg-secondary">
-                <h2>Item {{indexItem + 1}}</h2>
+                <div class="row">
+                  <div class="col-6 itemTile">
+                    <h2>Item {{indexItem + 1}}</h2>
+                  </div>
+                  <div class="col-6 order">
+                    <button (click)="this.downItem(indexItem)" class="btn btn-secondary" type="button">▼</button>
+                    <button (click)="this.upItem(indexItem)" class="btn btn-secondary" type="button">▲</button>
+                  </div>
+                </div>
               </div>
               <div class="card-body">
                 <div class="mb-3">
@@ -78,7 +86,8 @@
                         </div>
                         <div class="col-6 addImg">
                           <button (click)="inputImport.click()" class="btn imgAndSound" type="button">
-                            <input #inputImport (change)="addImg($event, indexItem, indexGrid)" accept=".jpg, .jpeg, .png"
+                            <input #inputImport (change)="addImg($event, indexItem, indexGrid)"
+                                   accept=".jpg, .jpeg, .png"
                                    hidden type="file">
                             Importer une image
                           </button>
@@ -87,7 +96,8 @@
                       <div class="row">
                         <div class="col-4 leftInput">
                           <label class="form-label">Nombre de score associé</label>
-                          <input (change)="setNbScore($event, indexItem, indexGrid)" [value]="this.imgToDisplay[indexItem][indexGrid][1]" class="form-control" min="0"
+                          <input (change)="setNbScore($event, indexItem, indexGrid)"
+                                 [value]="this.imgToDisplay[indexItem][indexGrid][1]" class="form-control" min="0"
                                  step="1"
                                  type="number">
                         </div>

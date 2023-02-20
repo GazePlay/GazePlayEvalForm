@@ -8,14 +8,14 @@ import {EvalJsonService} from "../../../services/json/eval-json.service";
   templateUrl: './eval-get-zip.component.html',
   styleUrls: ['./eval-get-zip.component.css']
 })
-export class EvalGetZipComponent implements OnInit{
+export class EvalGetZipComponent implements OnInit {
 
-  actualStep:number = 5;
+  actualStep: number = 5;
   isAnonymous: Boolean = true;
-  scores:String[][] = [];
-  assets:String[][] = [];
-  imgAndSongToDisplay:String[][] = [];
-  listTag:String[] = [];
+  scores: String[][] = [];
+  assets: String[][] = [];
+  imgAndSongToDisplay: String[][] = [];
+  listTag: String[] = [];
   displayScore: Boolean = true;
 
   constructor(
@@ -30,54 +30,54 @@ export class EvalGetZipComponent implements OnInit{
     this.checkScore();
   }
 
-  getName(){
+  getName() {
     return this.evalJsonService.nameEval;
   }
 
-  getIsAnonymous(){
-    if (this.isAnonymous){
+  getIsAnonymous() {
+    if (this.isAnonymous) {
       return "Oui";
-    }else {
+    } else {
       return "Non";
     }
   }
 
-  checkScore(){
+  checkScore() {
     this.displayScore = this.scores.length != 0;
   }
 
-  playAudio(index:number){
+  playAudio(index: number) {
     const audio = new Audio(this.assets[index][2].toString());
     audio.play();
   }
 
-  getLastname(){
+  getLastname() {
   }
 
-  getFirstName(){
+  getFirstName() {
   }
 
-  getGender(){
+  getGender() {
   }
 
-  getAge(){
+  getAge() {
   }
 
-  getBirthDate(){
+  getBirthDate() {
   }
 
-  getBirthPlace(){
+  getBirthPlace() {
   }
 
-  getZip(){
+  getZip() {
     this.evalJsonService.createEval();
   }
 
-  home(){
+  home() {
     this.router.navigate(['/home']);
   }
 
-  previous(){
+  previous() {
     this.router.navigate(['/assets']);
   }
 }

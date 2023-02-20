@@ -8,9 +8,9 @@ import {EvalJsonService} from "../../../services/json/eval-json.service";
   templateUrl: './eval-informations.component.html',
   styleUrls: ['./eval-informations.component.css']
 })
-export class EvalInformationsComponent implements OnInit{
+export class EvalInformationsComponent implements OnInit {
 
-  actualStep:number = 1;
+  actualStep: number = 1;
   nameEval: String = "";
   allOption: Boolean = true;
   csvOption: Boolean = false;
@@ -29,8 +29,8 @@ export class EvalInformationsComponent implements OnInit{
     this.setOption();
   }
 
-  setOption(){
-    switch (this.evalJsonService.output){
+  setOption() {
+    switch (this.evalJsonService.output) {
       case "all":
         this.allOption = true;
         this.csvOption = false;
@@ -51,19 +51,19 @@ export class EvalInformationsComponent implements OnInit{
     }
   }
 
-  getNameEval(value: any){
+  getNameEval(value: any) {
     this.evalJsonService.nameEval = value.target.value;
   }
 
-  getOutput(value: any){
+  getOutput(value: any) {
     this.evalJsonService.output = value.target.value;
   }
 
-  home(){
+  home() {
     this.router.navigate(['/home']);
   }
 
-  next(){
+  next() {
     this.router.navigate(['/user']);
   }
 }

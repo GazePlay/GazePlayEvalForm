@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EvalImagesAndSoundsComponent } from './eval-images-and-sounds.component';
+import {EvalImagesAndSoundsComponent} from './eval-images-and-sounds.component';
 
 describe('EvalImagesAndSoundsComponent', () => {
   let component: EvalImagesAndSoundsComponent;
@@ -8,9 +8,9 @@ describe('EvalImagesAndSoundsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EvalImagesAndSoundsComponent ]
+      declarations: [EvalImagesAndSoundsComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(EvalImagesAndSoundsComponent);
     component = fixture.componentInstance;

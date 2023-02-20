@@ -12,8 +12,8 @@ import {ChooseSoundComponent} from './components/chooseSound/choose-sound.compon
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import {EvalGetZipComponent} from './components/eval/evalGetZip/eval-get-zip.component';
-import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
-import { EvalScoresComponent } from './components/eval/evalScores/eval-scores.component';
+import {CdkDrag, CdkDropList, CdkDropListGroup} from "@angular/cdk/drag-drop";
+import {EvalScoresComponent} from './components/eval/evalScores/eval-scores.component';
 import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
@@ -35,7 +35,8 @@ import {MatGridListModule} from "@angular/material/grid-list";
     MatButtonModule,
     CdkDropList,
     CdkDrag,
-    MatGridListModule
+    MatGridListModule,
+    CdkDropListGroup
   ],
   providers: [
     MatDialog

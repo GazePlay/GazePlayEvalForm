@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EvalGetZipComponent } from './eval-get-zip.component';
+import {EvalGetZipComponent} from './eval-get-zip.component';
 
 describe('EvalGetZipComponent', () => {
   let component: EvalGetZipComponent;
@@ -8,9 +8,9 @@ describe('EvalGetZipComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EvalGetZipComponent ]
+      declarations: [EvalGetZipComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(EvalGetZipComponent);
     component = fixture.componentInstance;

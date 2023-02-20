@@ -5,23 +5,24 @@
     </div>
     <div class="card-body">
       <div class="mb-3">
-        <label for="EvalName" class="form-label">Nom de l'évaluation</label>
-        <input type="text" class="form-control" id="EvalName" placeholder="Défaut : GazePlayEval" [value]="nameEval" (change)="getNameEval($event)">
+        <label class="form-label" for="EvalName">Nom de l'évaluation</label>
+        <input (change)="getNameEval($event)" [value]="nameEval" class="form-control" id="EvalName" placeholder="Défaut : GazePlayEval"
+               type="text">
       </div>
     </div>
     <div class="card-body">
       <div class="mb-3">
         <label class="form-label">Résultat</label>
-        <select class="form-select" aria-label="Default select example" (change)="getOutput($event)">
-          <option value="all" [selected]="allOption">Csv & Xlsx</option>
-          <option value="csv" [selected]="csvOption">Csv</option>
-          <option value="xlsx" [selected]="xlsxOption">Xlsx</option>
+        <select (change)="getOutput($event)" aria-label="Default select example" class="form-select">
+          <option [selected]="allOption" value="all">Csv & Xlsx</option>
+          <option [selected]="csvOption" value="csv">Csv</option>
+          <option [selected]="xlsxOption" value="xlsx">Xlsx</option>
         </select>
       </div>
     </div>
     <div class="mb-3 text-center">
-      <button type="button" class="btn btn-secondary" (click)="home()">Accueil</button>
-      <button type="button" class="btn btn-secondary" (click)="next()">Suivant</button>
+      <button (click)="home()" class="btn btn-secondary" type="button">Accueil</button>
+      <button (click)="next()" class="btn btn-secondary" type="button">Suivant</button>
     </div>
   </div>
 </div>

@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'informations', component: EvalInformationsComponent},
   {path: 'user', component: EvalUserComponent},
-  {path: 'scores', component:EvalScoresComponent},
+  {path: 'scores', component: EvalScoresComponent},
   {path: 'assets', component: EvalImagesAndSoundsComponent},
   {path: 'zip', component: EvalGetZipComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'}

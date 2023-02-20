@@ -5,6 +5,7 @@ import {EvalJsonService} from "../../../services/json/eval-json.service";
 import {DomSanitizer} from "@angular/platform-browser";
 import {MatDialog} from "@angular/material/dialog";
 import {ChooseSoundComponent} from "../../chooseSound/choose-sound.component";
+import {moveItemInArray} from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'app-eval-images-and-sounds',
@@ -57,7 +58,7 @@ export class EvalImagesAndSoundsComponent implements OnInit {
     this.evalJsonService.rows.push(0);
     this.evalJsonService.fixationLength.push(0);
     this.evalJsonService.nbImgToSee.push(0);
-    this.evalJsonService.songToDisplay.push(["","",""]);
+    this.evalJsonService.songToDisplay.push(["", "", ""]);
     this.evalJsonService.rowHeight.push(0);
     this.evalJsonService.imgToZip.push([]);
     this.updateImgAndSong();
@@ -165,7 +166,6 @@ export class EvalImagesAndSoundsComponent implements OnInit {
     let calculIndex = 3 + (indexValueScore * 2);
     this.evalJsonService.imgToDisplay[indexItem][indexGrid][calculIndex] = Number(value.target.value);
     this.updateImgAndSong();
-    console.log(this.evalJsonService.imgToDisplay);
   }
 
   checkValue(value: any) {
@@ -183,13 +183,13 @@ export class EvalImagesAndSoundsComponent implements OnInit {
       reader.readAsDataURL(image);
       reader.onload = () => {
         this.evalJsonService.imgToDisplay[indexItem][indexGrid][0] = String(reader.result);
-        this.evalJsonService.imgToZip[indexItem][indexGrid*2] = image.name;
-        this.evalJsonService.imgToZip[indexItem][indexGrid*2+1] = image;
+        this.evalJsonService.imgToZip[indexItem][indexGrid * 2] = image.name;
+        this.evalJsonService.imgToZip[indexItem][indexGrid * 2 + 1] = image;
       };
     } catch (e) {
       this.evalJsonService.imgToDisplay[indexItem][indexGrid][0] = "assets/NeedImage.png";
-      this.evalJsonService.imgToZip[indexItem][indexGrid*2] = "";
-      this.evalJsonService.imgToZip[indexItem][indexGrid*2+1] = "";
+      this.evalJsonService.imgToZip[indexItem][indexGrid * 2] = "";
+      this.evalJsonService.imgToZip[indexItem][indexGrid * 2 + 1] = "";
     } finally {
       this.updateImgAndSong();
     }
@@ -207,6 +207,7 @@ export class EvalImagesAndSoundsComponent implements OnInit {
     let tmpNbImgToSee: number[] = [];
     let tmpImgToDisplay: String[][][] = [];
     let tmpSongToDisplay: String[][] = [];
+    let tmpImgToZip: String[][] = [];
 
     for (let i = 0; i < this.nbItem; i++) {
       if (i != index) {
@@ -216,6 +217,7 @@ export class EvalImagesAndSoundsComponent implements OnInit {
         tmpNbImgToSee.push(this.evalJsonService.nbImgToSee[i]);
         tmpImgToDisplay.push(this.evalJsonService.imgToDisplay[i]);
         tmpSongToDisplay.push(this.evalJsonService.songToDisplay[i]);
+        tmpImgToZip.push(this.evalJsonService.imgToZip[i]);
       }
     }
 
@@ -225,6 +227,7 @@ export class EvalImagesAndSoundsComponent implements OnInit {
     this.evalJsonService.nbImgToSee = tmpNbImgToSee;
     this.evalJsonService.imgToDisplay = tmpImgToDisplay;
     this.evalJsonService.songToDisplay = tmpSongToDisplay;
+    this.evalJsonService.imgToZip = tmpImgToZip;
     this.evalJsonService.nbItem--;
     this.updateImgAndSong();
   }
@@ -242,6 +245,32 @@ export class EvalImagesAndSoundsComponent implements OnInit {
 
   getSrcAudioFile(index: number) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(String(this.songToDisplay[index][1]));
+  }
+
+  upItem(indexItem: number) {
+    if (indexItem != 0) {
+      moveItemInArray(this.rows, indexItem, indexItem - 1);
+      moveItemInArray(this.cols, indexItem, indexItem - 1);
+      moveItemInArray(this.fixationLength, indexItem, indexItem - 1);
+      moveItemInArray(this.nbImgToSee, indexItem, indexItem - 1);
+      moveItemInArray(this.imgToDisplay, indexItem, indexItem - 1);
+      moveItemInArray(this.songToDisplay, indexItem, indexItem - 1);
+      moveItemInArray(this.evalJsonService.imgToZip, indexItem, indexItem - 1);
+      this.updateImgAndSong();
+    }
+  }
+
+  downItem(indexItem: number) {
+    if (indexItem != (this.imgToDisplay.length - 1)) {
+      moveItemInArray(this.rows, indexItem, indexItem + 1);
+      moveItemInArray(this.cols, indexItem, indexItem + 1);
+      moveItemInArray(this.fixationLength, indexItem, indexItem + 1);
+      moveItemInArray(this.nbImgToSee, indexItem, indexItem + 1);
+      moveItemInArray(this.imgToDisplay, indexItem, indexItem + 1);
+      moveItemInArray(this.songToDisplay, indexItem, indexItem + 1);
+      moveItemInArray(this.evalJsonService.imgToZip, indexItem, indexItem + 1);
+      this.updateImgAndSong();
+    }
   }
 
   home() {

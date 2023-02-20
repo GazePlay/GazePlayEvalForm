@@ -1,28 +1,34 @@
 <h1 mat-dialog-title>Ajouter un son</h1>
 <mat-dialog-content class="mat-typography">
   <mat-dialog-actions>
-    <button type="button" id="file" class="btn btn-light choiceButton active" (click)="activeButton('file', 'record',true)">Ajouter un fichier</button>
-    <button type="button" id="record" class="btn btn-light choiceButton" (click)="activeButton('record', 'file', false)">Enregistrer un son</button>
+    <button (click)="activeButton('file', 'record',true)" class="btn btn-light choiceButton active" id="file"
+            type="button">Ajouter un fichier
+    </button>
+    <button (click)="activeButton('record', 'file', false)" class="btn btn-light choiceButton" id="record"
+            type="button">Enregistrer un son
+    </button>
   </mat-dialog-actions>
-  <input *ngIf="buttonFileActivate" type="file" class="form-control audioFile" accept=".mp3, .wav" (change)="getSound($event)">
+  <input (change)="getSound($event)" *ngIf="buttonFileActivate" accept=".mp3, .wav" class="form-control audioFile"
+         type="file">
   <div *ngIf="!buttonFileActivate" class="btn-group" role="group">
-    <button type="button" class="btn btn-light choiceButton" (click)="startRecording()">
+    <button (click)="startRecording()" class="btn btn-light choiceButton" type="button">
       <img [src]="imgRecord" alt="Record" class="buttonimg">
     </button>
-    <button type="button" class="btn btn-light choiceButton" (click)="stopRecording()">
-      <img src="assets/stop.png" alt="Stop" class="buttonimg">
+    <button (click)="stopRecording()" class="btn btn-light choiceButton" type="button">
+      <img alt="Stop" class="buttonimg" src="assets/stop.png">
     </button>
-    <button type="button" class="btn btn-light choiceButton" (click)="listenRecording()">
-      <img src="assets/play.png" alt="Play" class="buttonimg">
+    <button (click)="listenRecording()" class="btn btn-light choiceButton" type="button">
+      <img alt="Play" class="buttonimg" src="assets/play.png">
     </button>
   </div>
-  <div class="mb-3 nameRecord" *ngIf="!buttonFileActivate">
-    <label for="SoundName" class="form-label">Nom du son enregistré</label>
-    <input type="text" class="form-control" id="SoundName" placeholder="Exemple : Record1" (change)="getNameRecord($event)">
+  <div *ngIf="!buttonFileActivate" class="mb-3 nameRecord">
+    <label class="form-label" for="SoundName">Nom du son enregistré</label>
+    <input (change)="getNameRecord($event)" class="form-control" id="SoundName" placeholder="Exemple : Record1"
+           type="text">
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
-  <button type="button" class="btn btn-secondary" (click)="close()">Fermer</button>
-  <button type="button" class="btn btn-secondary" (click)="add()">Ajouter</button>
+  <button (click)="close()" class="btn btn-secondary" type="button">Fermer</button>
+  <button (click)="add()" class="btn btn-secondary" type="button">Ajouter</button>
 </mat-dialog-actions>
 

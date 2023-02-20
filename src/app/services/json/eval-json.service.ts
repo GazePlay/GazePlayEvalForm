@@ -14,15 +14,15 @@ export class EvalJsonService {
   info: any[][] = [];
   options: Boolean[][] = [];
   type: String[] = [];
-  scores:String[][] = [];
-  errorsScores:Boolean[] = [];
+  scores: String[][] = [];
+  errorsScores: Boolean[] = [];
   output: String = "all";
   imgToDisplay: any[][][] = [];
   songToDisplay: String[][] = [];
-  cols:number[] = [];
-  rows:number[] = [];
-  fixationLength:number[] = [];
-  nbImgToSee:number[] = [];
+  cols: number[] = [];
+  rows: number[] = [];
+  fixationLength: number[] = [];
+  nbImgToSee: number[] = [];
   rowHeight: number[] = [];
   imgToZip: String[][] = [];
 
@@ -31,21 +31,17 @@ export class EvalJsonService {
 
   createEval() {
     this.generateConfigFile();
-    /*this.checkEval();
+    this.checkEval();
     const zip = new JSZip();
-    let info = {
-      "EvalName": this.nameEval,
-      "User": this.info,
-      "Output": this.output
-    };
-    let infoData = new Blob([JSON.stringify(info)], {type: 'application/json'});
+
+    let infoData = new Blob([JSON.stringify(this.generateInfoFile())], {type: 'application/json'});
     let configData = new Blob([JSON.stringify(this.generateConfigFile())], {type: 'application/json'});
     zip.file(this.nameEval + "/info.json", infoData);
     zip.file(this.nameEval + "/config.json", configData);
     this.addImgAndSongToZip(zip);
     zip.generateAsync({type: "blob"}).then((content) => {
       FileSaver.saveAs(content, this.nameEval.toString());
-    });*/
+    });
   }
 
   checkEval() {
@@ -54,14 +50,23 @@ export class EvalJsonService {
     }
   }
 
-  generateConfigFile(){
+  generateInfoFile() {
+    let info: any[] = [];
+    info.push(this.nameEval, this.output);
+    for (let i = 0; i < this.info.length; i++) {
+      info.push([this.info[i][0], this.info[i][1]]);
+    }
+    return info;
+  }
+
+  generateConfigFile() {
     let config: any[] = [];
-    for (let i=0; i<this.imgToDisplay.length; i++){
-      config.push([this.cols[i], this.rows[i]]);
-      for (let j=0; j<this.imgToZip[i].length; j+=2){
+    for (let i = 0; i < this.imgToDisplay.length; i++) {
+      config.push([this.rows[i], this.cols[i]]);
+      for (let j = 0; j < this.imgToZip[i].length; j += 2) {
         config[i].push(this.imgToZip[i][j]);
-        for (let k=2; k<this.imgToDisplay[i][j/2].length; k++){
-          config[i].push(this.imgToDisplay[i][j][k]);
+        for (let k = 2; k < this.imgToDisplay[i][j / 2].length; k++) {
+          config[i].push(this.imgToDisplay[i][j / 2][k]);
         }
       }
       config[i].push(this.songToDisplay[i][0]);
@@ -72,11 +77,12 @@ export class EvalJsonService {
   }
 
   addImgAndSongToZip(zip: any) {
-    /*for (let i = 0; i < this.imgToDisplay.length; i++) {
-      zip.file(this.nameEval + "/images/" + this.assets[i][0], this.imgAndSongToZip[i][0]);
-      zip.file(this.nameEval + "/images/" + this.assets[i][2], this.imgAndSongToZip[i][1]);
-      zip.file(this.nameEval + "/sounds/" + this.assets[i][4], this.imgAndSongToZip[i][2]);
-    }*/
+    for (let i = 0; i < this.imgToDisplay.length; i++) {
+      for (let j = 0; j < this.imgToZip[i].length; j += 2) {
+        zip.file(this.nameEval + "/images/" + this.imgToZip[i][j], this.imgToZip[i][j + 1]);
+        zip.file(this.nameEval + "/sounds/" + this.songToDisplay[i][0], this.songToDisplay[i][2]);
+      }
+    }
   }
 
   resetJson() {

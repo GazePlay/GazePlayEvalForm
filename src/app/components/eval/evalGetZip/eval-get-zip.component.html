@@ -6,7 +6,7 @@
     <div class="card-body">
       <div class="mb-3">
         <label class="form-label">Récapitulatif</label>
-        <dl id="recap" class="row">
+        <dl class="row" id="recap">
 
           <dt class="col-sm-3">Nom de l'évaluation</dt>
           <dd class="col-sm-9">{{getName()}}</dd>
@@ -15,7 +15,7 @@
           <dd class="col-sm-9">{{getIsAnonymous()}}</dd>
 
           <dt *ngIf="!isAnonymous" class="col-sm-3">Profil</dt>
-          <dd *ngIf="!isAnonymous"  class="col-sm-9"></dd>
+          <dd *ngIf="!isAnonymous" class="col-sm-9"></dd>
           <div *ngIf="!isAnonymous" class="col-sm-12">
             <dl class="row">
               <dt class="col-sm-3 user">Nom</dt>
@@ -44,21 +44,21 @@
           </div>
 
           <dt *ngIf="displayScore" class="col-sm-3">Scores</dt>
-          <div class="col-sm-12" *ngFor="let value of scores; let index = index">
+          <div *ngFor="let value of scores; let index = index" class="col-sm-12">
             <dl *ngIf="displayScore" class="row">
-              <dt class="col-sm-3 score">Nom du score : </dt>
+              <dt class="col-sm-3 score">Nom du score :</dt>
               <dd class="col-sm-1">{{this.scores[index][0]}}</dd>
-              <dt class="col-sm-3 score">Point du score : </dt>
+              <dt class="col-sm-3 score">Point du score :</dt>
               <dd class="col-sm-1">{{this.scores[index][2]}}</dd>
-              <dt class="col-sm-3 score">Point max du score : </dt>
+              <dt class="col-sm-3 score">Point max du score :</dt>
               <dd class="col-sm-1">{{this.scores[index][3]}}</dd>
             </dl>
           </div>
 
           <dt class="col-sm-3">Images & Sons</dt>
           <dd class="col-sm-9"></dd>
-          <div class="col-sm-12 assets" *ngFor="let value of imgAndSongToDisplay; let index = index">
-            <dt class="col-sm-3 item">Item {{index+1}}</dt>
+          <div *ngFor="let value of imgAndSongToDisplay; let index = index" class="col-sm-12 assets">
+            <dt class="col-sm-3 item">Item {{index + 1}}</dt>
             <dl class="row">
               <dt class="col-sm-3 img">Image 1 :</dt>
               <dd class="col-sm-1">
@@ -70,8 +70,8 @@
               </dd>
               <dt class="col-sm-1">Son :</dt>
               <dd class="col-sm-1">
-                <button type="button" class="btn btn-light sound" (click)="playAudio(index)">
-                  <img src="assets/play.png" alt="Play" class="buttonimg">
+                <button (click)="playAudio(index)" class="btn btn-light sound" type="button">
+                  <img alt="Play" class="buttonimg" src="assets/play.png">
                 </button>
               </dd>
             </dl>
@@ -96,9 +96,9 @@
       </div>
     </div>
     <div class="mb-3 text-center">
-      <button type="button" class="btn btn-secondary" (click)="previous()">Précédent</button>
-      <button type="button" class="btn btn-secondary" (click)="home()">Accueil</button>
-      <button type="button" class="btn btn-secondary" (click)="getZip()">Récupérer son évaluation</button>
+      <button (click)="previous()" class="btn btn-secondary" type="button">Précédent</button>
+      <button (click)="home()" class="btn btn-secondary" type="button">Accueil</button>
+      <button (click)="getZip()" class="btn btn-secondary" type="button">Récupérer son évaluation</button>
     </div>
   </div>
 </div>

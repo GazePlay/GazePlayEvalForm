@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ChooseSoundComponent } from './choose-sound.component';
+import {ChooseSoundComponent} from './choose-sound.component';
 
 describe('ChooseSoundComponent', () => {
   let component: ChooseSoundComponent;
@@ -8,9 +8,9 @@ describe('ChooseSoundComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChooseSoundComponent ]
+      declarations: [ChooseSoundComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ChooseSoundComponent);
     component = fixture.componentInstance;
