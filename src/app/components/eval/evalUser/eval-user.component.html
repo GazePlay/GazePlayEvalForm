@@ -1,17 +1,25 @@
 <div class="container-fluid">
   <div class="card">
     <div class="card-header text-center bg-secondary">
-      <h1>Informations Utilisateur</h1>
+      <div class="row">
+        <div class="col-11">
+          <h1>Informations Utilisateur</h1>
+        </div>
+        <div class="col-1 containerTooltip">
+          <img alt="information tooltip" class="infoTooltip" matTooltip="L'ordre des informations peuvent être modifiées via un Drag&Drop" matTooltipPosition="right"
+               src="assets/info.png">
+        </div>
+      </div>
     </div>
     <div class="card-body">
       <div class="mb-3">
         <div (cdkDropListDropped)="drop($event)" cdkDropList>
           <div *ngFor="let value of info; let index = index" cdkDrag>
             <div class="mb-3">
-              <div class="row">
+              <div class="row borderInfo">
                 <label class="form-label">{{"Information " + (index + 1)}}</label>
                 <div class="col-4">
-                  <label [for]="'InfoName' + index" class="form-label">Nom</label>
+                  <label [for]="'InfoName' + index" class="form-label">Untitulé</label>
                   <input (change)="getNameInfo($event, index)" [id]="'InfoName' + index" [value]="info[index][0]"
                          class="form-control"
                          placeholder="Nom de l'information" type="text">

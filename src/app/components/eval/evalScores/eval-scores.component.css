@@ -18,8 +18,19 @@ button {
   margin-bottom: 7px;
 }
 
-#scores {
-  margin-left: 5%;
+.infoTooltip {
+  width: 40px;
+  height: 40px;
+}
+
+.containerTooltip {
+  text-align: end;
+}
+
+.borderInfo {
+  border: thick groove ghostwhite;
+  min-height: 100px;
+  max-height: 100px;
 }
 
 #addScoreButton {

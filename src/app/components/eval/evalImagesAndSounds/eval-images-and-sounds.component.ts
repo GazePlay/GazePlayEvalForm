@@ -16,7 +16,7 @@ export class EvalImagesAndSoundsComponent implements OnInit {
 
   actualStep: number = 4;
   nbItem: number = 0;
-  rowHeight: number[] = [];
+  rowHeight: number = 0;
   cols: number[] = [];
   rows: number[] = [];
   fixationLength: number[] = [];
@@ -38,6 +38,7 @@ export class EvalImagesAndSoundsComponent implements OnInit {
     this.orderProgressBarService.setupOrderProgressBar();
     this.listScores = this.evalJsonService.scores;
     this.updateImgAndSong();
+    this.updateScores();
   }
 
   openChooseSoundDialog(index: number) {
@@ -59,7 +60,6 @@ export class EvalImagesAndSoundsComponent implements OnInit {
     this.evalJsonService.fixationLength.push(0);
     this.evalJsonService.nbImgToSee.push(0);
     this.evalJsonService.songToDisplay.push(["", "", ""]);
-    this.evalJsonService.rowHeight.push(0);
     this.evalJsonService.imgToZip.push([]);
     this.updateImgAndSong();
   }
@@ -78,8 +78,8 @@ export class EvalImagesAndSoundsComponent implements OnInit {
 
   updateGrid(index: number) {
     let gridSize = this.evalJsonService.cols[index] * this.evalJsonService.rows[index];
-    this.updateRowHeightGrid(gridSize, index);
     if (gridSize >= 0) {
+      this.resizeRowHeightGrid(gridSize);
       let sizeDifference = this.evalJsonService.imgToDisplay[index].length - gridSize;
       if (sizeDifference > 0) {
         for (let i = 0; i < sizeDifference; i++) {
@@ -89,22 +89,13 @@ export class EvalImagesAndSoundsComponent implements OnInit {
         }
       } else {
         for (let j = 0; j < Math.abs(sizeDifference); j++) {
-          this.evalJsonService.imgToDisplay[index].push(["../../../../assets/NeedImage.png", 0]);
+          this.evalJsonService.imgToDisplay[index].push(["../../../../assets/NeedImage.png", this.listScores.length]);
           this.evalJsonService.imgToZip[index].push("", "");
         }
       }
     }
+    this.setNbScore(index);
     this.updateImgAndSong();
-  }
-
-  updateRowHeightGrid(value: number, index: number) {
-    if (value == 0) {
-      this.evalJsonService.rowHeight[index] = 0;
-    } else {
-      if (this.evalJsonService.rowHeight[index] < 280) {
-        this.evalJsonService.rowHeight[index] = 280;
-      }
-    }
   }
 
   setFixationLength(value: any, index: number) {
@@ -117,49 +108,40 @@ export class EvalImagesAndSoundsComponent implements OnInit {
     this.updateImgAndSong();
   }
 
-  setNbScore(value: any, indexItem: number, indexGrid: number) {
-    let nbScore;
-    if (Number(value.target.value) < 0) {
-      nbScore = 0 - this.evalJsonService.imgToDisplay[indexItem][indexGrid][1];
-    } else {
-      nbScore = Number(value.target.value) - this.evalJsonService.imgToDisplay[indexItem][indexGrid][1];
-    }
-
-    if (this.evalJsonService.imgToDisplay[indexItem][indexGrid][1] < Number(value.target.value)) {
-      for (let i = 0; i < nbScore; i++) {
-        this.evalJsonService.imgToDisplay[indexItem][indexGrid].push("", 0);
-      }
-    } else {
-      for (let i = 0; i < Math.abs(nbScore); i++) {
-        this.evalJsonService.imgToDisplay[indexItem][indexGrid].pop();
-        this.evalJsonService.imgToDisplay[indexItem][indexGrid].pop();
+  setNbScore(indexItem: number) {
+    for (let i = 0; i < this.listScores.length; i++) {
+      for (let k=0; k<this.evalJsonService.imgToDisplay[indexItem].length; k++){
+        if (this.evalJsonService.imgToDisplay[indexItem][k].length < ((this.evalJsonService.imgToDisplay[indexItem][k][1]*2)+2)){
+          this.evalJsonService.imgToDisplay[indexItem][k].push(this.listScores[i][0], 0);
+        }
       }
     }
-
-    this.evalJsonService.imgToDisplay[indexItem][indexGrid][1] = Number(value.target.value);
-    this.resizeRowHeightGrid(Number(value.target.value), nbScore, indexItem);
     this.updateImgAndSong();
   }
 
-  resizeRowHeightGrid(value: number, nbScore: number, indexItem: number) {
-    if ((value != 1) || (nbScore < 0)) {
-      if ((this.evalJsonService.rowHeight[indexItem] + nbScore * 40) < 280) {
-        this.evalJsonService.rowHeight[indexItem] = 280;
-      } else {
-        this.evalJsonService.rowHeight[indexItem] += nbScore * 40;
-      }
+  resizeRowHeightGrid(gridSize: number) {
+    if (gridSize > 0){
+      this.evalJsonService.rowHeight = 240;
+      this.evalJsonService.rowHeight += this.listScores.length * 40;
+    }else {
+      this.evalJsonService.rowHeight = 0;
     }
   }
 
-  setChoiceOption(value: any, indexItem: number, indexGrid: number, indexChoice: number) {
-    let calculIndex = 2 + (indexChoice * 2);
-    this.evalJsonService.imgToDisplay[indexItem][indexGrid][calculIndex] = value.target.value;
+  updateScores(){
+    for (let i = 0; i < this.listScores.length; i++) {
+      for (let j = 0; j < this.evalJsonService.imgToDisplay.length; j++){
+        this.resizeRowHeightGrid((this.cols[j]*this.rows[j]));
+        for (let k=0; k<this.evalJsonService.imgToDisplay[j].length; k++){
+          this.evalJsonService.imgToDisplay[j][k][1] = this.listScores.length;
+          if (this.evalJsonService.imgToDisplay[j][k].length < ((this.evalJsonService.imgToDisplay[j][k][1]*2)+2)){
+            this.evalJsonService.imgToDisplay[j][k].push(this.listScores[i][0], 0);
+          }
+          this.evalJsonService.imgToDisplay[j][k][2*(i+1)] = this.listScores[i][0];
+        }
+      }
+    }
     this.updateImgAndSong();
-  }
-
-  choiceIsSelected(value: any, indexItem: number, indexGrid: number, indexChoice: number) {
-    let calculIndex = 2 + (indexChoice * 2);
-    return value == this.imgToDisplay[indexItem][indexGrid][calculIndex];
   }
 
   setValueScore(value: any, indexItem: number, indexGrid: number, indexValueScore: number) {

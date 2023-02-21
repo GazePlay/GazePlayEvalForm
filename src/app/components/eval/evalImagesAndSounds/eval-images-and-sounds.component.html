@@ -70,7 +70,7 @@
                     </div>
                   </div>
                 </div>
-                <mat-grid-list [cols]="this.cols[indexItem]" [rowHeight]="this.rowHeight[indexItem]">
+                <mat-grid-list [cols]="this.cols[indexItem]" [rowHeight]="this.rowHeight">
                   <mat-grid-tile
                     *ngFor="let grid of this.imgToDisplay[indexItem]; let indexGrid = index"
                     [colspan]="1"
@@ -94,27 +94,13 @@
                         </div>
                       </div>
                       <div class="row">
-                        <div class="col-4 leftInput">
-                          <label class="form-label">Nombre de score associé</label>
-                          <input (change)="setNbScore($event, indexItem, indexGrid)"
-                                 [value]="this.imgToDisplay[indexItem][indexGrid][1]" class="form-control" min="0"
-                                 step="1"
-                                 type="number">
+                        <div class="col-3"></div>
+                        <div *ngIf="this.listScores.length>0" class="col-3">
+                          <label class="form-label">Type</label>
+                          <input *ngFor="let choiceScore of [].constructor(this.imgToDisplay[indexItem][indexGrid][1]); let indexChoice = index"
+                                 [value]="this.imgToDisplay[indexItem][indexGrid][2 + (indexChoice * 2)]" class="form-control" disabled>
                         </div>
-                        <div *ngIf="this.imgToDisplay[indexItem][indexGrid][1]>0" class="col-4 rigthInput">
-                          <label [for]="'InfoType' + indexGrid" class="form-label">Type</label>
-                          <select
-                            (change)="setChoiceOption($event, indexItem, indexGrid, indexChoice)"
-                            *ngFor="let choiceScore of [].constructor(this.imgToDisplay[indexItem][indexGrid][1]); let indexChoice = index"
-                            [id]="'InfoType' + indexGrid" aria-label="Default select example"
-                            class="form-select">
-                            <option value="">Choisir le score</option>
-                            <option *ngFor="let score of this.listScores; let indexScore = index"
-                                    [selected]="choiceIsSelected(this.listScores[indexScore][0], indexItem, indexGrid, indexChoice)"
-                                    [value]="this.listScores[indexScore][0]">{{this.listScores[indexScore][0]}}</option>
-                          </select>
-                        </div>
-                        <div *ngIf="this.imgToDisplay[indexItem][indexGrid][1]>0" class="col-4 rigthInput">
+                        <div *ngIf="this.listScores.length>0" class="col-3">
                           <label class="form-label">Valeur du score</label>
                           <input
                             (change)="setValueScore($event, indexItem, indexGrid, indexValueScore)"
@@ -122,6 +108,7 @@
                             [value]="this.imgToDisplay[indexItem][indexGrid][3 + (indexValueScore * 2)]"
                             class="form-control" step="1" type="number">
                         </div>
+                        <div class="col-3"></div>
                       </div>
                     </div>
                   </mat-grid-tile>

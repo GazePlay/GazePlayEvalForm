@@ -51,24 +51,6 @@ export class EvalGetZipComponent implements OnInit {
     audio.play();
   }
 
-  getLastname() {
-  }
-
-  getFirstName() {
-  }
-
-  getGender() {
-  }
-
-  getAge() {
-  }
-
-  getBirthDate() {
-  }
-
-  getBirthPlace() {
-  }
-
   getZip() {
     this.evalJsonService.createEval();
   }

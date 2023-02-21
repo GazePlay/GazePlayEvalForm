@@ -1,14 +1,22 @@
 <div class="container-fluid">
   <div class="card">
     <div class="card-header text-center bg-secondary">
-      <h1>Scores évaluation</h1>
+      <div class="row">
+        <div class="col-11">
+          <h1>Scores</h1>
+        </div>
+        <div class="col-1 containerTooltip">
+          <img alt="information tooltip" class="infoTooltip" matTooltip="L'ordre des scores peuvent être modifiées via un Drag&Drop" matTooltipPosition="right"
+               src="assets/info.png">
+        </div>
+      </div>
     </div>
     <div class="card-body">
-      <div class="mb-3" id="scores">
+      <div class="mb-3">
         <div (cdkDropListDropped)="drop($event)" cdkDropList>
           <div *ngFor="let value of scores; let index = index" cdkDrag>
             <div class="mb-3">
-              <div class="row">
+              <div class="row borderInfo">
                 <div class="col-3">
                 </div>
                 <div class="col-5">

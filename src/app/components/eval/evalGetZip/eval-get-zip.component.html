@@ -6,99 +6,13 @@
     <div class="card-body">
       <div class="mb-3">
         <label class="form-label">Récapitulatif</label>
-        <dl class="row" id="recap">
-
-          <dt class="col-sm-3">Nom de l'évaluation</dt>
-          <dd class="col-sm-9">{{getName()}}</dd>
-
-          <dt class="col-sm-3">Anonyme</dt>
-          <dd class="col-sm-9">{{getIsAnonymous()}}</dd>
-
-          <dt *ngIf="!isAnonymous" class="col-sm-3">Profil</dt>
-          <dd *ngIf="!isAnonymous" class="col-sm-9"></dd>
-          <div *ngIf="!isAnonymous" class="col-sm-12">
-            <dl class="row">
-              <dt class="col-sm-3 user">Nom</dt>
-              <dd class="col">{{getLastname()}}</dd>
-            </dl>
-            <dl class="row">
-              <dt class="col-sm-3 user">Prénom</dt>
-              <dd class="col">{{getFirstName()}}</dd>
-            </dl>
-            <dl class="row">
-              <dt class="col-sm-3 user">Genre</dt>
-              <dd class="col">{{getGender()}}</dd>
-            </dl>
-            <dl class="row">
-              <dt class="col-sm-3 user">Age</dt>
-              <dd class="col">{{getAge()}}</dd>
-            </dl>
-            <dl class="row">
-              <dt class="col-sm-3 user">Date de naissance</dt>
-              <dd class="col">{{getBirthDate()}}</dd>
-            </dl>
-            <dl class="row">
-              <dt class="col-sm-3 user">Lieu de naissance</dt>
-              <dd class="col">{{getBirthPlace()}}</dd>
-            </dl>
-          </div>
-
-          <dt *ngIf="displayScore" class="col-sm-3">Scores</dt>
-          <div *ngFor="let value of scores; let index = index" class="col-sm-12">
-            <dl *ngIf="displayScore" class="row">
-              <dt class="col-sm-3 score">Nom du score :</dt>
-              <dd class="col-sm-1">{{this.scores[index][0]}}</dd>
-              <dt class="col-sm-3 score">Point du score :</dt>
-              <dd class="col-sm-1">{{this.scores[index][2]}}</dd>
-              <dt class="col-sm-3 score">Point max du score :</dt>
-              <dd class="col-sm-1">{{this.scores[index][3]}}</dd>
-            </dl>
-          </div>
-
-          <dt class="col-sm-3">Images & Sons</dt>
-          <dd class="col-sm-9"></dd>
-          <div *ngFor="let value of imgAndSongToDisplay; let index = index" class="col-sm-12 assets">
-            <dt class="col-sm-3 item">Item {{index + 1}}</dt>
-            <dl class="row">
-              <dt class="col-sm-3 img">Image 1 :</dt>
-              <dd class="col-sm-1">
-                <img [src]="imgAndSongToDisplay[index][0]">
-              </dd>
-              <dt class="col-sm-1">Image 2 :</dt>
-              <dd class="col-sm-1">
-                <img [src]="imgAndSongToDisplay[index][1]">
-              </dd>
-              <dt class="col-sm-1">Son :</dt>
-              <dd class="col-sm-1">
-                <button (click)="playAudio(index)" class="btn btn-light sound" type="button">
-                  <img alt="Play" class="buttonimg" src="assets/play.png">
-                </button>
-              </dd>
-            </dl>
-            <div class="col-sm-12 assets">
-              <dl class="row">
-                <dt class="col-sm-6 description">Description image 1 :</dt>
-                <dd class="col-sm-6">
-                  <p>{{assets[index][1]}}</p>
-                </dd>
-                <dt class="col-sm-6 description">Description image 2 :</dt>
-                <dd class="col-sm-6">
-                  <p>{{assets[index][3]}}</p>
-                </dd>
-                <dt class="col-sm-6 description">Description son :</dt>
-                <dd class="col-sm-6">
-                  <p>{{assets[index][5]}}</p>
-                </dd>
-              </dl>
-            </div>
-          </div>
-        </dl>
+          //TODO
       </div>
     </div>
     <div class="mb-3 text-center">
       <button (click)="previous()" class="btn btn-secondary" type="button">Précédent</button>
       <button (click)="home()" class="btn btn-secondary" type="button">Accueil</button>
-      <button (click)="getZip()" class="btn btn-secondary" type="button">Récupérer son évaluation</button>
+      <button (click)="getZip()" class="btn btn-secondary" type="button">Télécharger son évaluation</button>
     </div>
   </div>
 </div>

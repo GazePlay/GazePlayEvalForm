@@ -5,3 +5,17 @@ button {
 .container-fluid {
   width: 50%;
 }
+
+.borderInfo {
+  border: thick groove ghostwhite;
+  padding-bottom: 1%;
+}
+
+.infoTooltip {
+  width: 40px;
+  height: 40px;
+}
+
+.containerTooltip {
+  text-align: end;
+}

@@ -23,7 +23,7 @@ export class EvalJsonService {
   rows: number[] = [];
   fixationLength: number[] = [];
   nbImgToSee: number[] = [];
-  rowHeight: number[] = [];
+  rowHeight: number = 0;
   imgToZip: String[][] = [];
 
   constructor() {
@@ -102,7 +102,7 @@ export class EvalJsonService {
     this.rows = [];
     this.fixationLength = [];
     this.nbImgToSee = [];
-    this.rowHeight = [];
+    this.rowHeight = 0;
     this.imgToZip = [];
   }
 }

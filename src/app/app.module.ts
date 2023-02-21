@@ -15,6 +15,7 @@ import {EvalGetZipComponent} from './components/eval/evalGetZip/eval-get-zip.com
 import {CdkDrag, CdkDropList, CdkDropListGroup} from "@angular/cdk/drag-drop";
 import {EvalScoresComponent} from './components/eval/evalScores/eval-scores.component';
 import {MatGridListModule} from "@angular/material/grid-list";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -28,16 +29,17 @@ import {MatGridListModule} from "@angular/material/grid-list";
     EvalGetZipComponent,
     EvalScoresComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatDialogModule,
-    MatButtonModule,
-    CdkDropList,
-    CdkDrag,
-    MatGridListModule,
-    CdkDropListGroup
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MatDialogModule,
+        MatButtonModule,
+        CdkDropList,
+        CdkDrag,
+        MatGridListModule,
+        CdkDropListGroup,
+        MatTooltipModule
+    ],
   providers: [
     MatDialog
   ],
