@@ -1,0 +1,14 @@
+.modal-header {
+  color: rgba(255, 255, 255, 0.55);
+  background-color: rgb(33, 37, 41);
+  border-bottom: none !important;
+}
+
+.modal-body {
+  color: white;
+  border-bottom: none !important;
+}
+
+.modal-footer {
+  border-top: none !important;
+}

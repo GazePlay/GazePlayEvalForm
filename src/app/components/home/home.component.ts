@@ -17,12 +17,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.orderProgress = document.getElementById("orderProgressBar");
-    this.orderProgress.style = "position: absolute; visibility: hidden";
+    this.orderProgress.style = "visibility: hidden";
     this.evalJsonService.resetJson();
-  }
-
-  start() {
-    this.orderProgress.style = "";
-    this.router.navigate(['/informations']);
   }
 }

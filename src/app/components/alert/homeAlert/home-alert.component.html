@@ -1,0 +1,18 @@
+<div class="modal fade" id="homeAlert" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="homeAlertHeader" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="homeAlertHeader">Retour accueil</h1>
+      </div>
+      <div class="modal-body bg-secondary">
+        Attention !
+        En revenant à l'accueil vous allez perdre toute les données remplis dans cette évaluation.
+        Êtes vous toujours sûr ?
+      </div>
+      <div class="modal-footer bg-secondary">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="returnHome()">Oui</button>
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal"><span data-bs-toggle="offcanvas" data-bs-target="#menu">Non</span></button>
+      </div>
+    </div>
+  </div>
+</div>

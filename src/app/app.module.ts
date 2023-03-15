@@ -16,6 +16,10 @@ import {CdkDrag, CdkDropList, CdkDropListGroup} from "@angular/cdk/drag-drop";
 import {EvalScoresComponent} from './components/eval/evalScores/eval-scores.component';
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { MenuComponent } from './components/navbar/menu/menu.component';
+import { NavbarComponent } from './components/navbar/navbar/navbar.component';
+import { HomeAlertComponent } from './components/alert/homeAlert/home-alert.component';
+import { DeleteAlertComponent } from './components/alert/deleteAlert/delete-alert.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,11 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     EvalImagesAndSoundsComponent,
     ChooseSoundComponent,
     EvalGetZipComponent,
-    EvalScoresComponent
+    EvalScoresComponent,
+    MenuComponent,
+    NavbarComponent,
+    HomeAlertComponent,
+    DeleteAlertComponent
   ],
     imports: [
         BrowserModule,

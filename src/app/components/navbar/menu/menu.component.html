@@ -1,0 +1,43 @@
+<div aria-labelledby="menuTitle" class="offcanvas offcanvas-start text-bg-dark" data-bs-scroll="true" id="menu"
+     tabindex="-1">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title" id="menuTitle">Menu</h3>
+    <a class="closeButton" data-bs-dismiss="offcanvas" type="button"><h5><i class="fa-solid fa-arrow-left"></i></h5></a>
+  </div>
+  <div class="offcanvas-body">
+    <nav class="nav flex-column">
+      <span class="navbar-text">
+        <h4>
+          Accueil
+        </h4>
+      </span>
+      <button class="navbar-toggler navbar-button" data-bs-target="#homeAlert" data-bs-toggle="modal">
+        <div data-bs-dismiss="offcanvas"><h5><span><i class="fa-solid fa-house"></i> Accueil</span></h5></div>
+      </button>
+      <span class="navbar-text">
+        <h4>
+          Evaluation
+        </h4>
+      </span>
+      <button class="navbar-toggler navbar-button" data-bs-dismiss="offcanvas" (click)="startEval()">
+        <div><h5><span><i class="fa-solid fa-file"></i> Commencer</span></h5></div>
+      </button>
+      <button class="navbar-toggler navbar-button" data-bs-dismiss="offcanvas">
+        <div><h5><span><i class="fa-solid fa-floppy-disk"></i> Sauvegarder</span></h5></div>
+      </button>
+      <button class="navbar-toggler navbar-button" data-bs-dismiss="offcanvas">
+        <div><h5><span><i class="fa-solid fa-download"></i> Charger</span></h5></div>
+      </button>
+      <span class="navbar-text">
+        <h4>
+          Paramètres
+        </h4>
+      </span>
+      <button class="navbar-toggler navbar-button" data-bs-dismiss="offcanvas">
+        <div><h5><span><i class="fa-solid fa-gear"></i> Options</span></h5></div>
+      </button>
+    </nav>
+  </div>
+</div>
+
+<app-home-alert></app-home-alert>

@@ -10,10 +10,22 @@ ul {
   margin-left: 20%;
 }
 
+/*----- CLASS -----*/
+
 .container-fluid {
   width: 50%;
 }
 
 .explanation {
   margin-top: 2%;
+  color: lightgray;
+}
+
+.card-header {
+  color: rgba(255, 255, 255, 0.55);
+  background-color: rgb(33, 37, 41);
+}
+
+.card {
+  border: 2px black solid !important;
 }

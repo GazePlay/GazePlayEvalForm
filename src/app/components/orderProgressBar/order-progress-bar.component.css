@@ -64,7 +64,7 @@
 
 .bs4-order-tracking li.active {
   font-weight: bold;
-  color: #dc3545
+  color: darkred;
 }
 
 .bs4-order-tracking li.active > div {
