@@ -1,5 +1,5 @@
 h3, span, a {
- color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 button span:hover {
@@ -20,4 +20,8 @@ button span:hover {
 
 .closeButton:hover{
   color: white;
+}
+
+.themes{
+  margin-left: 20% !important;
 }

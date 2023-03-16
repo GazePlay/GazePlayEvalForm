@@ -1,0 +1,51 @@
+<div class="offcanvas offcanvas-end text-bg-dark" id="options" tabindex="-1" aria-labelledby="optionsTitle" data-bs-scroll="true" data-bs-backdrop="static">
+  <div class="offcanvas-header">
+    <a class="closeButton" data-bs-dismiss="offcanvas" type="button">
+      <h5 data-bs-toggle="offcanvas" data-bs-target="#menu" aria-controls="menuTitle">
+        <i class="fa-solid fa-arrow-right"></i>
+      </h5>
+    </a>
+    <h3 class="offcanvas-title" id="optionsTitle">Options</h3>
+  </div>
+  <div class="offcanvas-body">
+    <nav class="nav flex-column">
+      <span class="navbar-text">
+        <h4>
+          Thèmes
+        </h4>
+      </span>
+      <button class="navbar-toggler navbar-button" (click)="showHideTheme()">
+        <div>
+          <h5>
+            <span>Choisir le thème
+              <svg class="svg-inline&#45;&#45;fa fa-caret-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg="">
+                <path fill="currentColor" [attr.d]="svgPathCaret">
+                </path>
+              </svg>
+            </span>
+          </h5>
+        </div>
+      </button>
+      <button *ngIf="showThemes" class="navbar-toggler navbar-button themes" (click)="changeTheme('light')">
+        <h6>
+          <span>Thème clair
+            <svg *ngIf="!isDarkTheme" class="svg-inline&#45;&#45;fa fa-circle-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle-check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+              <path fill="currentColor" d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z">
+              </path>
+            </svg>
+          </span>
+        </h6>
+      </button>
+      <button *ngIf="showThemes" class="navbar-toggler navbar-button themes" (click)="changeTheme('dark')">
+        <h6>
+          <span>Thème sombre
+            <svg *ngIf="isDarkTheme" class="svg-inline&#45;&#45;fa fa-circle-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle-check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+              <path fill="currentColor" d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z">
+              </path>
+            </svg>
+          </span>
+        </h6>
+      </button>
+    </nav>
+  </div>
+</div>

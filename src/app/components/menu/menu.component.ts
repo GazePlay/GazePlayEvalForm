@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent {
+export class MenuComponent{
 
   orderProgress: any;
 
@@ -17,5 +17,6 @@ export class MenuComponent {
     this.orderProgress = document.getElementById("orderProgressBar");
     this.orderProgress.style = "";
     this.router.navigate(['/informations']);
+
   }
 }

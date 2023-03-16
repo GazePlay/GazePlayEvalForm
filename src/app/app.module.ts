@@ -16,10 +16,11 @@ import {CdkDrag, CdkDropList, CdkDropListGroup} from "@angular/cdk/drag-drop";
 import {EvalScoresComponent} from './components/eval/evalScores/eval-scores.component';
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatTooltipModule} from "@angular/material/tooltip";
-import { MenuComponent } from './components/navbar/menu/menu.component';
-import { NavbarComponent } from './components/navbar/navbar/navbar.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeAlertComponent } from './components/alert/homeAlert/home-alert.component';
 import { DeleteAlertComponent } from './components/alert/deleteAlert/delete-alert.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { DeleteAlertComponent } from './components/alert/deleteAlert/delete-aler
     MenuComponent,
     NavbarComponent,
     HomeAlertComponent,
-    DeleteAlertComponent
+    DeleteAlertComponent,
+    SettingsComponent
   ],
     imports: [
         BrowserModule,

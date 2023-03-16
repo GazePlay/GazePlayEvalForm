@@ -1,0 +1,19 @@
+h3, span, a {
+ color: rgba(255, 255, 255, 0.55);
+}
+
+button span:hover {
+  color: white;
+}
+
+/* ----- CLASS ----- */
+
+.navbar-button{
+  text-align: start;
+  margin-left: 10%;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.closeButton:hover{
+  color: white;
+}

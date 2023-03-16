@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark bg-dark">
+<nav [class]="navbarTheme">
   <div class="container-fluid">
     <span class="navbar-text">
       Menu
@@ -16,8 +16,8 @@
         <i class="fas fa-user fa-fw"></i>
         Utilisateur
       </button>
-      <ul class="dropdown-menu dropdown-menu-dark">
-        <li><a class="dropdown-item">Déconnexion</a></li>
+      <ul [class]="navbarDropdownTheme">
+        <li><a class="dropdown-item"><i class="fa-solid fa-power-off"></i> Déconnexion</a></li>
       </ul>
     </div>
   </div>
