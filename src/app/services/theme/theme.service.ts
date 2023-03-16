@@ -15,6 +15,9 @@ export class ThemeService {
   navbarTheme: string[] = ["navbar navbar-dark bg-dark", "dropdown-menu dropdown-menu-dark"];
   navbarThemeObservable = new Subject<string[]>();
 
+  menuTheme: string[]= ["offcanvas offcanvas-start text-bg-dark", "closeButton darkText", "navbar-toggler navbar-button darkButton", "darkText"];
+  menuThemeObservable = new Subject<string[]>();
+
   homeTheme: string[] = ["card text-bg-dark", "card-header cardHeaderColor text-center", "explanation explanationColor"];
   homeThemeObservable = new Subject<string[]>();
 
@@ -26,16 +29,20 @@ export class ThemeService {
     if (value == "light"){
       this.bodyTheme = "";
       this.navbarTheme = ["navbar navbar-light bg-light", "dropdown-menu"];
+      this.menuTheme = ["offcanvas offcanvas-start text-bg-light", "closeButton lightText", "navbar-toggler navbar-button", "lightText"];
       this.homeTheme = ["card text-bg-light", "card-header text-center", "explanation"];
       this.bodyThemeObservable.next("");
       this.navbarThemeObservable.next(["navbar navbar-light bg-light", "dropdown-menu"]);
+      this.menuThemeObservable.next(["offcanvas offcanvas-start text-bg-light", "closeButton lightText", "navbar-toggler navbar-button", "lightText"]);
       this.homeThemeObservable.next(["card text-bg-light", "card-header text-center", "explanation"]);
     }else {
       this.bodyTheme = "bg-secondary";
       this.navbarTheme = ["navbar navbar-dark bg-dark", "dropdown-menu dropdown-menu-dark"];
+      this.menuTheme = ["offcanvas offcanvas-start text-bg-dark", "closeButton darkText", "navbar-toggler navbar-button darkButton", "darkText"];
       this.homeTheme = ["card text-bg-dark", "card-header cardHeaderColor text-center", "explanation explanationColor"];
       this.bodyThemeObservable.next("bg-secondary")
       this.navbarThemeObservable.next(["navbar navbar-dark bg-dark", "dropdown-menu dropdown-menu-dark"]);
+      this.menuThemeObservable.next(["offcanvas offcanvas-start text-bg-dark", "closeButton darkText", "navbar-toggler navbar-button darkButton", "darkText"]);
       this.homeThemeObservable.next(["card text-bg-dark", "card-header cardHeaderColor text-center", "explanation explanationColor"]);
     }
   }
