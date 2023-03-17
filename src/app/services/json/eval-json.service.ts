@@ -11,9 +11,7 @@ export class EvalJsonService {
   nbItem: number = 0;
 
   nameEval: String = "";
-  info: any[][] = [];
-  options: Boolean[][] = [];
-  type: String[] = [];
+  infoPatient: any[][] = [];
   scores: String[][] = [];
   errorsScores: Boolean[] = [];
   output: String = "all";
@@ -53,8 +51,8 @@ export class EvalJsonService {
   generateInfoFile() {
     let info: any[] = [];
     info.push(this.nameEval, this.output);
-    for (let i = 0; i < this.info.length; i++) {
-      info.push([this.info[i][0], this.info[i][1]]);
+    for (let i = 0; i < this.infoPatient.length; i++) {
+      info.push([this.infoPatient[i][0], this.infoPatient[i][1]]);
     }
     return info;
   }
@@ -88,11 +86,8 @@ export class EvalJsonService {
   resetJson() {
     this.index = 0;
     this.nbItem = 0;
-
-    this.nameEval = "GazePlayEval";
-    this.info = [];
-    this.options = [];
-    this.type = [];
+    this.nameEval = "";
+    this.infoPatient = [["Identifiant du patient", this.generateId()]];
     this.scores = [];
     this.errorsScores = [];
     this.output = "all";
@@ -104,5 +99,16 @@ export class EvalJsonService {
     this.nbImgToSee = [];
     this.rowHeight = 0;
     this.imgToZip = [];
+  }
+
+  generateId(){
+    let possibleValue: string = "1234567890";
+    let sizeId: number = 4;
+    let id: string = "P";
+
+    for (let i = 0; i < sizeId; i++) {
+      id += possibleValue.charAt(Math.floor(Math.random() * possibleValue.length));
+    }
+    return id;
   }
 }

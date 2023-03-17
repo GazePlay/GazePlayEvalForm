@@ -8,7 +8,7 @@ export class OrderProgressBarService {
 
   orderProgress: any;
 
-  actualStep: number = 0;
+  actualStep: number = -1;
   actualStepObservable = new Subject<number>();
 
   maxStep: number = 5;

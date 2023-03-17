@@ -19,3 +19,8 @@ button {
 .containerTooltip {
   text-align: end;
 }
+
+.removeButton {
+  text-align: center;
+  margin: auto;
+}

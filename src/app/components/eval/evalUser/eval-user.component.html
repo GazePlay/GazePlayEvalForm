@@ -1,48 +1,44 @@
 <div class="container-fluid">
   <div class="card">
     <div class="card-header text-center bg-secondary">
+      <h1>Informations Patient</h1>
+    </div>
+    <div class="card-body">
       <div class="row">
-        <div class="col-11">
-          <h1>Informations Utilisateur</h1>
+        <div class="col-1"></div>
+        <div class="col-10 alert alert-info text-center" role="alert">
+          <i class="fa-solid fa-circle-info"></i>
+          Aucune information n'est gardé de notre côté !
         </div>
-        <div class="col-1 containerTooltip">
-          <img alt="information tooltip" class="infoTooltip" matTooltip="L'ordre des informations peuvent être modifiées via un Drag&Drop" matTooltipPosition="right"
+        <div class="col-1 text-end">
+          <img alt="information tooltip" class="infoTooltip containerTooltip"
+               matTooltip="L'ordre des informations peuvent être modifiées via un Drag&Drop"
+               matTooltipPosition="right"
                src="../../../../assets/images/info.png">
         </div>
       </div>
-    </div>
-    <div class="card-body">
       <div class="mb-3">
         <div (cdkDropListDropped)="drop($event)" cdkDropList>
-          <div *ngFor="let value of info; let index = index" cdkDrag>
+          <div *ngFor="let value of infoPatient; let index = index" cdkDrag [cdkDragDisabled]="index==0">
             <div class="mb-3">
               <div class="row borderInfo">
                 <label class="form-label">{{"Information " + (index + 1)}}</label>
+                <div class="col-1"></div>
                 <div class="col-4">
-                  <label [for]="'InfoName' + index" class="form-label">Untitulé</label>
-                  <input (change)="getNameInfo($event, index)" [id]="'InfoName' + index" [value]="info[index][0]"
+                  <label [for]="'InfoName' + index" class="form-label">Intitulé</label>
+                  <input (change)="getNameInfo($event, index)" [id]="'InfoName' + index" [value]="infoPatient[index][0]"
                          class="form-control"
-                         placeholder="Nom de l'information" type="text">
+                         placeholder="Nom de l'information" type="text" [disabled]="index==0">
                 </div>
-                <div class="col-3">
-                  <label [for]="'InfoType' + index" class="form-label">Type</label>
-                  <select (change)="getOutput($event, index)" [id]="'InfoType' + index"
-                          aria-label="Default select example"
-                          class="form-select">
-                    <option [selected]="options[index][0]" value="none">Choisir</option>
-                    <option [selected]="options[index][1]" value="text">Texte</option>
-                    <option [selected]="options[index][2]" value="number">Nombre</option>
-                    <option [selected]="options[index][3]" value="date">Date</option>
-                  </select>
-                </div>
-                <div *ngIf="!options[index][0]" class="col-4">
+                <div class="col-1"></div>
+                <div class="col-4">
                   <label [for]="'InfoValue' + index" class="form-label">Valeur</label>
-                  <input (change)="getValueInfo($event, index)" [id]="'InfoValue' + index" [type]="type[index]"
-                         [value]="info[index][1]"
+                  <input (change)="getValueInfo($event, index)" [id]="'InfoValue' + index" type="text"
+                         [value]="infoPatient[index][1]"
                          class="form-control" placeholder="Valeur de l'information">
                 </div>
-                <div class="col-1 d-flex align-items-center removeButton">
-                  <button (click)="removeInfo(index)" class="btn btn-danger" type="button">-</button>
+                <div class="col-2 removeButton">
+                  <button (click)="removeInfo(index)" class="btn btn-danger" type="button" [disabled]="index==0">-</button>
                 </div>
               </div>
             </div>
@@ -52,11 +48,14 @@
           <button (click)="addOneMoreInfo()" class="btn btn-secondary" id="addInfoButton" type="button">+</button>
         </div>
       </div>
-    </div>
-    <div class="mb-3 text-center">
-      <button (click)="previous()" class="btn btn-secondary" type="button">Précédent</button>
-      <button (click)="home()" class="btn btn-secondary" type="button">Accueil</button>
-      <button (click)="next()" class="btn btn-secondary" type="button">Suivant</button>
+      <div *ngIf="showErrors" class="alert alert-danger text-center" role="alert">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        {{error[0] + " de l'information " + error[1] + " n'est pas valide !"}}
+      </div>
+      <div class="text-center">
+        <button (click)="previous()" class="btn btn-secondary" type="button">Précédent</button>
+        <button (click)="next()" class="btn btn-secondary" type="button">Suivant</button>
+      </div>
     </div>
   </div>
 </div>

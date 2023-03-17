@@ -12,9 +12,9 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 export class EvalUserComponent implements OnInit {
 
   actualStep: number = 2;
-  info: any[][] = [];
-  options: Boolean[][] = [[true, false, false, false]];
-  type: String[] = ["none"];
+  infoPatient: any[][] = [];
+  showErrors: boolean = false;
+  error: any[] = ["", ""];
 
   constructor(
     private router: Router,
@@ -29,80 +29,65 @@ export class EvalUserComponent implements OnInit {
   }
 
   getNameInfo(value: any, index: number) {
-    this.evalJsonService.info[index][0] = value.target.value;
+    this.evalJsonService.infoPatient[index][0] = String(value.target.value);
     this.updateInfo();
   }
 
   getValueInfo(value: any, index: number) {
-    this.evalJsonService.info[index][1] = String(value.target.value);
-    this.updateInfo();
-  }
-
-  getOutput(value: any, index: number) {
-    this.evalJsonService.type[index] = value.target.value;
-
-    switch (this.type[index]) {
-      case "none":
-        this.evalJsonService.options[index] = [true, false, false, false];
-        break;
-      case "text":
-        this.evalJsonService.options[index] = [false, true, false, false];
-        break;
-      case "number":
-        this.evalJsonService.options[index] = [false, false, true, false];
-        break;
-      case "date":
-        this.evalJsonService.options[index] = [false, false, false, true];
-        break;
-      default:
-        break;
-    }
+    this.evalJsonService.infoPatient[index][1] = String(value.target.value);
     this.updateInfo();
   }
 
   addOneMoreInfo() {
-    this.evalJsonService.info.push(["", ""]);
-    this.evalJsonService.options.push([true, false, false, false]);
-    this.evalJsonService.type.push("");
+    this.evalJsonService.infoPatient.push(["", ""]);
     this.updateInfo();
   }
 
   removeInfo(index: number) {
-    let tmpInfo: String[][] = [];
-    let tmpOption: Boolean[][] = [];
-    let tmpType: String[] = [];
-    for (let i = 0; i < this.evalJsonService.info.length; i++) {
+    let tmpInfoPatient: String[][] = [];
+    for (let i = 0; i < this.evalJsonService.infoPatient.length; i++) {
       if (i != index) {
-        tmpInfo.push(this.evalJsonService.info[i]);
-        tmpOption.push(this.evalJsonService.options[i]);
-        tmpType.push(this.evalJsonService.type[i]);
+        tmpInfoPatient.push(this.evalJsonService.infoPatient[i]);
       }
     }
-    this.evalJsonService.info = tmpInfo;
-    this.evalJsonService.options = tmpOption;
-    this.evalJsonService.type = tmpType;
+    this.evalJsonService.infoPatient = tmpInfoPatient;
     this.updateInfo();
   }
 
   updateInfo() {
-    this.info = this.evalJsonService.info;
-    this.options = this.evalJsonService.options;
-    this.type = this.evalJsonService.type;
+    this.infoPatient = this.evalJsonService.infoPatient;
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.evalJsonService.info, event.previousIndex, event.currentIndex);
-    moveItemInArray(this.evalJsonService.options, event.previousIndex, event.currentIndex);
-    moveItemInArray(this.evalJsonService.type, event.previousIndex, event.currentIndex);
-    this.updateInfo();
+    if (event.currentIndex != 0){
+      moveItemInArray(this.evalJsonService.infoPatient, event.previousIndex, event.currentIndex);
+      this.updateInfo();
+    }
   }
 
-  home() {
-    this.router.navigate(['/home']);
+  checkValues(){
+    let error: boolean = false;
+    for (let i=0; i<this.infoPatient.length; i++){
+      if (this.infoPatient[i][0] == ""){
+        error = true;
+        this.error = ["L'intitulé", i+1];
+        break;
+      }else if (this.infoPatient[i][1] == ""){
+        error = true;
+        this.error = ["La valeur", i+1];
+        break;
+      }
+    }
+    return error;
   }
 
   next() {
-    this.router.navigate(['/scores']);
+    if (!this.checkValues()){
+      this.showErrors = false;
+      this.router.navigate(['/scores']);
+    }else {
+      this.showErrors = true;
+    }
   }
 
   previous() {

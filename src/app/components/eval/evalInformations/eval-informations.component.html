@@ -1,28 +1,31 @@
 <div class="container-fluid">
-  <div class="card">
-    <div class="card-header text-center bg-secondary">
+  <div [class]="cardTheme">
+    <div [class]="cardHeaderTheme">
       <h1>Informations Evaluation</h1>
     </div>
-    <div class="card-body">
+    <div class="card-body text-center firstCardBody" [class]="cardTextTheme">
       <div class="mb-3">
         <label class="form-label" for="EvalName">Nom de l'évaluation</label>
-        <input (change)="getNameEval($event)" [value]="nameEval" class="form-control" id="EvalName" placeholder="Défaut : GazePlayEval"
-               type="text">
+        <div>
+          <input (change)="getNameEval($event)" [value]="nameEval" class="form-control bg-light" id="EvalName" placeholder="Défaut : GazePlayEval"
+                 type="text">
+        </div>
       </div>
     </div>
-    <div class="card-body">
+    <div class="card-body text-center secondCardBody" [class]="cardTextTheme">
       <div class="mb-3">
         <label class="form-label">Résultat</label>
-        <select (change)="getOutput($event)" aria-label="Default select example" class="form-select">
-          <option [selected]="allOption" value="all">Csv & Xlsx</option>
-          <option [selected]="csvOption" value="csv">Csv</option>
-          <option [selected]="xlsxOption" value="xlsx">Xlsx</option>
-        </select>
+        <div>
+          <select (change)="getOutput($event)" aria-label="Default select example" class="form-select">
+            <option [selected]="allOption" value="all">Csv & Xlsx</option>
+            <option [selected]="csvOption" value="csv">Csv</option>
+            <option [selected]="xlsxOption" value="xlsx">Xlsx</option>
+          </select>
+        </div>
       </div>
-    </div>
-    <div class="mb-3 text-center">
-      <button (click)="home()" class="btn btn-secondary" type="button">Accueil</button>
-      <button (click)="next()" class="btn btn-secondary" type="button">Suivant</button>
+      <div class="text-center">
+        <button (click)="next()" [class]="buttonTheme" type="button">Suivant</button>
+      </div>
     </div>
   </div>
 </div>

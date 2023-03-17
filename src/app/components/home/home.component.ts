@@ -24,17 +24,17 @@ export class HomeComponent implements OnInit {
               private themeService: ThemeService,
               private orderProgressBarService: OrderProgressBarService) {
 
-    this.cardTheme = this.themeService.homeTheme[0];
-    this.cardHeaderTheme = this.themeService.homeTheme[1];
-    this.cardTextTheme = this.themeService.homeTheme[2];
-    this.buttonTheme = this.themeService.homeTheme[3];
+    this.cardTheme = this.themeService.cardTheme[0];
+    this.cardHeaderTheme = this.themeService.cardTheme[1];
+    this.cardTextTheme = this.themeService.cardTheme[2];
+    this.buttonTheme = this.themeService.cardTheme[3];
 
-    this.themeService.homeThemeObservable.subscribe(value => {
+    this.themeService.cardThemeObservable.subscribe(value => {
       this.cardTheme = value[0];
       this.cardHeaderTheme = value[1];
       this.cardTextTheme = value[2];
       this.buttonTheme = value[3];
-    })
+    });
   }
 
   ngOnInit(): void {

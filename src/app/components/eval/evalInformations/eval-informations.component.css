@@ -1,7 +1,46 @@
 button {
-  margin-right: 1%;
+  margin-top: 1%;
 }
+
+input, select {
+  width: auto;
+}
+
+div > input, div > select {
+  margin: auto;
+  display: table;
+}
+
+/*----- CLASS -----*/
 
 .container-fluid {
   width: 50%;
+}
+
+.firstCardBody {
+  padding-bottom: 0;
+}
+
+.secondCardBody {
+  padding-top: 0;
+}
+
+.btnColor {
+  color: lightgrey;
+}
+
+.explanationColor {
+  background-color: rgba(255, 255, 255, 0.55);
+}
+
+.cardHeaderColor {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.cardDark {
+  border: 2px black solid !important;
+}
+
+.cardLight {
+  border: 2px gray solid !important;
 }
