@@ -1,9 +1,9 @@
 <div class="container-fluid">
-  <div class="card">
-    <div class="card-header text-center bg-secondary">
+  <div [class]="cardTheme">
+    <div [class]="cardHeaderTheme">
       <h1>Informations Patient</h1>
     </div>
-    <div class="card-body">
+    <div class="card-body" [class]="cardTextTheme">
       <div class="row">
         <div class="col-1"></div>
         <div class="col-10 alert alert-info text-center" role="alert">
@@ -53,8 +53,8 @@
         {{error[0] + " de l'information " + error[1] + " n'est pas valide !"}}
       </div>
       <div class="text-center">
-        <button (click)="previous()" class="btn btn-secondary" type="button">Précédent</button>
-        <button (click)="next()" class="btn btn-secondary" type="button">Suivant</button>
+        <button (click)="previous()" [class]="buttonTheme" type="button">Précédent</button>
+        <button (click)="next()" [class]="buttonTheme" type="button">Suivant</button>
       </div>
     </div>
   </div>

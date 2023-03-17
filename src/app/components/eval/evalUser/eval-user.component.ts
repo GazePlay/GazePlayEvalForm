@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {OrderProgressBarService} from "../../../services/orderProgressBar/order-progress-bar.service";
 import {EvalJsonService} from "../../../services/json/eval-json.service";
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {ThemeService} from "../../../services/theme/theme.service";
 
 @Component({
   selector: 'app-eval-user',
@@ -16,10 +17,27 @@ export class EvalUserComponent implements OnInit {
   showErrors: boolean = false;
   error: any[] = ["", ""];
 
-  constructor(
-    private router: Router,
-    private orderProgressBarService: OrderProgressBarService,
-    private evalJsonService: EvalJsonService) {
+  cardTheme: string = "";
+  cardHeaderTheme: string = "";
+  cardTextTheme: string = "";
+  buttonTheme: string = "";
+
+  constructor(private router: Router,
+              private orderProgressBarService: OrderProgressBarService,
+              private evalJsonService: EvalJsonService,
+              private themeService: ThemeService) {
+
+    this.cardTheme = this.themeService.cardTheme[0];
+    this.cardHeaderTheme = this.themeService.cardTheme[1];
+    this.cardTextTheme = this.themeService.cardTheme[2];
+    this.buttonTheme = this.themeService.cardTheme[3];
+
+    this.themeService.cardThemeObservable.subscribe(value => {
+      this.cardTheme = value[0];
+      this.cardHeaderTheme = value[1];
+      this.cardTextTheme = value[2];
+      this.buttonTheme = value[3];
+    });
   }
 
   ngOnInit(): void {
