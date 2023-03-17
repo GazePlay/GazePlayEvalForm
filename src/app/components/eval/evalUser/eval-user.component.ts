@@ -4,6 +4,7 @@ import {OrderProgressBarService} from "../../../services/orderProgressBar/order-
 import {EvalJsonService} from "../../../services/json/eval-json.service";
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {ThemeService} from "../../../services/theme/theme.service";
+import {SettingsService} from "../../../services/settings/settings.service";
 
 @Component({
   selector: 'app-eval-user',
@@ -13,6 +14,7 @@ import {ThemeService} from "../../../services/theme/theme.service";
 export class EvalUserComponent implements OnInit {
 
   actualStep: number = 2;
+
   infoPatient: any[][] = [];
   showErrors: boolean = false;
   error: any[] = ["", ""];
@@ -22,10 +24,13 @@ export class EvalUserComponent implements OnInit {
   cardTextTheme: string = "";
   buttonTheme: string = "";
 
+  indexElemToDelete: number = -1;
+
   constructor(private router: Router,
               private orderProgressBarService: OrderProgressBarService,
               private evalJsonService: EvalJsonService,
-              private themeService: ThemeService) {
+              private themeService: ThemeService,
+              private settingsService: SettingsService) {
 
     this.cardTheme = this.themeService.cardTheme[0];
     this.cardHeaderTheme = this.themeService.cardTheme[1];
@@ -37,6 +42,12 @@ export class EvalUserComponent implements OnInit {
       this.cardHeaderTheme = value[1];
       this.cardTextTheme = value[2];
       this.buttonTheme = value[3];
+    });
+
+    this.settingsService.deleteElemWhitModalObservable.subscribe(value => {
+      if (value){
+        this.removeInfo(this.indexElemToDelete);
+      }
     });
   }
 
@@ -54,6 +65,10 @@ export class EvalUserComponent implements OnInit {
   getValueInfo(value: any, index: number) {
     this.evalJsonService.infoPatient[index][1] = String(value.target.value);
     this.updateInfo();
+  }
+
+  getIndexElemToDelete(value: number){
+    this.indexElemToDelete = value;
   }
 
   addOneMoreInfo() {

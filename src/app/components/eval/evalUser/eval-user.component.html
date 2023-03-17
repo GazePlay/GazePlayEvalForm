@@ -38,7 +38,7 @@
                          class="form-control" placeholder="Valeur de l'information">
                 </div>
                 <div class="col-2 removeButton">
-                  <button (click)="removeInfo(index)" class="btn btn-danger" type="button" [disabled]="index==0">-</button>
+                  <button (click)="getIndexElemToDelete(index)" class="btn btn-danger" type="button" data-bs-target="#deleteAlert" data-bs-toggle="modal" [disabled]="index==0">-</button>
                 </div>
               </div>
             </div>

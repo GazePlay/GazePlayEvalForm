@@ -1,0 +1,20 @@
+.modal-header {
+  border-bottom: none !important;
+}
+
+.modal-body {
+  border-bottom: none !important;
+}
+
+.modal-footer {
+  border-top: none !important;
+}
+
+.headerDark {
+  color: rgba(255, 255, 255, 0.55);
+  background-color: rgb(33, 37, 41);
+}
+
+.bodyDark {
+  color: white;
+}
