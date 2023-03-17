@@ -2,13 +2,15 @@
   <div class="container-fluid">
     <span class="navbar-text">
       Menu
-      <button class="navbar-toggler navbar-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#menu" aria-controls="menuTitle">
+      <button class="navbar-toggler navbar-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#menu" aria-controls="menuTitle" (click)="openModalWithNavbarTitle(false)">
         <span class="navbar-toggler-icon"></span>
       </button>
     </span>
     <span class="navbar-text">
       <h3>
-        GazePlay Eval
+        <a type="button" data-bs-target="#homeAlert" [attr.data-bs-toggle]="activateAlert" (click)="openModalWithNavbarTitle(true)">
+          GazePlay Eval
+        </a>
       </h3>
     </span>
     <div class="dropdown">

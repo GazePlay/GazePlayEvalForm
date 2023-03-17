@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
 import {ThemeService} from "../../services/theme/theme.service";
+import {OrderProgressBarService} from "../../services/orderProgressBar/order-progress-bar.service";
 
 @Component({
   selector: 'app-menu',
@@ -16,8 +17,12 @@ export class MenuComponent{
   navbarButton: string = "";
   text: string = "";
 
+  activateAlert: string[] = ["", ""];
+
+
   constructor(private router: Router,
-              private themeService: ThemeService) {
+              private themeService: ThemeService,
+              private orderProgressBarService: OrderProgressBarService) {
 
     this.offcanvas = this.themeService.menuTheme[0];
     this.closeButton = this.themeService.menuTheme[1];
@@ -30,12 +35,19 @@ export class MenuComponent{
       this.navbarButton = value[2];
       this.text = value[3];
     });
+
+    this.orderProgressBarService.actualStepObservable.subscribe(value => {
+        if (value != 0){
+          this.activateAlert = ["modal", "offcanvas"];
+        }else {
+          this.activateAlert = ["", ""];
+        }
+    });
   }
 
   startEval() {
     this.orderProgress = document.getElementById("orderProgressBar");
     this.orderProgress.style = "";
     this.router.navigate(['/informations']);
-
   }
 }

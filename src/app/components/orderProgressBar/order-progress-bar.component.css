@@ -1,7 +1,7 @@
 .bs4-order-tracking {
   margin-bottom: 30px;
   overflow: hidden;
-  color: #878788;
+  color: black;
   padding-left: 0px;
   margin-top: 30px
 }
@@ -13,7 +13,7 @@
   float: left;
   position: relative;
   font-weight: 400;
-  color: #878788;
+  color: black;
   text-align: center
 }
 
@@ -35,8 +35,9 @@
   text-align: center;
   line-height: 29px;
   display: block;
-  font-size: 12px;
-  background: #878788;
+  font-size: 18px;
+  font-weight: bold;
+  background: black;
   border-radius: 50%;
   margin: auto
 }
@@ -45,7 +46,7 @@
   content: '';
   width: 150%;
   height: 2px;
-  background: #878788;
+  background: black;
   position: absolute;
   left: 0%;
   right: 0%;
@@ -63,16 +64,15 @@
 }
 
 .bs4-order-tracking li.active {
-  font-weight: bold;
   color: darkred;
 }
 
 .bs4-order-tracking li.active > div {
-  background: #dc3545
+  background: #dc3545;
 }
 
 .bs4-order-tracking li.active:after {
-  background: #dc3545
+  background: #dc3545;
 }
 
 .card-timeline {

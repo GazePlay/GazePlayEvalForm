@@ -25,14 +25,22 @@ p, ul {
 }
 
 .explanationColor {
-  color: lightgray;
+  color: lightgrey;
   background-color: rgba(255, 255, 255, 0.55);
+}
+
+.btnColor {
+  color: lightgrey;
 }
 
 .cardHeaderColor {
   color: rgba(255, 255, 255, 0.55);
 }
 
-.card {
+.cardDark {
   border: 2px black solid !important;
+}
+
+.cardLight {
+  border: 2px gray solid !important;
 }

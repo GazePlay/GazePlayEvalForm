@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {ThemeService} from "../../services/theme/theme.service";
 
 @Component({
   selector: 'app-order-progress-bar',
@@ -7,4 +8,12 @@ import {Component} from '@angular/core';
 })
 export class OrderProgressBarComponent {
 
+  card = "";
+
+  constructor(private themeService: ThemeService) {
+    this.card = this.themeService.orderProgressBarTheme;
+    this.themeService.orderProgressBarThemeObservable.subscribe(value => {
+      this.card = value;
+    });
+  }
 }

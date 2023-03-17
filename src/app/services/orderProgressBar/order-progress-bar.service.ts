@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +7,10 @@ import {Injectable} from '@angular/core';
 export class OrderProgressBarService {
 
   orderProgress: any;
-  actualStep: number = 1;
+
+  actualStep: number = 0;
+  actualStepObservable = new Subject<number>();
+
   maxStep: number = 5;
 
   constructor() {
@@ -14,6 +18,7 @@ export class OrderProgressBarService {
 
   setStepOrderProgressBar(step: number) {
     this.actualStep = step;
+    this.actualStepObservable.next(step);
   }
 
   setupOrderProgressBar() {

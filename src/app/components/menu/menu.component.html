@@ -11,14 +11,14 @@
           Accueil
         </h4>
       </span>
-      <button [class]="navbarButton" data-bs-target="#homeAlert" data-bs-toggle="modal">
-        <div data-bs-dismiss="offcanvas"><h5><span [class]="text"><i class="fa-solid fa-house"></i> Accueil</span></h5></div>
+      <button [class]="navbarButton" data-bs-target="#homeAlert" [attr.data-bs-toggle]="activateAlert[0]">
+        <div [attr.data-bs-dismiss]="activateAlert[1]"><h5><span [class]="text"><i class="fa-solid fa-house"></i> Accueil</span></h5></div>
       </button>
-      <span class="navbar-text" [class]="text">
-        <h4>
-          Evaluation
-        </h4>
-      </span>
+        <span class="navbar-text" [class]="text">
+          <h4>
+            Evaluation
+          </h4>
+        </span>
       <button [class]="navbarButton" data-bs-dismiss="offcanvas" (click)="startEval()">
         <div><h5><span [class]="text"><i class="fa-solid fa-file"></i> Commencer</span></h5></div>
       </button>
