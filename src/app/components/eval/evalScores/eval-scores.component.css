@@ -6,16 +6,9 @@ button {
   width: 50%;
 }
 
-.mb-3 {
-  --bs-border-width: 0 !important;
-}
-
-.error {
-  color: red;
-}
-
-.removeButton {
-  margin-bottom: 7px;
+.borderInfo {
+  border: thick groove ghostwhite;
+  padding-bottom: 1%;
 }
 
 .infoTooltip {
@@ -27,12 +20,27 @@ button {
   text-align: end;
 }
 
-.borderInfo {
-  border: thick groove ghostwhite;
-  min-height: 100px;
-  max-height: 100px;
+.removeButton {
+  text-align: center;
+  margin: auto;
 }
 
-#addScoreButton {
-  margin-left: -5%;
+.btnColor {
+  color: lightgrey;
+}
+
+.explanationColor {
+  background-color: rgba(255, 255, 255, 0.55);
+}
+
+.cardHeaderColor {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.cardDark {
+  border: 2px black solid !important;
+}
+
+.cardLight {
+  border: 2px gray solid !important;
 }

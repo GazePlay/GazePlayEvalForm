@@ -3,6 +3,8 @@ import {Router} from "@angular/router";
 import {OrderProgressBarService} from "../../../services/orderProgressBar/order-progress-bar.service";
 import {EvalJsonService} from "../../../services/json/eval-json.service";
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
+import {ThemeService} from "../../../services/theme/theme.service";
+import {SettingsService} from "../../../services/settings/settings.service";
 
 @Component({
   selector: 'app-eval-scores',
@@ -12,128 +14,124 @@ import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 export class EvalScoresComponent implements OnInit {
 
   actualStep: number = 3;
-  scores: String[][] = [];
-  errorsScores: Boolean[] = [];
-  errorElem: any;
-  errorNameScore: String = "Ce nom de score existe déjà !";
-  haveError: Boolean = false;
+
+  skillToEvaluate: String[][] = [];
+  showErrors: boolean = false;
+  error: any[] = ["", ""];
+
+  cardTheme: string = "";
+  cardHeaderTheme: string = "";
+  cardTextTheme: string = "";
+  buttonTheme: string = "";
+
+  indexElemToDelete: number = -1;
 
   constructor(
     private router: Router,
     private orderProgressBarService: OrderProgressBarService,
-    private evalJsonService: EvalJsonService) {
+    private evalJsonService: EvalJsonService,
+    private themeService: ThemeService,
+    private settingsService: SettingsService) {
+
+    this.cardTheme = this.themeService.cardTheme[0];
+    this.cardHeaderTheme = this.themeService.cardTheme[1];
+    this.cardTextTheme = this.themeService.cardTheme[2];
+    this.buttonTheme = this.themeService.cardTheme[3];
+
+    this.themeService.cardThemeObservable.subscribe(value => {
+      this.cardTheme = value[0];
+      this.cardHeaderTheme = value[1];
+      this.cardTextTheme = value[2];
+      this.buttonTheme = value[3];
+    });
+
+    this.settingsService.deleteElemWhitModalObservable.subscribe(value => {
+      if (value){
+        this.removeScore(this.indexElemToDelete);
+      }
+    });
   }
 
   ngOnInit(): void {
-    this.orderProgressBarService.setStepOrderProgressBar(this.actualStep);
-    this.orderProgressBarService.setupOrderProgressBar();
-    this.updateScores();
-    this.haveScoresErrors();
-    setTimeout(() => {
-      this.updateErrors();
-    }, 250);
+    this.canAccess();
+  }
+
+  canAccess(){
+    if ((this.orderProgressBarService.actualStep + 1) < this.actualStep){
+      this.router.navigate(['/home']);
+    }else {
+      this.orderProgressBarService.setStepOrderProgressBar(this.actualStep);
+      this.orderProgressBarService.setupOrderProgressBar();
+      this.updateScores();
+    }
   }
 
   setNameScore(value: any, index: number) {
-    if (!this.checkIfNameExist(value.target.value, index)) {
-      this.evalJsonService.scores[index][0] = value.target.value;
-      this.setError(false, index);
-    } else {
-      this.evalJsonService.scores[index][0] = value.target.value;
-      this.setError(true, index);
-    }
+      this.evalJsonService.skillToEvaluate[index][0] = value.target.value;
     this.updateScores();
-    this.haveScoresErrors();
-    this.updateErrors();
   }
 
   checkIfNameExist(name: String, index: number) {
     let find = false;
-    this.scores.forEach(elem => {
+    this.skillToEvaluate.forEach(elem => {
       if (elem[0].toLowerCase() == name.toLowerCase()) {
         find = true;
       }
     });
-    this.evalJsonService.errorsScores[index] = find;
     return find;
   }
 
-  setError(value: boolean, index: number) {
-    let id = "ErrorScoreName" + index;
-    this.errorElem = document.getElementById(id);
-    if (value) {
-      this.errorElem.style = "";
-    } else {
-      this.errorElem.style = "visibility: hidden";
-    }
+  getIndexElemToDelete(value: number){
+    this.indexElemToDelete = value;
   }
 
   addOneMoreScore() {
-    this.evalJsonService.scores.push([""]);
-    this.evalJsonService.errorsScores.push(false);
+    this.evalJsonService.skillToEvaluate.push([""]);
     this.updateScores();
   }
 
   removeScore(index: number) {
     let tmpScore: String[][] = [];
-    let tmpErrorsScores: Boolean[] = [];
-    for (let i = 0; i < this.evalJsonService.scores.length; i++) {
+    for (let i = 0; i < this.evalJsonService.skillToEvaluate.length; i++) {
       if (i != index) {
-        tmpScore.push(this.evalJsonService.scores[i]);
-        tmpErrorsScores.push(this.errorsScores[i]);
+        tmpScore.push(this.evalJsonService.skillToEvaluate[i]);
       }
     }
-    this.evalJsonService.scores = tmpScore;
-    this.evalJsonService.errorsScores = tmpErrorsScores;
+    this.evalJsonService.skillToEvaluate = tmpScore;
     this.updateScores();
-    this.haveScoresErrors();
   }
 
   updateScores() {
-    this.scores = this.evalJsonService.scores;
-    this.errorsScores = this.evalJsonService.errorsScores;
+    this.skillToEvaluate = this.evalJsonService.skillToEvaluate;
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.evalJsonService.scores, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.evalJsonService.skillToEvaluate, event.previousIndex, event.currentIndex);
     this.updateScores();
   }
 
-  haveScoresErrors() {
-    let haveScoresErrors = false;
-    this.errorsScores.forEach(elem => {
-      if (elem) {
-        haveScoresErrors = true;
-      }
-    });
-    this.haveError = haveScoresErrors;
-  }
-
-  updateErrors() {
-    for (let i = 0; i < this.evalJsonService.scores.length; i++) {
-      let id = "ErrorScoreName" + i;
-      this.errorElem = document.getElementById(id);
-      if (this.evalJsonService.errorsScores[i]) {
-        this.errorElem.style = "";
-      } else {
-        this.errorElem.style = "visibility: hidden";
+  checkValues(){
+    let error: boolean = false;
+    for (let i=0; i<this.skillToEvaluate.length; i++){
+      if (this.skillToEvaluate[i][0] == ""){
+        error = true;
+        this.error = ["", i];
+        break;
       }
     }
-  }
-
-  home() {
-    this.router.navigate(['/home']);
+    return error;
   }
 
   next() {
-    this.router.navigate(['/assets']);
+    if (!this.checkValues()){
+      this.showErrors = false;
+      this.router.navigate(['/assets']);
+    }else {
+      this.showErrors = true;
+    }
   }
 
   previous() {
     this.router.navigate(['/user']);
-  }
-
-  checkValues() {
-
   }
 }

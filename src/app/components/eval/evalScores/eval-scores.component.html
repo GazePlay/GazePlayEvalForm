@@ -1,33 +1,30 @@
 <div class="container-fluid">
-  <div class="card">
-    <div class="card-header text-center bg-secondary">
-      <div class="row">
-        <div class="col-11">
-          <h1>Scores</h1>
-        </div>
-        <div class="col-1 containerTooltip">
-          <img alt="information tooltip" class="infoTooltip" matTooltip="L'ordre des scores peuvent être modifiées via un Drag&Drop" matTooltipPosition="right"
-               src="../../../../assets/images/info.png">
-        </div>
-      </div>
+  <div [class]="cardTheme">
+    <div [class]="cardHeaderTheme">
+      <h1>Compétences à évaluer</h1>
     </div>
-    <div class="card-body">
+    <div class="card-body" [class]="cardTextTheme">
+      <div class="text-end">
+        <img alt="information tooltip" class="infoTooltip containerTooltip"
+             matTooltip="L'ordre des informations peuvent être modifiées via un Drag&Drop"
+             matTooltipPosition="right"
+             src="assets/images/info.png">
+      </div>
       <div class="mb-3">
         <div (cdkDropListDropped)="drop($event)" cdkDropList>
-          <div *ngFor="let value of scores; let index = index" cdkDrag>
+          <div *ngFor="let value of skillToEvaluate; let index = index" cdkDrag>
             <div class="mb-3">
               <div class="row borderInfo">
                 <div class="col-3">
                 </div>
                 <div class="col-5">
-                  <label [for]="'ScoreName' + index" class="form-label">Nom du score</label>
-                  <input (change)="setNameScore($event, index)" [id]="'ScoreName' + index" [value]="scores[index]"
+                  <label [for]="'ScoreName' + index" class="form-label">{{"Intutulé de la compétence " + (index+1)}}</label>
+                  <input (change)="setNameScore($event, index)" [id]="'ScoreName' + index" [value]="skillToEvaluate[index]"
                          class="form-control"
                          placeholder="Par exemple : Total" type="text">
-                  <p [id]="'ErrorScoreName' + index" class="error" style="visibility: hidden">{{errorNameScore}}</p>
                 </div>
-                <div class="col-4 d-flex align-items-center removeButton">
-                  <button (click)="removeScore(index)" class="btn btn-danger" type="button">-</button>
+                <div class="col-4 removeButton">
+                  <button (click)="getIndexElemToDelete(index)" class="btn btn-danger" type="button" data-bs-target="#deleteAlert" data-bs-toggle="modal">-</button>
                 </div>
               </div>
             </div>
@@ -37,11 +34,14 @@
           <button (click)="addOneMoreScore()" class="btn btn-secondary" id="addScoreButton" type="button">+</button>
         </div>
       </div>
-    </div>
-    <div class="mb-3 text-center">
-      <button (click)="previous()" class="btn btn-secondary" type="button">Précédent</button>
-      <button (click)="home()" class="btn btn-secondary" type="button">Accueil</button>
-      <button (click)="next()" [disabled]="haveError" class="btn btn-secondary" type="button">Suivant</button>
+      <div *ngIf="showErrors" class="alert alert-danger text-center" role="alert">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        {{" L'intitulé de la compétence " + (error[1]+1) + " n'est pas valide !"}}
+      </div>
+      <div class="text-center">
+        <button (click)="previous()" [class]="buttonTheme" type="button">Précédent</button>
+        <button (click)="next()" [class]="buttonTheme" type="button">Suivant</button>
+      </div>
     </div>
   </div>
 </div>

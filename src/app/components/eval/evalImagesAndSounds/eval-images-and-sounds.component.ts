@@ -36,7 +36,7 @@ export class EvalImagesAndSoundsComponent implements OnInit {
   ngOnInit(): void {
     this.orderProgressBarService.setStepOrderProgressBar(this.actualStep);
     this.orderProgressBarService.setupOrderProgressBar();
-    this.listScores = this.evalJsonService.scores;
+    this.listScores = this.evalJsonService.skillToEvaluate;
     this.updateImgAndSong();
     this.updateScores();
   }

@@ -12,8 +12,7 @@ export class EvalJsonService {
 
   nameEval: String = "";
   infoPatient: any[][] = [];
-  scores: String[][] = [];
-  errorsScores: Boolean[] = [];
+  skillToEvaluate: String[][] = [];
   output: String = "all";
   imgToDisplay: any[][][] = [];
   songToDisplay: String[][] = [];
@@ -88,8 +87,7 @@ export class EvalJsonService {
     this.nbItem = 0;
     this.nameEval = "";
     this.infoPatient = [["Identifiant du patient", this.generateId()]];
-    this.scores = [];
-    this.errorsScores = [];
+    this.skillToEvaluate = [];
     this.output = "all";
     this.imgToDisplay = [];
     this.songToDisplay = [];
