@@ -24,7 +24,3 @@ a.darkText:hover, button span.darkText:hover {
 a.lightText:hover, button span.lightText:hover {
   color: darkgray;
 }
-
-.themes{
-  margin-left: 20% !important;
-}

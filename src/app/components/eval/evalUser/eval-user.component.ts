@@ -47,14 +47,23 @@ export class EvalUserComponent implements OnInit {
     this.settingsService.deleteElemWhitModalObservable.subscribe(value => {
       if (value){
         this.removeInfo(this.indexElemToDelete);
+        this.showErrors = false;
       }
     });
   }
 
   ngOnInit(): void {
-    this.orderProgressBarService.setStepOrderProgressBar(this.actualStep);
-    this.orderProgressBarService.setupOrderProgressBar();
-    this.updateInfo();
+    this.canAccess();
+  }
+
+  canAccess(){
+    if ((this.orderProgressBarService.actualStep + 1) < this.actualStep){
+      this.router.navigate(['/home']);
+    }else {
+      this.orderProgressBarService.setStepOrderProgressBar(this.actualStep);
+      this.orderProgressBarService.setupOrderProgressBar();
+      this.updateInfo();
+    }
   }
 
   getNameInfo(value: any, index: number) {
