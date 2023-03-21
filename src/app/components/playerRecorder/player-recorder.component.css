@@ -1,0 +1,67 @@
+/* ----- HTML ----- */
+
+a.lightText:hover, button span.lightText:hover {
+  color: black;
+}
+
+a.darkText:hover, button span.darkText:hover {
+  color: white;
+}
+
+/* ----- CLASS ----- */
+
+.offcanvas.offcanvas-bottom {
+  height: 50% !important;
+}
+
+.navbar-button{
+  text-align: start;
+  margin-left: 10%;
+}
+
+.nav-tabs {
+  height: 40px;
+}
+
+.nav-tabs-dark {
+  --bs-nav-tabs-border-color: rgba(255, 255, 255, 0.55) !important;
+  --bs-nav-tabs-link-active-border-color: rgba(255, 255, 255, 0.55) !important;
+  --bs-nav-tabs-link-hover-border-color: rgba(255, 255, 255, 0.55) !important;
+}
+
+.nav-tabs-light {
+  --bs-nav-tabs-border-color: black !important;
+  --bs-nav-tabs-link-active-border-color: black !important;
+  --bs-nav-tabs-link-hover-border-color: black !important;
+}
+
+.nav {
+  --bs-nav-link-hover-color: none !important;
+}
+
+.darkText {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.darkButton.active {
+  color: black;
+  background-color: rgba(255, 255, 255, 0.55);
+}
+
+.darkButton {
+  color : rgba(255, 255, 255, 0.55);
+}
+
+.lightText {
+  color: black;
+}
+
+/* ----- ID ----- */
+
+#playerRecorderNavbar {
+  justify-content: center;
+}
+
+#playerNavbarTab {
+  margin-left: 0 !important;
+}

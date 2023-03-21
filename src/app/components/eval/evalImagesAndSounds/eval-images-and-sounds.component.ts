@@ -6,6 +6,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {MatDialog} from "@angular/material/dialog";
 import {ChooseSoundComponent} from "../../chooseSound/choose-sound.component";
 import {moveItemInArray} from "@angular/cdk/drag-drop";
+import {ThemeService} from "../../../services/theme/theme.service";
 
 @Component({
   selector: 'app-eval-images-and-sounds',
@@ -25,12 +26,29 @@ export class EvalImagesAndSoundsComponent implements OnInit {
   songToDisplay: String[][] = [];
   listScores: String[][] = [];
 
-  constructor(
-    private router: Router,
-    private orderProgressBarService: OrderProgressBarService,
-    private evalJsonService: EvalJsonService,
-    private dialog: MatDialog,
-    public sanitizer: DomSanitizer) {
+  cardTheme: string = "";
+  cardHeaderTheme: string = "";
+  cardTextTheme: string = "";
+  buttonTheme: string = "";
+
+  constructor(private router: Router,
+              private orderProgressBarService: OrderProgressBarService,
+              private evalJsonService: EvalJsonService,
+              private dialog: MatDialog,
+              public sanitizer: DomSanitizer,
+              private themeService: ThemeService) {
+
+    this.cardTheme = this.themeService.cardTheme[0];
+    this.cardHeaderTheme = this.themeService.cardTheme[1];
+    this.cardTextTheme = this.themeService.cardTheme[2];
+    this.buttonTheme = this.themeService.cardTheme[3];
+
+    this.themeService.cardThemeObservable.subscribe(value => {
+      this.cardTheme = value[0];
+      this.cardHeaderTheme = value[1];
+      this.cardTextTheme = value[2];
+      this.buttonTheme = value[3];
+    });
   }
 
   ngOnInit(): void {
@@ -253,10 +271,6 @@ export class EvalImagesAndSoundsComponent implements OnInit {
       moveItemInArray(this.evalJsonService.imgToZip, indexItem, indexItem + 1);
       this.updateImgAndSong();
     }
-  }
-
-  home() {
-    this.router.navigate(['/home']);
   }
 
   next() {

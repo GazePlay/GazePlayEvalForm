@@ -1,26 +1,20 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import {ThemeService} from "../../services/theme/theme.service";
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css']
+  selector: 'app-player-recorder',
+  templateUrl: './player-recorder.component.html',
+  styleUrls: ['./player-recorder.component.css']
 })
-export class SettingsComponent{
-
-  isDarkTheme: boolean = true;
+export class PlayerRecorderComponent {
 
   offcanvas: string = "";
   closeButton: string = "";
   navbarButton: string = "";
   text: string = "";
+  navTabs: string = "";
 
   constructor(private themeService: ThemeService) {
-
-    this.isDarkTheme = this.themeService.themeChoice == "dark";
-    this.themeService.themeChoiceObservable.subscribe(value => {
-      this.isDarkTheme = value == "dark";
-    });
 
     this.offcanvas = this.themeService.menuTheme[0];
     this.closeButton = this.themeService.menuTheme[1];
@@ -32,16 +26,13 @@ export class SettingsComponent{
       this.closeButton = value[1];
       this.navbarButton = value[2];
       this.text = value[3];
+      this.navTabs = value[4];
       this.adapteOffcanvas();
     });
     this.adapteOffcanvas();
   }
 
-  changeTheme(value: string){
-    this.themeService.changeTheme(value);
-  }
-
   adapteOffcanvas(){
-    this.offcanvas = this.offcanvas.replace("offcanvas offcanvas-start", "offcanvas offcanvas-end");
+    this.offcanvas = this.offcanvas.replace("offcanvas offcanvas-start", "offcanvas offcanvas-bottom");
   }
 }

@@ -129,3 +129,44 @@ Id
 #descriptionSound {
   margin-top: 4%;
 }
+
+/*---------------------------------*/
+
+.borderInfo {
+  border: thick groove ghostwhite;
+  padding-bottom: 1%;
+}
+
+.infoTooltip {
+  width: 40px;
+  height: 40px;
+}
+
+.containerTooltip {
+  text-align: end;
+}
+
+.removeButton {
+  text-align: center;
+  margin: auto;
+}
+
+.btnColor {
+  color: lightgrey;
+}
+
+.explanationColor {
+  background-color: rgba(255, 255, 255, 0.55);
+}
+
+.cardHeaderColor {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.cardDark {
+  border: 2px black solid !important;
+}
+
+.cardLight {
+  border: 2px gray solid !important;
+}

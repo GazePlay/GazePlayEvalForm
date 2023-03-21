@@ -2,57 +2,45 @@ button {
   margin-right: 1%;
 }
 
-img {
-  max-width: 100px;
-  max-height: 100px;
-  margin-top: -50%;
-  margin-left: -10%;
-}
-
-.sound {
-  width: 50px;
-  height: 40px;
-  margin-top: -10%;
-  margin-left: -50%;
-}
-
 .container-fluid {
   width: 75%;
 }
 
-.item {
-  text-align: center;
+.borderInfo {
+  border: thick groove ghostwhite;
+  padding-bottom: 1%;
 }
 
-.img {
+.infoTooltip {
+  width: 40px;
+  height: 40px;
+}
+
+.containerTooltip {
   text-align: end;
 }
 
-.user {
+.removeButton {
   text-align: center;
+  margin: auto;
 }
 
-.score {
-  text-align: end;
+.btnColor {
+  color: lightgrey;
 }
 
-.description {
-  text-align: center;
+.explanationColor {
+  background-color: rgba(255, 255, 255, 0.55);
 }
 
-.assets {
-  width: 100%;
+.cardHeaderColor {
+  color: rgba(255, 255, 255, 0.55);
 }
 
-.buttonimg {
-  height: 0.7cm;
-  width: 0.7cm;
-  min-width: 0.4cm;
-  min-height: 0.4cm;
-  margin-top: 1px;
-  margin-left: -1px;
+.cardDark {
+  border: 2px black solid !important;
 }
 
-#recap {
-  margin-left: 3%;
+.cardLight {
+  border: 2px gray solid !important;
 }

@@ -21,6 +21,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeAlertComponent } from './components/alert/homeAlert/home-alert.component';
 import { DeleteAlertComponent } from './components/alert/deleteAlert/delete-alert.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { PlayerRecorderComponent } from './components/playerRecorder/player-recorder.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SettingsComponent } from './components/settings/settings.component';
     NavbarComponent,
     HomeAlertComponent,
     DeleteAlertComponent,
-    SettingsComponent
+    SettingsComponent,
+    PlayerRecorderComponent
   ],
     imports: [
         BrowserModule,

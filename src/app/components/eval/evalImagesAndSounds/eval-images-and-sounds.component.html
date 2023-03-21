@@ -1,14 +1,14 @@
 <div class="container-fluid main">
-  <div class="card">
-    <div class="card-header text-center bg-secondary">
+  <div [class]="cardTheme">
+    <div [class]="cardHeaderTheme">
       <h1>Images & Sons</h1>
     </div>
-    <div class="card-body">
+    <div class="card-body" [class]="cardTextTheme">
       <div class="mb-3">
         <div *ngFor="let item of [].constructor(this.nbItem); let indexItem = index">
           <div class="container-fluid second">
-            <div class="card">
-              <div class="card-header text-center bg-secondary">
+            <div [class]="cardTheme">
+              <div [class]="cardHeaderTheme">
                 <div class="row">
                   <div class="col-6 itemTile">
                     <h2>Item {{indexItem + 1}}</h2>
@@ -19,7 +19,7 @@
                   </div>
                 </div>
               </div>
-              <div class="card-body">
+              <div class="card-body" [class]="cardTextTheme">
                 <div class="mb-3">
                   <div class="row">
                     <div class="col-4">
@@ -45,7 +45,7 @@
                   <div class="row">
                     <label class="form-label">Son</label>
                     <div class="col-4 addSong">
-                      <button (click)="openChooseSoundDialog(indexItem)" class="btn imgAndSound" type="button">Choisir
+                      <button data-bs-target="#playerRecorder" data-bs-toggle="offcanvas" class="btn imgAndSound" type="button">Choisir
                         le son
                       </button>
                     </div>
@@ -125,11 +125,12 @@
           <button (click)="addOneMoreItem()" class="btn btn-secondary" type="button">+</button>
         </div>
       </div>
-    </div>
-    <div class="mb-3 text-center">
-      <button (click)="previous()" class="btn btn-secondary" type="button">Précédent</button>
-      <button (click)="home()" class="btn btn-secondary" type="button">Accueil</button>
-      <button (click)="next()" class="btn btn-secondary" type="button">Suivant</button>
+      <div class="mb-3 text-center">
+        <button (click)="previous()" [class]="buttonTheme" type="button">Précédent</button>
+        <button (click)="next()" [class]="buttonTheme" type="button">Suivant</button>
+      </div>
     </div>
   </div>
 </div>
+
+<app-player-recorder></app-player-recorder>

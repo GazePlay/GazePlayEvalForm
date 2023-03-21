@@ -1,3 +1,13 @@
+/* ----- HTML ----- */
+
+a.lightText:hover, button span.lightText:hover {
+  color: darkgray;
+}
+
+a.darkText:hover, button span.darkText:hover {
+  color: white;
+}
+
 /* ----- CLASS ----- */
 
 .navbar-button{
@@ -13,14 +23,6 @@
   color: rgba(255, 255, 255, 0.55);
 }
 
-a.darkText:hover, button span.darkText:hover {
-  color: white;
-}
-
 .lightText {
   color: black;
-}
-
-a.lightText:hover, button span.lightText:hover {
-  color: darkgray;
 }

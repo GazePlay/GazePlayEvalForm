@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {OrderProgressBarService} from "../../../services/orderProgressBar/order-progress-bar.service";
 import {EvalJsonService} from "../../../services/json/eval-json.service";
+import {ThemeService} from "../../../services/theme/theme.service";
 
 @Component({
   selector: 'app-eval-get-zip',
@@ -11,52 +12,46 @@ import {EvalJsonService} from "../../../services/json/eval-json.service";
 export class EvalGetZipComponent implements OnInit {
 
   actualStep: number = 5;
-  isAnonymous: Boolean = true;
-  scores: String[][] = [];
-  assets: String[][] = [];
-  imgAndSongToDisplay: String[][] = [];
-  listTag: String[] = [];
-  displayScore: Boolean = true;
+
+  cardTheme: string = "";
+  cardHeaderTheme: string = "";
+  cardTextTheme: string = "";
+  buttonTheme: string = "";
 
   constructor(
     private router: Router,
     private orderProgressBarService: OrderProgressBarService,
-    private evalJsonService: EvalJsonService) {
+    private evalJsonService: EvalJsonService,
+    private themeService: ThemeService) {
+
+    this.cardTheme = this.themeService.cardTheme[0];
+    this.cardHeaderTheme = this.themeService.cardTheme[1];
+    this.cardTextTheme = this.themeService.cardTheme[2];
+    this.buttonTheme = this.themeService.cardTheme[3];
+
+    this.themeService.cardThemeObservable.subscribe(value => {
+      this.cardTheme = value[0];
+      this.cardHeaderTheme = value[1];
+      this.cardTextTheme = value[2];
+      this.buttonTheme = value[3];
+    });
   }
 
   ngOnInit(): void {
-    this.orderProgressBarService.setStepOrderProgressBar(this.actualStep);
-    this.orderProgressBarService.setupOrderProgressBar();
-    this.checkScore();
+    this.canAccess();
   }
 
-  getName() {
-    return this.evalJsonService.nameEval;
-  }
-
-  getIsAnonymous() {
-    if (this.isAnonymous) {
-      return "Oui";
-    } else {
-      return "Non";
+  canAccess(){
+    if ((this.orderProgressBarService.actualStep + 1) < this.actualStep){
+      this.router.navigate(['/home']);
+    }else {
+      this.orderProgressBarService.setStepOrderProgressBar(this.actualStep);
+      this.orderProgressBarService.setupOrderProgressBar();
     }
-  }
-
-  checkScore() {
-    this.displayScore = this.scores.length != 0;
-  }
-
-  playAudio(index: number) {
-    const audio = new Audio(this.assets[index][2].toString());
-    audio.play();
   }
 
   getZip() {
     this.evalJsonService.createEval();
-  }
-
-  home() {
-    this.router.navigate(['/home']);
   }
 
   previous() {

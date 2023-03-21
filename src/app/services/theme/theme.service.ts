@@ -15,7 +15,7 @@ export class ThemeService {
   navbarTheme: string[] = ["navbar navbar-dark bg-dark", "dropdown-menu dropdown-menu-dark"];
   navbarThemeObservable = new Subject<string[]>();
 
-  menuTheme: string[]= ["offcanvas offcanvas-start text-bg-dark", "closeButton darkText", "navbar-toggler navbar-button darkButton", "darkText"];
+  menuTheme: string[]= ["offcanvas offcanvas-start text-bg-dark", "closeButton darkText", "navbar-toggler navbar-button darkButton", "darkText", "nav-tabs-dark"];
   menuThemeObservable = new Subject<string[]>();
 
   cardTheme: string[] = ["card text-bg-dark cardDark", "card-header cardHeaderColor text-center", "explanationColor", "btn btn-secondary btnColor"];
@@ -36,26 +36,26 @@ export class ThemeService {
     if (value == "light"){
       this.bodyTheme = "";
       this.navbarTheme = ["navbar navbar-light bg-light", "dropdown-menu"];
-      this.menuTheme = ["offcanvas offcanvas-start text-bg-light", "closeButton lightText", "navbar-toggler navbar-button", "lightText"];
+      this.menuTheme = ["offcanvas offcanvas-start text-bg-light", "closeButton lightText", "navbar-toggler navbar-button", "lightText", "nav-tabs-light"];
       this.cardTheme = ["card text-bg-light cardLight", "card-header text-center", "", "btn btn-secondary"];
       this.homeAlertTheme = ["modal-header bg-light", "modal-body", "modal-footer"];
       this.orderProgressBarTheme = "card card-timeline px-2 border-none";
       this.bodyThemeObservable.next("");
       this.navbarThemeObservable.next(["navbar navbar-light bg-light", "dropdown-menu"]);
-      this.menuThemeObservable.next(["offcanvas offcanvas-start text-bg-light", "closeButton lightText", "navbar-toggler navbar-button", "lightText"]);
+      this.menuThemeObservable.next(["offcanvas offcanvas-start text-bg-light", "closeButton lightText", "navbar-toggler navbar-button", "lightText", "nav-tabs-light"]);
       this.cardThemeObservable.next(["card text-bg-light cardLight", "card-header text-center", "", "btn btn-secondary"]);
       this.homeAlertThemeObservable.next(["modal-header bg-light", "modal-body", "modal-footer"]);
       this.orderProgressBarThemeObservable.next("card card-timeline px-2 border-none");
     }else {
       this.bodyTheme = "bg-secondary";
       this.navbarTheme = ["navbar navbar-dark bg-dark", "dropdown-menu dropdown-menu-dark"];
-      this.menuTheme = ["offcanvas offcanvas-start text-bg-dark", "closeButton darkText", "navbar-toggler navbar-button darkButton", "darkText"];
+      this.menuTheme = ["offcanvas offcanvas-start text-bg-dark", "closeButton darkText", "navbar-toggler navbar-button darkButton", "darkText", "nav-tabs-dark"];
       this.cardTheme = ["card text-bg-dark cardDark", "card-header cardHeaderColor text-center", "explanationColor", "btn btn-secondary btnColor"];
       this.homeAlertTheme = ["modal-header headerDark", "modal-body bodyDark bg-secondary", "modal-footer bg-secondary"];
       this.orderProgressBarTheme = "card card-timeline px-2 border-none bg-secondary";
       this.bodyThemeObservable.next("bg-secondary")
       this.navbarThemeObservable.next(["navbar navbar-dark bg-dark", "dropdown-menu dropdown-menu-dark"]);
-      this.menuThemeObservable.next(["offcanvas offcanvas-start text-bg-dark", "closeButton darkText", "navbar-toggler navbar-button darkButton", "darkText"]);
+      this.menuThemeObservable.next(["offcanvas offcanvas-start text-bg-dark", "closeButton darkText", "navbar-toggler navbar-button darkButton", "darkText", "nav-tabs-dark"]);
       this.cardThemeObservable.next(["card text-bg-dark cardDark", "card-header cardHeaderColor text-center", "explanationColor", "btn btn-secondary btnColor"]);
       this.homeAlertThemeObservable.next(["modal-header headerDark", "modal-body bodyDark bg-secondary", "modal-footer bg-secondary"]);
       this.orderProgressBarThemeObservable.next("card card-timeline px-2 border-none bg-secondary");
