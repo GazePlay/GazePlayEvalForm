@@ -14,6 +14,15 @@ export class PlayerRecorderComponent {
   text: string = "";
   navTabs: string = "";
 
+  showError: boolean = false;
+  showFile: boolean = false;
+  showFileUpload: boolean = false;
+
+  soundName: string = "";
+  soundToListen: any = "";
+  soundToZip: any = "";
+  uploadFileProgress: string = "width: 0%"
+
   constructor(private themeService: ThemeService) {
 
     this.offcanvas = this.themeService.menuTheme[0];
@@ -35,4 +44,45 @@ export class PlayerRecorderComponent {
   adapteOffcanvas(){
     this.offcanvas = this.offcanvas.replace("offcanvas offcanvas-start", "offcanvas offcanvas-bottom");
   }
+
+  dropFile(value: any) {
+    const song = value.addedFiles[0];
+    const reader = new FileReader();
+    try {
+      reader.readAsDataURL(song);
+      reader.onload = () => {
+        this.showFileUpload = true;
+
+        let progressUpload: number = 0;
+        const progressInterval = setInterval(() => {
+          if (progressUpload < 99){
+            progressUpload += 5;
+            this.uploadFileProgress = "width: " + progressUpload + "%";
+          }else {
+            clearInterval(progressInterval);
+            setTimeout(() => {
+              this.soundName = song.name;
+              this.soundToListen = String(reader.result);
+              this.soundToZip = song;
+
+              this.showError = false;
+              this.showFileUpload = false;
+              this.showFile = true
+            }, 1000);
+          }
+        }, 200);
+      };
+    } catch (e) {
+      this.showError = true;
+    }
+  }
+
+  onRemove() {
+    this.soundName = "";
+    this.soundToListen = "";
+    this.soundToZip = "";
+
+    this.showFile = false;
+  }
+
 }

@@ -8,6 +8,17 @@ a.darkText:hover, button span.darkText:hover {
   color: white;
 }
 
+ngx-dropzone {
+  width: 50%;
+  height: auto;
+  margin: auto;
+}
+
+ngx-dropzone-preview {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 /* ----- CLASS ----- */
 
 .offcanvas.offcanvas-bottom {
@@ -54,6 +65,9 @@ a.darkText:hover, button span.darkText:hover {
 
 .lightText {
   color: black;
+}
+.progressBar {
+  width: -webkit-fill-available;
 }
 
 /* ----- ID ----- */

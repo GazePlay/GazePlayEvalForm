@@ -22,6 +22,7 @@ import { HomeAlertComponent } from './components/alert/homeAlert/home-alert.comp
 import { DeleteAlertComponent } from './components/alert/deleteAlert/delete-alert.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { PlayerRecorderComponent } from './components/playerRecorder/player-recorder.component';
+import {NgxDropzoneModule} from "ngx-dropzone";
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { PlayerRecorderComponent } from './components/playerRecorder/player-reco
         CdkDrag,
         MatGridListModule,
         CdkDropListGroup,
-        MatTooltipModule
+        MatTooltipModule,
+        NgxDropzoneModule
     ],
   providers: [
     MatDialog
