@@ -42,14 +42,14 @@ export class ThemeService {
       this.cardTheme = ["card text-bg-light cardLight", "card-header text-center", "", "btn btn-secondary"];
       this.homeAlertTheme = ["modal-header bg-light", "modal-body", "modal-footer"];
       this.orderProgressBarTheme = "card card-timeline px-2 border-none";
-      this.playerRecorderTheme = ["offcanvas offcanvas-start text-bg-dark", "closeButton darkText", "navbar-toggler navbar-button darkButton", "darkText", "nav-tabs-light", "btn btn-secondary"];
+      this.playerRecorderTheme = ["offcanvas offcanvas-start text-bg-light", "closeButton lightText", "navbar-toggler navbar-button", "lightText", "nav-tabs-light", "btn btn-secondary"];
       this.bodyThemeObservable.next("");
       this.navbarThemeObservable.next(["navbar navbar-light bg-light", "dropdown-menu"]);
       this.menuThemeObservable.next(["offcanvas offcanvas-start text-bg-light", "closeButton lightText", "navbar-toggler navbar-button", "lightText"]);
       this.cardThemeObservable.next(["card text-bg-light cardLight", "card-header text-center", "", "btn btn-secondary"]);
       this.homeAlertThemeObservable.next(["modal-header bg-light", "modal-body", "modal-footer"]);
       this.orderProgressBarThemeObservable.next("card card-timeline px-2 border-none");
-      this.playerRecorderThemeObservable.next(["offcanvas offcanvas-start text-bg-dark", "closeButton darkText", "navbar-toggler navbar-button darkButton", "darkText", "nav-tabs-light", "btn btn-secondary"]);
+      this.playerRecorderThemeObservable.next(["offcanvas offcanvas-start text-bg-light", "closeButton lightText", "navbar-toggler navbar-button", "lightText", "nav-tabs-light", "btn btn-secondary"]);
     }else {
       this.bodyTheme = "bg-secondary";
       this.navbarTheme = ["navbar navbar-dark bg-dark", "dropdown-menu dropdown-menu-dark"];

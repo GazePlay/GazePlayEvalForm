@@ -38,4 +38,10 @@ export class AudioRecorderService {
   listenRecording() {
     this.audio.play();
   }
+
+  speechSynthesis(value: string){
+    let speak = new SpeechSynthesisUtterance(value);
+    speak.lang = "fr-FR";
+    window.speechSynthesis.speak(speak);
+  }
 }

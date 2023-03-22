@@ -22,7 +22,7 @@ ngx-dropzone-preview {
 /* ----- CLASS ----- */
 
 .offcanvas.offcanvas-bottom {
-  height: 55% !important;
+  height: 60% !important;
 }
 
 .navbar-button{
@@ -73,6 +73,20 @@ ngx-dropzone-preview {
 
 .progressBar {
   width: -webkit-fill-available;
+}
+
+.inputRecord {
+  width: auto;
+  margin: auto;
+}
+
+.inputRecordText {
+  width: auto;
+  margin-left: auto;
+}
+
+.textInput {
+  margin: auto;
 }
 
 /* ----- ID ----- */
