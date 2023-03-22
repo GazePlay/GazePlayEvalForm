@@ -13,10 +13,12 @@ export class PlayerRecorderComponent {
   navbarButton: string = "";
   text: string = "";
   navTabs: string = "";
+  buttonAdd: string = "";
 
   showError: boolean = false;
   showFile: boolean = false;
   showFileUpload: boolean = false;
+  disableAddSongButton: boolean = true;
 
   soundName: string = "";
   soundToListen: any = "";
@@ -25,17 +27,20 @@ export class PlayerRecorderComponent {
 
   constructor(private themeService: ThemeService) {
 
-    this.offcanvas = this.themeService.menuTheme[0];
-    this.closeButton = this.themeService.menuTheme[1];
-    this.navbarButton = this.themeService.menuTheme[2];
-    this.text = this.themeService.menuTheme[3];
+    this.offcanvas = this.themeService.playerRecorderTheme[0];
+    this.closeButton = this.themeService.playerRecorderTheme[1];
+    this.navbarButton = this.themeService.playerRecorderTheme[2];
+    this.text = this.themeService.playerRecorderTheme[3];
+    this.navTabs = this.themeService.playerRecorderTheme[4];
+    this.buttonAdd = this.themeService.playerRecorderTheme[5];
 
-    this.themeService.menuThemeObservable.subscribe(value => {
+    this.themeService.playerRecorderThemeObservable.subscribe(value => {
       this.offcanvas = value[0];
       this.closeButton = value[1];
       this.navbarButton = value[2];
       this.text = value[3];
       this.navTabs = value[4];
+      this.buttonAdd = value[5];
       this.adapteOffcanvas();
     });
     this.adapteOffcanvas();
@@ -68,6 +73,7 @@ export class PlayerRecorderComponent {
               this.showError = false;
               this.showFileUpload = false;
               this.showFile = true
+              this.disableAddSongButton = false;
             }, 1000);
           }
         }, 200);
@@ -77,7 +83,7 @@ export class PlayerRecorderComponent {
     }
   }
 
-  onRemove() {
+  removeFile() {
     this.soundName = "";
     this.soundToListen = "";
     this.soundToZip = "";
@@ -85,4 +91,7 @@ export class PlayerRecorderComponent {
     this.showFile = false;
   }
 
+  addSong(){
+
+  }
 }

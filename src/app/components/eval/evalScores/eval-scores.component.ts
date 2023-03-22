@@ -16,7 +16,7 @@ export class EvalScoresComponent implements OnInit {
   actualStep: number = 3;
 
   skillToEvaluate: String[][] = [];
-  showErrors: boolean = false;
+  showErrorEmpty: boolean = false;
   error: any[] = ["", ""];
 
   cardTheme: string = "";
@@ -48,6 +48,7 @@ export class EvalScoresComponent implements OnInit {
     this.settingsService.deleteElemWhitModalObservable.subscribe(value => {
       if (value){
         this.removeScore(this.indexElemToDelete);
+        this.showErrorEmpty = false;
       }
     });
   }
@@ -67,7 +68,7 @@ export class EvalScoresComponent implements OnInit {
   }
 
   setNameScore(value: any, index: number) {
-      this.evalJsonService.skillToEvaluate[index][0] = value.target.value;
+    this.evalJsonService.skillToEvaluate[index][0] = value.target.value;
     this.updateScores();
   }
 
@@ -111,23 +112,44 @@ export class EvalScoresComponent implements OnInit {
   }
 
   checkValues(){
-    let error: boolean = false;
+    let error: boolean = this.checkIfEmpty();
+    if (error){
+      return error;
+    }else {
+      return this.checkIfAlreadyExist();
+    }
+  }
+
+  checkIfEmpty(){
     for (let i=0; i<this.skillToEvaluate.length; i++){
       if (this.skillToEvaluate[i][0] == ""){
-        error = true;
-        this.error = ["", i];
-        break;
+        this.error = ["il ne peut pas être vide", i];
+        return true;
       }
     }
-    return error;
+    return false;
+  }
+
+  checkIfAlreadyExist(){
+    for (let i=0; i<this.skillToEvaluate.length; i++){
+      for (let j=(this.skillToEvaluate.length-1); j>=0; j--){
+        if (i != j){
+          if (this.skillToEvaluate[i][0].toLowerCase() == this.skillToEvaluate[j][0].toLowerCase()){
+            this.error = ["ce nom existe déjà", j];
+            return true;
+          }
+        }
+      }
+    }
+    return false;
   }
 
   next() {
     if (!this.checkValues()){
-      this.showErrors = false;
+      this.showErrorEmpty = false;
       this.router.navigate(['/assets']);
     }else {
-      this.showErrors = true;
+      this.showErrorEmpty = true;
     }
   }
 

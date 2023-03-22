@@ -37,7 +37,7 @@
               <br>
               Cliquer pour ouvrir l'explorateur de fichier
             </ngx-dropzone-label>
-            <ngx-dropzone-preview *ngIf="showFile" [removable]="true" (removed)="onRemove()">
+            <ngx-dropzone-preview *ngIf="showFile" [removable]="true" (removed)="removeFile()">
               <ngx-dropzone-label>
                 <i class="fa-solid fa-file-audio"></i>
                 <br>
@@ -52,6 +52,11 @@
               </ngx-dropzone-label>
             </ngx-dropzone-preview>
           </ngx-dropzone>
+          <br>
+          <audio [src]="soundToListen" controls></audio>
+          <br>
+          <br>
+          <button [class]="buttonAdd" type="button" (click)="addSong()" data-bs-toggle="offcanvas" data-bs-target="#playerRecorder" [disabled]="disableAddSongButton">Ajouter ce son</button>
         </div>
         <div class="tab-pane fade" id="recorderNavbarPanel" role="tabpanel" aria-labelledby="recorderPanel" tabindex="0">...</div>
         <div class="tab-pane fade" id="textNavbarPanel" role="tabpanel" aria-labelledby="textPanel" tabindex="0">...</div>

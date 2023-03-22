@@ -22,7 +22,7 @@ ngx-dropzone-preview {
 /* ----- CLASS ----- */
 
 .offcanvas.offcanvas-bottom {
-  height: 50% !important;
+  height: 55% !important;
 }
 
 .navbar-button{
@@ -66,6 +66,11 @@ ngx-dropzone-preview {
 .lightText {
   color: black;
 }
+
+.btnColor {
+  color: lightgrey;
+}
+
 .progressBar {
   width: -webkit-fill-available;
 }

@@ -34,9 +34,9 @@
           <button (click)="addOneMoreScore()" class="btn btn-secondary" id="addScoreButton" type="button">+</button>
         </div>
       </div>
-      <div *ngIf="showErrors" class="alert alert-danger text-center" role="alert">
+      <div *ngIf="showErrorEmpty" class="alert alert-danger text-center" role="alert">
         <i class="fa-solid fa-triangle-exclamation"></i>
-        {{" L'intitulé de la compétence " + (error[1]+1) + " n'est pas valide !"}}
+        {{" L'intitulé de la compétence " + (error[1]+1) + " n'est pas valide, " + error[0] + " !"}}
       </div>
       <div class="text-center">
         <button (click)="previous()" [class]="buttonTheme" type="button">Précédent</button>
