@@ -42,7 +42,7 @@
               <ngx-dropzone-label>
                 <i class="fa-solid fa-file-audio"></i>
                 <br>
-                {{soundName}}
+                {{nameSound}}
               </ngx-dropzone-label>
             </ngx-dropzone-preview>
             <ngx-dropzone-preview *ngIf="showFileUpload">
@@ -54,7 +54,7 @@
             </ngx-dropzone-preview>
           </ngx-dropzone>
           <br>
-          <audio [src]="soundFileToListen" controls></audio>
+          <audio [src]="soundToListen" controls></audio>
           <br>
           <br>
           <div *ngIf="showErrorDropFile" class="alert alert-danger text-center" role="alert">
@@ -85,9 +85,9 @@
           <label for="nameRecord" class="form-label">Nom de mon enregistrement</label>
           <input id="nameRecord"
                  class="form-control inputRecord"
-                 placeholder="Par exemple : MonEnregistrement" type="text" [value]="nameRecord" (change)="getNameRecord($event)">
+                 placeholder="Par exemple : MonEnregistrement" type="text" [value]="nameSound" (keyup)="getNameRecord($event)">
           <br>
-          <audio [src]="soundRecordedToListen" controls></audio>
+          <audio [src]="soundToListen" controls></audio>
           <br>
           <br>
           <div *ngIf="showErrorRecord" class="alert alert-danger text-center" role="alert">
@@ -104,10 +104,10 @@
             <div class="col-7 text-end textInput">
               <input id="text"
                      class="form-control inputRecordText"
-                     placeholder="Par exemple : Voiture" type="text" [value]="nameRecord" (change)="getText($event)">
+                     placeholder="Par exemple : Voiture" type="text" [value]="nameSound" (keyup)="getText($event)">
             </div>
             <div class="col-5 text-start">
-              <button [class]="buttonAdd" type="button" (click)="listenText()">
+              <button [class]="buttonAdd" type="button" (click)="listenText()" [disabled]="disableAddSongButton">
                 <i class="fa-solid fa-volume-high fa-xl"></i>
               </button>
             </div>

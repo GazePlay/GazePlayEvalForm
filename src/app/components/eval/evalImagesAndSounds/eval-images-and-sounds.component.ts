@@ -7,6 +7,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {ChooseSoundComponent} from "../../chooseSound/choose-sound.component";
 import {moveItemInArray} from "@angular/cdk/drag-drop";
 import {ThemeService} from "../../../services/theme/theme.service";
+import {AudioRecorderService} from "../../../services/audioRecorder/audio-recorder.service";
 
 @Component({
   selector: 'app-eval-images-and-sounds',
@@ -36,7 +37,8 @@ export class EvalImagesAndSoundsComponent implements OnInit {
               private evalJsonService: EvalJsonService,
               private dialog: MatDialog,
               public sanitizer: DomSanitizer,
-              private themeService: ThemeService) {
+              private themeService: ThemeService,
+              private audioRecorderService: AudioRecorderService) {
 
     this.cardTheme = this.themeService.cardTheme[0];
     this.cardHeaderTheme = this.themeService.cardTheme[1];
@@ -49,25 +51,30 @@ export class EvalImagesAndSoundsComponent implements OnInit {
       this.cardTextTheme = value[2];
       this.buttonTheme = value[3];
     });
+
+    this.audioRecorderService.audioObservable.subscribe(value => {
+      this.updateImgAndSong();
+    });
   }
 
   ngOnInit(): void {
-    this.orderProgressBarService.setStepOrderProgressBar(this.actualStep);
-    this.orderProgressBarService.setupOrderProgressBar();
-    this.listScores = this.evalJsonService.skillToEvaluate;
-    this.updateImgAndSong();
-    this.updateScores();
+    this.canAccess();
   }
 
-  openChooseSoundDialog(index: number) {
-    let dialogRef = this.dialog.open(ChooseSoundComponent, {
-      width: '500px',
-      height: '375px',
-      data: {index: index}
-    });
-    dialogRef.afterClosed().subscribe(() => {
+  canAccess(){
+    if ((this.orderProgressBarService.actualStep + 1) < this.actualStep){
+      this.router.navigate(['/home']);
+    }else {
+      this.orderProgressBarService.setStepOrderProgressBar(this.actualStep);
+      this.orderProgressBarService.setupOrderProgressBar();
+      this.listScores = this.evalJsonService.skillToEvaluate;
       this.updateImgAndSong();
-    })
+      this.updateScores();
+    }
+  }
+
+  openPlayerRecorder(index: number) {
+    this.evalJsonService.index = index;
   }
 
   addOneMoreItem() {

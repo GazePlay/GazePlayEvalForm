@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,8 @@ export class AudioRecorderService {
   audioBlob: Blob = new Blob();
   audioUrl: any;
   audio = new Audio();
+
+  audioObservable = new Subject();
 
   startRecording() {
     this.audioChunks = [];

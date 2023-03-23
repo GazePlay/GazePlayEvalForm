@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {ThemeService} from "../../services/theme/theme.service";
 import {AudioRecorderService} from "../../services/audioRecorder/audio-recorder.service";
 import {DomSanitizer} from "@angular/platform-browser";
+import {EvalJsonService} from "../../services/json/eval-json.service";
 
 @Component({
   selector: 'app-player-recorder',
@@ -27,19 +28,17 @@ export class PlayerRecorderComponent {
   isRecording: boolean = false;
 
   acceptedFile: string[] = ["mp3", "wav"];
-  soundName: string = "";
-  soundFileToListen: any = "";
-  soundRecordedToListen: any = "";
+  soundToListen: any = "";
+  nameSound: string = "";
   soundToZip: any = "";
   uploadFileProgress: string = "width: 0%"
-  nameRecord: string = "";
-  nameText: string = "";
 
   errorDropFile: string = "";
 
   constructor(private themeService: ThemeService,
               public sanitizer: DomSanitizer,
-              private audioRecorderService: AudioRecorderService) {
+              private audioRecorderService: AudioRecorderService,
+              private evalJsonService: EvalJsonService) {
 
     this.offcanvas = this.themeService.playerRecorderTheme[0];
     this.closeButton = this.themeService.playerRecorderTheme[1];
@@ -82,8 +81,8 @@ export class PlayerRecorderComponent {
             }else {
               clearInterval(progressInterval);
               setTimeout(() => {
-                this.soundName = song.name;
-                this.soundFileToListen = String(reader.result);
+                this.nameSound = song.name;
+                this.soundToListen = String(reader.result);
                 this.soundToZip = song;
 
                 this.showFileUpload = false;
@@ -110,8 +109,8 @@ export class PlayerRecorderComponent {
   }
 
   removeFile() {
-    this.soundName = "";
-    this.soundFileToListen = "";
+    this.nameSound = "";
+    this.soundToListen = "";
     this.soundToZip = "";
 
     this.showFile = false;
@@ -134,49 +133,54 @@ export class PlayerRecorderComponent {
     this.isRecording = false;
     this.audioRecorderService.stopRecording();
     setTimeout(() => {
-      this.soundRecordedToListen = this.sanitizer.bypassSecurityTrustResourceUrl(this.audioRecorderService.audioUrl);
+      this.soundToListen = this.sanitizer.bypassSecurityTrustResourceUrl(this.audioRecorderService.audioUrl);
     }, 500);
     this.checkRecord();
   }
 
   getNameRecord(value: any){
-    this.nameRecord = value.target.value;
+    this.nameSound = value.target.value;
     this.checkRecord();
-    this.showErrorRecord = this.nameRecord == "";
+    this.showErrorRecord = this.nameSound == "";
   }
 
   checkRecord(){
-    this.disableAddSongButton = !((this.nameRecord != "") && (this.soundRecordedToListen != ""));
+    this.disableAddSongButton = !((this.nameSound != "") && (this.soundToListen != ""));
   }
 
   getText(value: any){
-    this.nameText = value.target.value;
+    this.nameSound = value.target.value;
     this.checkText();
-    this.showErrorText = this.nameText == "";
+    this.showErrorText = this.nameSound == "";
   }
 
   checkText(){
-    this.disableAddSongButton = !(this.nameText != "");
+    this.disableAddSongButton = !(this.nameSound != "");
   }
 
   listenText(){
-    this.audioRecorderService.speechSynthesis(this.nameText);
+    this.audioRecorderService.speechSynthesis(this.nameSound);
   }
 
   addSong(){
     this.showErrorDropFile = false;
     this.showErrorRecord = false;
     this.showErrorText = false;
+
+    const index = this.evalJsonService.index;
+    this.evalJsonService.songToDisplay[index][0] = this.nameSound;
+    this.evalJsonService.songToDisplay[index][1] = this.soundToListen;
+    this.evalJsonService.songToDisplay[index][2] = this.soundToZip;
+
+    this.audioRecorderService.audioObservable.next("");
+    this.reset();
   }
 
   reset(){
-    this.soundName = "";
-    this.soundFileToListen = "";
-    this.soundRecordedToListen= "";
+    this.nameSound = "";
+    this.soundToListen = "";
     this.soundToZip = "";
     this.uploadFileProgress = "width: 0%";
-    this.nameRecord = "";
-    this.nameText = "";
 
     this.showErrorDropFile = false;
     this.showErrorRecord = false;
