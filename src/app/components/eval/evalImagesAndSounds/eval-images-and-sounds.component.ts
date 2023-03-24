@@ -114,7 +114,7 @@ export class EvalImagesAndSoundsComponent implements OnInit {
         }
       } else {
         for (let j = 0; j < Math.abs(sizeDifference); j++) {
-          this.evalJsonService.imgToDisplay[index].push(["../../../../assets/NeedImage.png", this.listScores.length]);
+          this.evalJsonService.imgToDisplay[index].push(["assets/images/NeedImage.png", this.listScores.length]);
           this.evalJsonService.imgToZip[index].push("", "");
         }
       }
@@ -194,7 +194,7 @@ export class EvalImagesAndSoundsComponent implements OnInit {
         this.evalJsonService.imgToZip[indexItem][indexGrid * 2 + 1] = image;
       };
     } catch (e) {
-      this.evalJsonService.imgToDisplay[indexItem][indexGrid][0] = "assets/NeedImage.png";
+      this.evalJsonService.imgToDisplay[indexItem][indexGrid][0] = "assets/images/NeedImage.png";
       this.evalJsonService.imgToZip[indexItem][indexGrid * 2] = "";
       this.evalJsonService.imgToZip[indexItem][indexGrid * 2 + 1] = "";
     } finally {
@@ -203,7 +203,7 @@ export class EvalImagesAndSoundsComponent implements OnInit {
   }
 
   resetImg(indexItem: number, indexGrid: number) {
-    this.evalJsonService.imgToDisplay[indexItem][indexGrid][0] = "assets/NeedImage.png";
+    this.evalJsonService.imgToDisplay[indexItem][indexGrid][0] = "assets/image/NeedImage.png";
     this.updateImgAndSong();
   }
 
