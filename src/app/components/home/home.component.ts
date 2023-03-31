@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {EvalJsonService} from "../../services/json/eval-json.service";
 import {ThemeService} from "../../services/theme/theme.service";
 import {OrderProgressBarService} from "../../services/orderProgressBar/order-progress-bar.service";
+import {DatabaseService} from "../../services/database/database.service";
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,10 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router,
               private evalJsonService: EvalJsonService,
               private themeService: ThemeService,
-              private orderProgressBarService: OrderProgressBarService) {
+              private orderProgressBarService: OrderProgressBarService,
+              private databaseService: DatabaseService) {
+
+    this.databaseService.init();
 
     this.cardTheme = this.themeService.cardTheme[0];
     this.cardHeaderTheme = this.themeService.cardTheme[1];
@@ -41,10 +45,10 @@ export class HomeComponent implements OnInit {
     this.orderProgressBarService.setStepOrderProgressBar(this.actualStep);
     this.orderProgress = document.getElementById("orderProgressBar");
     this.orderProgress.style = "visibility: hidden";
-    this.evalJsonService.resetJson();
   }
 
   startEval() {
+    this.evalJsonService.resetJson();
     this.orderProgress.style = "";
     this.router.navigate(['/informations']);
   }

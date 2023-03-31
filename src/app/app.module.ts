@@ -23,6 +23,7 @@ import { DeleteAlertComponent } from './components/alert/deleteAlert/delete-aler
 import { SettingsComponent } from './components/settings/settings.component';
 import { PlayerRecorderComponent } from './components/playerRecorder/player-recorder.component';
 import {NgxDropzoneModule} from "ngx-dropzone";
+import { InfoAlertComponent } from './components/alert/infoAlert/info-alert.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {NgxDropzoneModule} from "ngx-dropzone";
     HomeAlertComponent,
     DeleteAlertComponent,
     SettingsComponent,
-    PlayerRecorderComponent
+    PlayerRecorderComponent,
+    InfoAlertComponent
   ],
     imports: [
         BrowserModule,

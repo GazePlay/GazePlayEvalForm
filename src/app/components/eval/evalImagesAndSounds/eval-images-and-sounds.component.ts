@@ -8,6 +8,7 @@ import {ChooseSoundComponent} from "../../chooseSound/choose-sound.component";
 import {moveItemInArray} from "@angular/cdk/drag-drop";
 import {ThemeService} from "../../../services/theme/theme.service";
 import {AudioRecorderService} from "../../../services/audioRecorder/audio-recorder.service";
+import {SettingsService} from "../../../services/settings/settings.service";
 
 @Component({
   selector: 'app-eval-images-and-sounds',
@@ -38,7 +39,8 @@ export class EvalImagesAndSoundsComponent implements OnInit {
               private dialog: MatDialog,
               public sanitizer: DomSanitizer,
               private themeService: ThemeService,
-              private audioRecorderService: AudioRecorderService) {
+              private audioRecorderService: AudioRecorderService,
+              private settingsService: SettingsService) {
 
     this.cardTheme = this.themeService.cardTheme[0];
     this.cardHeaderTheme = this.themeService.cardTheme[1];
@@ -281,10 +283,12 @@ export class EvalImagesAndSoundsComponent implements OnInit {
   }
 
   next() {
+    this.settingsService.saveAuto();
     this.router.navigate(['/zip']);
   }
 
   previous() {
+    this.settingsService.saveAuto();
     this.router.navigate(['/scores']);
   }
 }

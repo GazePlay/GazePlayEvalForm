@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {OrderProgressBarService} from "../../../services/orderProgressBar/order-progress-bar.service";
 import {EvalJsonService} from "../../../services/json/eval-json.service";
 import {ThemeService} from "../../../services/theme/theme.service";
+import {SettingsService} from "../../../services/settings/settings.service";
 
 @Component({
   selector: 'app-eval-get-zip',
@@ -22,7 +23,8 @@ export class EvalGetZipComponent implements OnInit {
     private router: Router,
     private orderProgressBarService: OrderProgressBarService,
     private evalJsonService: EvalJsonService,
-    private themeService: ThemeService) {
+    private themeService: ThemeService,
+    private settingsService: SettingsService) {
 
     this.cardTheme = this.themeService.cardTheme[0];
     this.cardHeaderTheme = this.themeService.cardTheme[1];
@@ -55,6 +57,7 @@ export class EvalGetZipComponent implements OnInit {
   }
 
   previous() {
+    this.settingsService.saveAuto();
     this.router.navigate(['/assets']);
   }
 }

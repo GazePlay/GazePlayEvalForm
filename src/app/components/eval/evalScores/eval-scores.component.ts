@@ -147,6 +147,7 @@ export class EvalScoresComponent implements OnInit {
   next() {
     if (!this.checkValues()){
       this.showErrorEmpty = false;
+      this.settingsService.saveAuto();
       this.router.navigate(['/assets']);
     }else {
       this.showErrorEmpty = true;
@@ -154,6 +155,7 @@ export class EvalScoresComponent implements OnInit {
   }
 
   previous() {
+    this.settingsService.saveAuto();
     this.router.navigate(['/user']);
   }
 }

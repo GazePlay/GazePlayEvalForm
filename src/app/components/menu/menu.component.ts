@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {Router} from "@angular/router";
 import {ThemeService} from "../../services/theme/theme.service";
 import {OrderProgressBarService} from "../../services/orderProgressBar/order-progress-bar.service";
+import {EvalJsonService} from "../../services/json/eval-json.service";
+import {SettingsService} from "../../services/settings/settings.service";
 
 @Component({
   selector: 'app-menu',
@@ -11,6 +13,11 @@ import {OrderProgressBarService} from "../../services/orderProgressBar/order-pro
 export class MenuComponent{
 
   orderProgress: any;
+  infoAlert: any;
+
+  titleInfoAlertMessage: string = " Sauvegarde";
+  contentInfoAlertMessage: string = "Une sauvegarde a été effectuer !";
+  delayForCloseInfoAlert: any = setTimeout;
 
   offcanvas: string = "";
   closeButton: string = "";
@@ -19,10 +26,11 @@ export class MenuComponent{
 
   activateAlert: string[] = ["", ""];
 
-
   constructor(private router: Router,
               private themeService: ThemeService,
-              private orderProgressBarService: OrderProgressBarService) {
+              private orderProgressBarService: OrderProgressBarService,
+              private evalJsonService: EvalJsonService,
+              private settingsService: SettingsService) {
 
     this.offcanvas = this.themeService.menuTheme[0];
     this.closeButton = this.themeService.menuTheme[1];
@@ -46,8 +54,19 @@ export class MenuComponent{
   }
 
   startEval() {
+    this.evalJsonService.resetJson();
     this.orderProgress = document.getElementById("orderProgressBar");
     this.orderProgress.style = "";
     this.router.navigate(['/informations']);
+  }
+
+  save(){
+    clearTimeout(this.delayForCloseInfoAlert);
+    this.settingsService.changeMessageInfoAlert(this.titleInfoAlertMessage, this.contentInfoAlertMessage);
+    this.infoAlert = document.getElementById("infoAlert");
+    this.infoAlert.style = "display: block !important";
+    this.delayForCloseInfoAlert = setTimeout(() => {
+      this.infoAlert.style = "display: none !important";
+    }, this.settingsService.timeForMessageInfoAlert);
   }
 }

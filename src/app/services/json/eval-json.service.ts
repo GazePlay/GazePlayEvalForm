@@ -109,4 +109,36 @@ export class EvalJsonService {
     }
     return id;
   }
+
+  save(){
+    return [
+      this.nameEval,
+      this.infoPatient,
+      this.skillToEvaluate,
+      this.output,
+      this.imgToDisplay,
+      this.songToDisplay,
+      this.cols,
+      this.rows,
+      this.fixationLength,
+      this.nbImgToSee,
+      this.rowHeight,
+      this.imgToZip
+    ]
+  }
+
+  load(value: any[]){
+    this.nameEval = value[0];
+    this.infoPatient = value[1];
+    this.skillToEvaluate = value[2];
+    this.output = value[3];
+    this.imgToDisplay = value[4];
+    this.songToDisplay = value[5];
+    this.cols = value[6];
+    this.rows = value[7];
+    this.fixationLength = value[8];
+    this.nbImgToSee = value[9];
+    this.rowHeight = value[10];
+    this.imgToZip = value[11];
+  }
 }

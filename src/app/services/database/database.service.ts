@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import {EvalJsonService} from "../json/eval-json.service";
+import {ThemeService} from "../theme/theme.service";
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +10,8 @@ export class DatabaseService {
   databaseVersion: number = 1;
   openRequest: IDBOpenDBRequest | undefined;
 
-  constructor() {
-    this.init();
+  constructor(private evalJsonService: EvalJsonService,
+              private themeService: ThemeService) {
   }
 
   /**
@@ -19,43 +21,80 @@ export class DatabaseService {
   init(){
 
     // Opening of the Database
-    this.openRequest = indexedDB.open('saveEval', this.databaseVersion);
+    this.openRequest = indexedDB.open('GazePlayEvalDB', this.databaseVersion);
 
     // Creation of Stores if the version changes
     this.openRequest.onupgradeneeded = event => {
+
       // @ts-ignore
       const db = event.target.result;
-      // @ts-ignore
-      const transaction = event.target.transaction;
 
       // Creation of Eval Store if this one does not exist
-      if (!db.objectStoreNames.contains("Eval")) {
-        db.createObjectStore('Eval', {autoIncrement: true});
-        const evalDatabase = transaction.objectStore('Eval');
-        //evalDatabase.add(this.playlistService.nameActualPlaylist);
-      }
-
-      // Creation of Theme Store if this one does not exist
-      if (!db.objectStoreNames.contains("Theme")) {
-        db.createObjectStore('Theme', {autoIncrement: true});
-        const themeDatabase = transaction.objectStore('Theme');
-        //themeDatabase.add(this.themeService.theme);
+      if (!db.objectStoreNames.contains("GazePlayEval")) {
+        db.createObjectStore('GazePlayEval', {autoIncrement: true});
       }
 
       // Creation of Language Store if this one does not exist
-      if (!db.objectStoreNames.contains("Language")) {
-        db.createObjectStore('Language', {autoIncrement: true});
-        const languageDatabase = transaction.objectStore('Language');
-        //languageDatabase.add(this.languageService.activeLanguage);
+      if (!db.objectStoreNames.contains("Settings")) {
+        db.createObjectStore('Settings', {autoIncrement: true});
       }
     }
+  }
 
-    // Success open Database
+  save() {
+
+    // Opening of the Database
+    this.openRequest = indexedDB.open('GazePlayEvalDB', this.databaseVersion);
+
     this.openRequest.onsuccess = event => {
+
       // @ts-ignore
       const db = event.target.result;
 
-    }
+      // Save GazePlay Eval
+      const gazePlayEvalStore = db.transaction(['GazePlayEval'], 'readwrite');
+      const gazePlayEvalObjectStore = gazePlayEvalStore.objectStore('GazePlayEval');
+      const storeGazePlayEvalRequest = gazePlayEvalObjectStore.get(1);
+      storeGazePlayEvalRequest.onsuccess = () => {
+        gazePlayEvalObjectStore.put(this.evalJsonService.save());
+      };
 
+      // Save Settings
+      const settingsStore = db.transaction(['Settings'], 'readwrite');
+      const settingsObjectStore = settingsStore.objectStore('Settings');
+      const storeSettingsRequest = settingsObjectStore.get(1);
+      storeSettingsRequest.onsuccess = () => {
+        settingsObjectStore.put(this.themeService.themeChoice);
+      };
+    }
   }
+
+  load(){
+
+    // Opening of the Database
+    this.openRequest = indexedDB.open('GazePlayEvalDB', this.databaseVersion);
+
+    this.openRequest.onsuccess = event => {
+
+      // @ts-ignore
+      const db = event.target.result;
+
+      // Load GazePlay Eval
+      const gazePlayEvalStore = db.transaction(['GazePlayEval'], 'readwrite');
+      const gazePlayEvalObjectStore = gazePlayEvalStore.objectStore('GazePlayEval');
+      const storeGazePlayEvalRequest = gazePlayEvalObjectStore.get(1);
+      storeGazePlayEvalRequest.onsuccess = () => {
+        this.evalJsonService.load(storeGazePlayEvalRequest.result);
+      };
+
+      // Load Settings
+      const settingsStore = db.transaction(['Settings'], 'readwrite');
+      const settingsObjectStore = settingsStore.objectStore('Settings');
+      const storeSettingsRequest = settingsObjectStore.get(1);
+      storeSettingsRequest.onsuccess = () => {
+        this.themeService.changeTheme(storeSettingsRequest.result);
+      };
+    }
+  }
+
 }

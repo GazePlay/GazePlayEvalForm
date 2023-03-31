@@ -126,6 +126,7 @@ export class EvalUserComponent implements OnInit {
   next() {
     if (!this.checkValues()){
       this.showErrors = false;
+      this.settingsService.saveAuto();
       this.router.navigate(['/scores']);
     }else {
       this.showErrors = true;
@@ -133,6 +134,7 @@ export class EvalUserComponent implements OnInit {
   }
 
   previous() {
+    this.settingsService.saveAuto();
     this.router.navigate(['/informations']);
   }
 }
