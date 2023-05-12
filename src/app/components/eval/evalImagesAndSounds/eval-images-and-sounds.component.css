@@ -107,7 +107,7 @@ Class
 }
 
 .imgTile {
-  text-align: end;
+  text-align: center;
 }
 
 .itemTile {
@@ -135,6 +135,7 @@ Id
 .borderInfo {
   border: thick groove ghostwhite;
   padding-bottom: 1%;
+  padding-top: 1%;
 }
 
 .infoTooltip {
@@ -169,4 +170,79 @@ Id
 
 .cardLight {
   border: 2px gray solid !important;
+}
+
+.accordionDarkColor{
+  background-color: rgba(0, 0, 0, 0.38);
+}
+
+.accordionLightColor{
+  background-color: rgba(248, 249, 250, 1);
+}
+
+.accordionHeaderDarkColor {
+  background-color: rgba(33, 37, 41, 1);
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+.accordionHeaderLightColor {
+  background-color: rgba(240, 241, 242, 1);
+  color: black !important;
+}
+
+.accordion-button {
+  font-size: smaller;
+}
+
+.matGridContainer {
+  margin: auto;
+}
+
+.matGridTitle {
+  width: -webkit-fill-available;
+  text-align: center;
+}
+
+.index {
+  margin: 0 !important;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: initial !important;
+  box-shadow: none;
+}
+
+.accordion-item {
+  border: none;
+}
+
+.accordionDarkLineItem {
+  border-top: solid 2px rgba(0, 0, 0, 0.38);
+}
+
+.accordionLightLineItem {
+  border-top: solid 2px gray;
+}
+
+.accordion-item:last-of-type {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.accordion-item:first-of-type {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.accordion-item:last-of-type .accordion-collapse {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.evaluatedSkill {
+  margin-bottom: 2%;
+}
+
+.accordion-button::after {
+  background-image: var(--bs-accordion-btn-active-icon);
 }

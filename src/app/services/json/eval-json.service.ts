@@ -20,20 +20,16 @@ export class EvalJsonService {
   rows: number[] = [];
   fixationLength: number[] = [];
   nbImgToSee: number[] = [];
-  rowHeight: number = 0;
   imgToZip: String[][] = [];
 
   constructor() {
   }
 
   createEval() {
-    this.generateConfigFile();
     this.checkEval();
     const zip = new JSZip();
 
-    let infoData = new Blob([JSON.stringify(this.generateInfoFile())], {type: 'application/json'});
-    let configData = new Blob([JSON.stringify(this.generateConfigFile())], {type: 'application/json'});
-    zip.file(this.nameEval + "/info.json", infoData);
+    let configData = new Blob([JSON.stringify(this.generateJson())], {type: 'application/json'});
     zip.file(this.nameEval + "/config.json", configData);
     this.addImgAndSongToZip(zip);
     zip.generateAsync({type: "blob"}).then((content) => {
@@ -59,7 +55,7 @@ export class EvalJsonService {
   generateConfigFile() {
     let config: any[] = [];
     for (let i = 0; i < this.imgToDisplay.length; i++) {
-      config.push([this.rows[i], this.cols[i]]);
+      config.push([this.rows[i], this.cols[i], this.skillToEvaluate.length]);
       for (let j = 0; j < this.imgToZip[i].length; j += 2) {
         config[i].push(this.imgToZip[i][j]);
         for (let k = 2; k < this.imgToDisplay[i][j / 2].length; k++) {
@@ -71,6 +67,19 @@ export class EvalJsonService {
       config[i].push(this.fixationLength[i]);
     }
     return config;
+  }
+
+  generateJson(){
+    let infoUser: any[] = this.generateInfoFile();
+    let config: any[] = this.generateConfigFile();
+    let json: any[] = [];
+
+    json.push(infoUser);
+    for (let i=0; i<config.length; i++){
+      json.push(config[i]);
+    }
+    
+    return json;
   }
 
   addImgAndSongToZip(zip: any) {
@@ -95,7 +104,6 @@ export class EvalJsonService {
     this.rows = [];
     this.fixationLength = [];
     this.nbImgToSee = [];
-    this.rowHeight = 0;
     this.imgToZip = [];
   }
 
@@ -122,7 +130,6 @@ export class EvalJsonService {
       this.rows,
       this.fixationLength,
       this.nbImgToSee,
-      this.rowHeight,
       this.imgToZip
     ]
   }
@@ -138,7 +145,6 @@ export class EvalJsonService {
     this.rows = value[7];
     this.fixationLength = value[8];
     this.nbImgToSee = value[9];
-    this.rowHeight = value[10];
-    this.imgToZip = value[11];
+    this.imgToZip = value[10];
   }
 }

@@ -19,7 +19,6 @@ export class EvalImagesAndSoundsComponent implements OnInit {
 
   actualStep: number = 4;
   nbItem: number = 0;
-  rowHeight: number = 0;
   cols: number[] = [];
   rows: number[] = [];
   fixationLength: number[] = [];
@@ -32,6 +31,10 @@ export class EvalImagesAndSoundsComponent implements OnInit {
   cardHeaderTheme: string = "";
   cardTextTheme: string = "";
   buttonTheme: string = "";
+  accordionTheme: string = "";
+  accordionHeaderTheme: string = "";
+  accordionItemTheme: string = "";
+  accordionElementsTheme: string = "";
 
   constructor(private router: Router,
               private orderProgressBarService: OrderProgressBarService,
@@ -46,12 +49,20 @@ export class EvalImagesAndSoundsComponent implements OnInit {
     this.cardHeaderTheme = this.themeService.cardTheme[1];
     this.cardTextTheme = this.themeService.cardTheme[2];
     this.buttonTheme = this.themeService.cardTheme[3];
+    this.accordionTheme = this.themeService.cardTheme[4];
+    this.accordionHeaderTheme = this.themeService.cardTheme[5];
+    this.accordionItemTheme = this.themeService.cardTheme[6];
+    this.accordionElementsTheme = this.themeService.cardTheme[7];
 
     this.themeService.cardThemeObservable.subscribe(value => {
       this.cardTheme = value[0];
       this.cardHeaderTheme = value[1];
       this.cardTextTheme = value[2];
       this.buttonTheme = value[3];
+      this.accordionTheme = value[4];
+      this.accordionHeaderTheme = value[5];
+      this.accordionItemTheme = value[6];
+      this.accordionElementsTheme = value[7];
     });
 
     this.audioRecorderService.audioObservable.subscribe(value => {
@@ -106,7 +117,6 @@ export class EvalImagesAndSoundsComponent implements OnInit {
   updateGrid(index: number) {
     let gridSize = this.evalJsonService.cols[index] * this.evalJsonService.rows[index];
     if (gridSize >= 0) {
-      this.resizeRowHeightGrid(gridSize);
       let sizeDifference = this.evalJsonService.imgToDisplay[index].length - gridSize;
       if (sizeDifference > 0) {
         for (let i = 0; i < sizeDifference; i++) {
@@ -138,31 +148,21 @@ export class EvalImagesAndSoundsComponent implements OnInit {
   setNbScore(indexItem: number) {
     for (let i = 0; i < this.listScores.length; i++) {
       for (let k=0; k<this.evalJsonService.imgToDisplay[indexItem].length; k++){
-        if (this.evalJsonService.imgToDisplay[indexItem][k].length < ((this.evalJsonService.imgToDisplay[indexItem][k][1]*2)+2)){
-          this.evalJsonService.imgToDisplay[indexItem][k].push(this.listScores[i][0], 0);
+        if (this.evalJsonService.imgToDisplay[indexItem][k].length < ((this.evalJsonService.imgToDisplay[indexItem][k][1]*3)+2)){
+          this.evalJsonService.imgToDisplay[indexItem][k].push(this.listScores[i][0], 0, 0);
         }
       }
     }
     this.updateImgAndSong();
   }
 
-  resizeRowHeightGrid(gridSize: number) {
-    if (gridSize > 0){
-      this.evalJsonService.rowHeight = 240;
-      this.evalJsonService.rowHeight += this.listScores.length * 40;
-    }else {
-      this.evalJsonService.rowHeight = 0;
-    }
-  }
-
   updateScores(){
     for (let i = 0; i < this.listScores.length; i++) {
       for (let j = 0; j < this.evalJsonService.imgToDisplay.length; j++){
-        this.resizeRowHeightGrid((this.cols[j]*this.rows[j]));
         for (let k=0; k<this.evalJsonService.imgToDisplay[j].length; k++){
           this.evalJsonService.imgToDisplay[j][k][1] = this.listScores.length;
-          if (this.evalJsonService.imgToDisplay[j][k].length < ((this.evalJsonService.imgToDisplay[j][k][1]*2)+2)){
-            this.evalJsonService.imgToDisplay[j][k].push(this.listScores[i][0], 0);
+          if (this.evalJsonService.imgToDisplay[j][k].length < ((this.evalJsonService.imgToDisplay[j][k][1]*3)+2)){
+            this.evalJsonService.imgToDisplay[j][k].push(this.listScores[i][0], 0, 0);
           }
           this.evalJsonService.imgToDisplay[j][k][2*(i+1)] = this.listScores[i][0];
         }
@@ -171,21 +171,30 @@ export class EvalImagesAndSoundsComponent implements OnInit {
     this.updateImgAndSong();
   }
 
-  setValueScore(value: any, indexItem: number, indexGrid: number, indexValueScore: number) {
-    let calculIndex = 3 + (indexValueScore * 2);
+  setValueRightAnswer(value: any, indexItem: number, indexGrid: number, indexValueScore: number) {
+    let calculIndex = 3 + (indexValueScore * 3);
+    this.evalJsonService.imgToDisplay[indexItem][indexGrid][calculIndex] = Number(value.target.value);
+    this.updateImgAndSong();
+  }
+
+  setValueBadAnswer(value: any, indexItem: number, indexGrid: number, indexValueScore: number) {
+    let calculIndex = 4 + (indexValueScore * 3);
     this.evalJsonService.imgToDisplay[indexItem][indexGrid][calculIndex] = Number(value.target.value);
     this.updateImgAndSong();
   }
 
   checkValue(value: any) {
     if (value < 0) {
-      return 0
+      return 0;
+    } else if (value > 20){
+      return 20;
     } else {
       return value;
     }
   }
 
   addImg(value: any, indexItem: number, indexGrid: number) {
+    console.log(this.imgToDisplay);
     const image = value.target.files[0];
     const reader = new FileReader();
     try {
@@ -249,11 +258,18 @@ export class EvalImagesAndSoundsComponent implements OnInit {
     this.nbImgToSee = this.evalJsonService.nbImgToSee;
     this.imgToDisplay = this.evalJsonService.imgToDisplay;
     this.songToDisplay = this.evalJsonService.songToDisplay;
-    this.rowHeight = this.evalJsonService.rowHeight;
   }
 
   getSrcAudioFile(index: number) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(String(this.songToDisplay[index][1]));
+  }
+
+  haveSeparatedLine(index: number){
+    if (index > 0){
+      return this.accordionElementsTheme;
+    }else {
+      return "";
+    }
   }
 
   upItem(indexItem: number) {

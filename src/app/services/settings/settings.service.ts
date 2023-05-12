@@ -15,7 +15,7 @@ export class SettingsService {
   titleInfoAlertMessage: string = " Sauvegarde";
   contentInfoAlertMessage: string = "Une sauvegarde automatique a été effectuer !";
   delayForCloseInfoAlert: any = setTimeout;
-  timeForMessageInfoAlert = 10000; // c'est en millisecondes
+  timeForMessageInfoAlert = 1000; // c'est en millisecondes
   messageInfoAlertObservable = new Subject<string[]>();
 
   constructor() { }
