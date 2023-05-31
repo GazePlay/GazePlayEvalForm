@@ -28,6 +28,7 @@ export class PlayerRecorderComponent {
   isRecording: boolean = false;
 
   acceptedFile: string[] = ["mp3", "wav"];
+  recordedSongToListen: any = "";
   soundToListen: any = "";
   nameSound: string = "";
   soundToZip: any = "";
@@ -133,7 +134,9 @@ export class PlayerRecorderComponent {
     this.isRecording = false;
     this.audioRecorderService.stopRecording();
     setTimeout(() => {
-      this.soundToListen = this.sanitizer.bypassSecurityTrustResourceUrl(this.audioRecorderService.audioUrl);
+      this.soundToListen = this.audioRecorderService.audioUrl;
+      this.soundToZip = this.audioRecorderService.audioBlob;
+      this.recordedSongToListen = this.sanitizer.bypassSecurityTrustResourceUrl(this.audioRecorderService.audioUrl);
     }, 500);
     this.checkRecord();
   }
@@ -142,6 +145,7 @@ export class PlayerRecorderComponent {
     this.nameSound = value.target.value;
     this.checkRecord();
     this.showErrorRecord = this.nameSound == "";
+    this.nameSound = this.nameSound  + ".wav";
   }
 
   checkRecord(){

@@ -44,7 +44,9 @@ export class AudioRecorderService {
 
   speechSynthesis(value: string){
     let speak = new SpeechSynthesisUtterance(value);
+    console.log(speak);
     speak.lang = "fr-FR";
     window.speechSynthesis.speak(speak);
   }
+
 }

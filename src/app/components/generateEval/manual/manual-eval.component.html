@@ -1,0 +1,163 @@
+<div class="container-fluid main">
+  <div [class]="cardTheme">
+    <div [class]="cardHeaderTheme">
+      <h1>Items</h1>
+    </div>
+    <div class="card-body" [class]="cardTextTheme">
+      <div class="mb-3">
+        <div *ngIf="this.nbItem > 0" class="accordion" id="accordionItems" [class]="accordionItemTheme">
+          <div *ngFor="let item of [].constructor(this.nbItem); let indexItem = index">
+            <div class="accordion-item" [class]="haveSeparatedLine(indexItem)">
+              <h2 class="accordion-header" [class]="accordionHeaderTheme" id="{{'accordionHeader' + indexItem}}">
+                <button class="accordion-button" [class]="accordionHeaderTheme" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#accordionPanel' + indexItem" aria-expanded="true" [attr.aria-controls]="'accordionControls' + indexItem">
+                  Item {{indexItem + 1}}
+                </button>
+              </h2>
+              <div id="{{'accordionPanel' + indexItem}}" class="accordion-collapse collapse show" [class]="accordionTheme" [attr.aria-labelledby]="'accordionHeader' + indexItem" data-bs-parent="#accordionItems">
+                <div class="accordion-body">
+                  <div class="container-fluid second">
+                    <div [class]="cardTheme">
+                      <div [class]="cardHeaderTheme">
+                        <button (click)="this.upItem(indexItem)" class="btn btn-secondary" type="button">▲</button>
+                        <button (click)="this.downItem(indexItem)" class="btn btn-secondary" type="button">▼</button>
+                      </div>
+                      <div class="card-body" [class]="cardTextTheme">
+                        <div class="mb-3">
+                          <div class="row">
+                            <div class="col-4">
+                              <label class="form-label">Nombre de lignes</label>
+                              <input (change)="setRows($event, indexItem)"
+                                     [value]="this.rows[indexItem]" class="form-control" min="0" max="20" step="1"
+                                     type="number">
+                            </div>
+                            <div class="col-4">
+                              <label class="form-label">Nombre de colonnes</label>
+                              <input (change)="setCols($event, indexItem)"
+                                     [value]="this.cols[indexItem]" class="form-control" min="0" max="20" step="1"
+                                     type="number">
+                            </div>
+                            <div class="col-4">
+                              <label class="form-label">Nombre de bonne réponse</label>
+                              <input (change)="setNbImgToSee($event, indexItem)"
+                                     [value]="this.nbImgToSee[indexItem]" class="form-control" min="0" step="1"
+                                     type="number">
+                            </div>
+                          </div>
+                          <br>
+                          <div class="row">
+                            <label class="form-label">Choisir consigne</label>
+                            <div class="col-4 addSong">
+                              <button data-bs-target="#playerRecorder" data-bs-toggle="offcanvas" class="btn imgAndSound" type="button" (click)="openPlayerRecorder(indexItem)">
+                                Choisir le type
+                              </button>
+                            </div>
+                            <div class="col-4 audioElem">
+                              <div class="closeButton" style="visibility: hidden">
+                                <button aria-label="Close" class="btn-close" type="button"></button>
+                              </div>
+                              <div class="audioPos">
+                                <audio [src]="getSrcAudioFile(indexItem)" controls></audio>
+                              </div>
+                            </div>
+                            <div class="col-4">
+                              <label class="form-label">Temps de fixation</label>
+                              <div class="input-group">
+                                <input (change)="setFixationLength($event, indexItem)" [value]="this.fixationLength[indexItem]"
+                                       class="form-control" min="0"
+                                       step="0.1" type="number">
+                                <div class="input-group-append">
+                                  <span class="input-group-text">secondes</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <label *ngIf="this.cols[indexItem] > 0 && this.rows[indexItem] > 0" class="form-label matGridTitle">Prévisualisation</label>
+                        <div class="matGridContainer" [style]="'width:' + this.cols[indexItem] * 5 + '% !important;'">
+                          <mat-grid-list [cols]="this.cols[indexItem]" rowHeight="50px">
+                            <mat-grid-tile
+                              *ngFor="let grid of this.imgToDisplay[indexItem]; let indexGrid = index"
+                              [colspan]="1"
+                              [rowspan]="1">
+                              <label class="form-label">{{indexGrid+1}}</label>
+                            </mat-grid-tile>
+                          </mat-grid-list>
+                        </div>
+                        <br>
+                        <div *ngIf="this.cols[indexItem] > 0 && this.rows[indexItem] > 0" class="mb-3">
+                          <div cdkDropList>
+                            <div *ngFor="let value of this.imgToDisplay[indexItem]; let index = index" cdkDrag>
+                              <div class="mb-3">
+                                <div class="row borderInfo">
+                                  <h2 class="index">{{index+1}}</h2>
+                                  <div class="col-3">
+                                    <div class="closeButton">
+                                      <button (click)="resetImg(indexItem, index)" aria-label="Close" class="btn-close"
+                                              type="button"></button>
+                                    </div>
+                                    <div class="imgTile">
+                                      <img [src]="this.imgToDisplay[indexItem][index][0]" alt="Pas d'image" class="imgSize">
+                                    </div>
+                                    <div class="imgTile">
+                                      <button (click)="inputImport.click()" class="btn imgAndSound" type="button">
+                                        <input #inputImport (change)="addImg($event, indexItem, index)"
+                                               accept=".jpg, .jpeg, .png"
+                                               hidden type="file">
+                                        Importer une image
+                                      </button>
+                                    </div>
+                                  </div>
+                                  <div *ngIf="this.listScores.length>0" class="col-9">
+                                    <div class="row">
+                                      <div class="col-4">
+                                        <label class="form-label">Compétences</label>
+                                        <input *ngFor="let choiceScore of [].constructor(this.imgToDisplay[indexItem][index][1]); let indexChoice = index"
+                                               [value]="this.imgToDisplay[indexItem][index][2 + (indexChoice * 3)]"
+                                               class="form-control evaluatedSkill" disabled>
+                                      </div>
+                                      <div class="col-4">
+                                        <label class="form-label">Valeur si bonne réponse</label>
+                                        <input (change)="setValueRightAnswer($event, indexItem, index, indexValueScore)"
+                                               *ngFor="let valueScore of [].constructor(this.imgToDisplay[indexItem][index][1]); let indexValueScore = index"
+                                               [value]="this.imgToDisplay[indexItem][index][3 + (indexValueScore * 3)]"
+                                               class="form-control evaluatedSkill" step="1" type="number">
+                                      </div>
+                                      <div class="col-4">
+                                        <label class="form-label">Valeur si mauvaise réponse</label>
+                                        <input (change)="setValueBadAnswer($event, indexItem, index, indexValueScore)"
+                                               *ngFor="let valueScore of [].constructor(this.imgToDisplay[indexItem][index][1]); let indexValueScore = index"
+                                               [value]="this.imgToDisplay[indexItem][index][4 + (indexValueScore * 3)]"
+                                               class="form-control evaluatedSkill" step="1" type="number">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="removeButton">
+                          <button (click)="removeOneItem(indexItem)" class="btn btn-danger" type="button">-</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="mb-3 text-center">
+          <button (click)="addOneMoreItem()" class="btn btn-secondary" type="button">+</button>
+        </div>
+      </div>
+      <div class="mb-3 text-center">
+        <button (click)="previous()" [class]="buttonTheme" type="button">Retour</button>
+        <button (click)="next()" [class]="buttonTheme" type="button">Suivant</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-player-recorder></app-player-recorder>

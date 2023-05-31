@@ -64,7 +64,7 @@ export class EvalJsonService {
       }
       config[i].push(this.songToDisplay[i][0]);
       config[i].push(this.nbImgToSee[i]);
-      config[i].push(this.fixationLength[i]);
+      config[i].push(this.fixationLength[i] * 1000); //seconds to milliseconds
     }
     return config;
   }
@@ -78,7 +78,7 @@ export class EvalJsonService {
     for (let i=0; i<config.length; i++){
       json.push(config[i]);
     }
-    
+
     return json;
   }
 

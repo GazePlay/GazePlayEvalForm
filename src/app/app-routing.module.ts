@@ -6,6 +6,8 @@ import {EvalUserComponent} from "./components/eval/evalUser/eval-user.component"
 import {EvalImagesAndSoundsComponent} from "./components/eval/evalImagesAndSounds/eval-images-and-sounds.component";
 import {EvalGetZipComponent} from "./components/eval/evalGetZip/eval-get-zip.component";
 import {EvalScoresComponent} from "./components/eval/evalScores/eval-scores.component";
+import {AutomaticEvalComponent} from "./components/generateEval/automatic/automatic-eval.component";
+import {ManualEvalComponent} from "./components/generateEval/manual/manual-eval.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -14,6 +16,8 @@ const routes: Routes = [
   {path: 'scores', component: EvalScoresComponent},
   {path: 'assets', component: EvalImagesAndSoundsComponent},
   {path: 'zip', component: EvalGetZipComponent},
+  {path: 'auto', component: AutomaticEvalComponent},
+  {path: 'manual', component: ManualEvalComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 

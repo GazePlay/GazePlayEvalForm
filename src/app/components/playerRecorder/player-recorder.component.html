@@ -85,9 +85,9 @@
           <label for="nameRecord" class="form-label">Nom de mon enregistrement</label>
           <input id="nameRecord"
                  class="form-control inputRecord"
-                 placeholder="Par exemple : MonEnregistrement" type="text" [value]="nameSound" (keyup)="getNameRecord($event)">
+                 placeholder="Par exemple : MonEnregistrement" type="text" (keyup)="getNameRecord($event)">
           <br>
-          <audio [src]="soundToListen" controls></audio>
+          <audio [src]="recordedSongToListen" controls></audio>
           <br>
           <br>
           <div *ngIf="showErrorRecord" class="alert alert-danger text-center" role="alert">

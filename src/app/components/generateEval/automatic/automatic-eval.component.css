@@ -1,32 +1,19 @@
-/**
-Elem html
-**/
-
 button {
   margin-right: 1%;
 }
 
-img {
-  width: 25%;
-  height: 25%;
+/*----- CLASS -----*/
+
+.container-fluid {
+  width: 50%;
 }
 
-p {
-  margin: auto !important;
+.firstCardBody {
+  padding-bottom: 0;
 }
 
-/**
-Class
-**/
-.main {
-  width: 75%;
-}
-
-.col-6 {
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.secondCardBody {
+  padding-top: 0;
 }
 
 .btnColor {
@@ -47,4 +34,8 @@ Class
 
 .cardLight {
   border: 2px gray solid !important;
+}
+
+.items {
+  margin: auto;
 }

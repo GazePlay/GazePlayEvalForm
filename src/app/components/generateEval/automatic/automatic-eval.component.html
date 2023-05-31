@@ -1,0 +1,184 @@
+<div class="container-fluid">
+  <div [class]="cardTheme">
+    <div [class]="cardHeaderTheme">
+      <h1>Evaluation automatique</h1>
+    </div>
+    <div class="card-body text-center firstCardBody" [class]="cardTextTheme">
+      <div class="mb-3">
+        <h2>Paramètres de génération : </h2>
+        <br>
+        <div class="row">
+          <div class="col-6 items">
+            <label class="form-label">Nombre d'items a générer :</label>
+            <form class="form-inline">
+              <div class="form-group row">
+                <label for="minCols" class="col-8">Nombre d'items voulu</label>
+                <div class="col-4">
+                  <input #nbItems (change)="getNbItems($event)" type="number" class="form-control" id="nbItems" value="1" min="1" step="1">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-6">
+            <label class="form-label">Nombre de colonnes : </label>
+            <form class="form-inline">
+              <div class="form-group row">
+                <label for="minCols" class="col-8">Nombre de colonnes minimum</label>
+                <div class="col-4">
+                  <input #minCols (change)="getColsMin($event)" type="number" class="form-control" id="minCols" value="1" min="1" max="20" step="1">
+                </div>
+              </div>
+            </form>
+            <form class="form-inline">
+              <div class="form-group row">
+                <label for="maxCols" class="col-8 col-form-label">Nombre de colonnes maximum</label>
+                <div class="col-4">
+                  <input #maxCols (change)="getColsMax($event)" type="number" class="form-control" id="maxCols" value="1" min="1" max="20" step="1">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-6">
+            <label class="form-label">Nombre de lignes :</label>
+            <form class="form-inline">
+              <div class="form-group row">
+                <label for="minRows" class="col-8">Nombre de lignes minimum</label>
+                <div class="col-4">
+                  <input #minRows (change)="getRowsMin($event)" type="number" class="form-control" id="minRows" value="1" min="1" max="20" step="1">
+                </div>
+              </div>
+            </form>
+            <form class="form-inline">
+              <div class="form-group row">
+                <label for="maxRows" class="col-8 col-form-label">Nombre de lignes maximum</label>
+                <div class="col-4">
+                  <input #maxRows (change)="getRowsMax($event)" type="number" class="form-control" id="maxRows" value="1" min="1" max="20" step="1">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-6">
+            <label class="form-label">Temps de fixation (en secondes) :</label>
+            <form class="form-inline">
+              <div class="form-group row">
+                <label for="minFixationLength" class="col-8">Temps de fixation minimum</label>
+                <div class="col-4">
+                  <input #minFixationLength (change)="getFixationLengthMin($event)" type="number" class="form-control" id="minFixationLength" value="0" min="0" step="0.1">
+                </div>
+              </div>
+            </form>
+            <form class="form-inline">
+              <div class="form-group row">
+                <label for="maxFixationLength" class="col-8 col-form-label">Temps de fixation maximum</label>
+                <div class="col-4">
+                  <input #maxFixationLength (change)="getFixationLengthMax($event)" type="number" class="form-control" id="maxFixationLength" value="0" min="0" step="0.1">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-6">
+            <label class="form-label">Nombre de bonne réponse :</label>
+            <form class="form-inline">
+              <div class="form-group row">
+                <label for="minGoodAnswer" class="col-8">Nombre de bonne réponse minimum</label>
+                <div class="col-4">
+                  <input #minGoodAnswer (change)="getGoodAnswerMin($event)" type="number" class="form-control" id="minGoodAnswer" value="1" min="1" step="1">
+                </div>
+              </div>
+            </form>
+            <form class="form-inline">
+              <div class="form-group row">
+                <label for="maxGoodAnswer" class="col-8 col-form-label">Nombre de bonne réponse maximum</label>
+                <div class="col-4">
+                  <input #maxGoodAnswer (change)="getGoodAnswerMax($event)" type="number" class="form-control" id="maxGoodAnswer" value="1" min="1" step="1">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-6">
+            <label class="form-label">Remplir entierement d'image</label>
+            <div>
+              <div class="form-check form-check-inline">
+                <input (change)="getFillImages(true)" class="form-check-input" type="radio" name="fillImages" id="fillImagesTrue" value="true">
+                <label class="form-check-label" for="fillImagesTrue">Oui</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input (change)="getFillImages(false)" class="form-check-input" type="radio" name="fillImages" id="fillImagesFalse" value="false" checked>
+                <label class="form-check-label" for="fillImagesFalse">Non</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <label class="form-label">Utilisé plusieurs fois la même image</label>
+            <div>
+              <div class="form-check form-check-inline">
+                <input (change)="getReuseImages(true)" class="form-check-input" type="radio" name="reuseImages" id="reuseImagesTrue" value="true">
+                <label class="form-check-label" for="reuseImagesTrue">Oui</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input (change)="getReuseImages(false)" class="form-check-input" type="radio" name="reuseImages" id="reuseImagesFalse" value="false" checked>
+                <label class="form-check-label" for="reuseImagesFalse">Non</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-6">
+            <label class="form-label">Mettre un son/texte</label>
+            <div>
+              <div class="form-check form-check-inline">
+                <input (change)="getAddSongText(true)" class="form-check-input" type="radio" name="addSongText" id="addSongTextTrue" value="true">
+                <label class="form-check-label" for="addSongTextTrue">Oui</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input (change)="getFillImages(false)" class="form-check-input" type="radio" name="addSongText" id="addSongTextFalse" value="false" checked>
+                <label class="getAddSongText" for="addSongTextFalse">Non</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <label class="form-label">Son ou Texte</label>
+            <div>
+              <div class="form-check form-check-inline">
+                <input (change)="getIsSong(true)" class="form-check-input" type="radio" name="isSong" id="isSongTrue" value="true">
+                <label class="form-check-label" for="isSongTrue">Son</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input (change)="getIsSong(false)" class="form-check-input" type="radio" name="isSong" id="isSongFalse" value="false" checked>
+                <label class="getAddSongText" for="isSongFalse">Text</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body text-center secondCardBody" [class]="cardTextTheme">
+      <br>
+      <div class="mb-3">
+        <label class="form-label">Drag & Drop dossier d'images</label>
+        <div>
+          <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropFile($event)">
+            <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+              Zone de Drag & Drop des images !
+            </ng-template>
+          </ngx-file-drop>
+        </div>
+      </div>
+      <div class="text-center">
+        <button (click)="previous()" [class]="buttonTheme" type="button">Retour</button>
+        <button (click)="generate()" [class]="buttonTheme" type="button">Générer évaluation</button>
+      </div>
+    </div>
+  </div>
+</div>
+<br>

@@ -1,0 +1,248 @@
+/**
+Elem html
+**/
+
+button {
+  margin-right: 1%;
+}
+
+img {
+  max-height: 100px;
+  max-width: 100px;
+  margin-bottom: 3%;
+}
+
+textarea {
+  resize: none;
+}
+
+div.col {
+  text-align: -webkit-center;
+}
+
+mat-grid-tile {
+  border-color: black;
+  border-style: solid;
+}
+
+/**
+Class
+**/
+.main {
+  width: 100%;
+}
+
+.second {
+  padding-bottom: 1%;
+}
+
+.title {
+  text-align: center;
+}
+
+.tileSize {
+  width: -webkit-fill-available;
+  height: inherit;
+}
+
+.removeButton {
+  text-align: center;
+}
+
+.radioLabel {
+  margin-left: 3%;
+}
+
+.radioDiv {
+  text-align: center;
+}
+
+.textArea {
+  margin-top: 5%;
+}
+
+.audioElem {
+  min-width: 340px;
+}
+
+.audioPos {
+  text-align: center;
+}
+
+.imgAndSound {
+  background: #E9ECEF;
+  border-color: #CED4DA;
+}
+
+.addImg {
+  margin: auto;
+}
+
+.addSong {
+  text-align: center;
+  margin-top: 2%;
+}
+
+.form-control[type=file] {
+  overflow: hidden;
+  min-width: 145px;
+  max-width: 145px;
+}
+
+.closeButton {
+  text-align: end;
+}
+
+.imgSize {
+  min-width: 150px;
+  min-height: 150px;
+}
+
+.leftInput {
+  margin-left: 1%;
+}
+
+.rigthInput {
+  margin-left: -1%;
+}
+
+.imgTile {
+  text-align: center;
+}
+
+.itemTile {
+  text-align: end;
+}
+
+.order {
+  text-align: left;
+}
+
+/**
+Id
+**/
+
+#assets {
+  margin-left: 5%;
+}
+
+#descriptionSound {
+  margin-top: 4%;
+}
+
+/*---------------------------------*/
+
+.borderInfo {
+  border: thick groove ghostwhite;
+  padding-bottom: 1%;
+  padding-top: 1%;
+}
+
+.infoTooltip {
+  width: 40px;
+  height: 40px;
+}
+
+.containerTooltip {
+  text-align: end;
+}
+
+.removeButton {
+  text-align: center;
+  margin: auto;
+}
+
+.btnColor {
+  color: lightgrey;
+}
+
+.explanationColor {
+  background-color: rgba(255, 255, 255, 0.55);
+}
+
+.cardHeaderColor {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.cardDark {
+  border: 2px black solid !important;
+}
+
+.cardLight {
+  border: 2px gray solid !important;
+}
+
+.accordionDarkColor{
+  background-color: rgba(0, 0, 0, 0.38);
+}
+
+.accordionLightColor{
+  background-color: rgba(248, 249, 250, 1);
+}
+
+.accordionHeaderDarkColor {
+  background-color: rgba(33, 37, 41, 1);
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+.accordionHeaderLightColor {
+  background-color: rgba(240, 241, 242, 1);
+  color: black !important;
+}
+
+.accordion-button {
+  font-size: smaller;
+}
+
+.matGridContainer {
+  margin: auto;
+}
+
+.matGridTitle {
+  width: -webkit-fill-available;
+  text-align: center;
+}
+
+.index {
+  margin: 0 !important;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: initial !important;
+  box-shadow: none;
+}
+
+.accordion-item {
+  border: none;
+}
+
+.accordionDarkLineItem {
+  border-top: solid 2px rgba(0, 0, 0, 0.38);
+}
+
+.accordionLightLineItem {
+  border-top: solid 2px gray;
+}
+
+.accordion-item:last-of-type {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.accordion-item:first-of-type {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.accordion-item:last-of-type .accordion-collapse {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.evaluatedSkill {
+  margin-bottom: 2%;
+}
+
+.accordion-button::after {
+  background-image: var(--bs-accordion-btn-active-icon);
+}

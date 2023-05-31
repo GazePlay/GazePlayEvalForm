@@ -8,7 +8,6 @@ import {OrderProgressBarComponent} from './components/orderProgressBar/order-pro
 import {EvalInformationsComponent} from './components/eval/evalInformations/eval-informations.component';
 import {EvalUserComponent} from './components/eval/evalUser/eval-user.component';
 import {EvalImagesAndSoundsComponent} from "./components/eval/evalImagesAndSounds/eval-images-and-sounds.component";
-import {ChooseSoundComponent} from './components/chooseSound/choose-sound.component';
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import {EvalGetZipComponent} from './components/eval/evalGetZip/eval-get-zip.component';
@@ -23,7 +22,10 @@ import { DeleteAlertComponent } from './components/alert/deleteAlert/delete-aler
 import { SettingsComponent } from './components/settings/settings.component';
 import { PlayerRecorderComponent } from './components/playerRecorder/player-recorder.component';
 import {NgxDropzoneModule} from "ngx-dropzone";
+import {NgxFileDropModule} from 'ngx-file-drop';
 import { InfoAlertComponent } from './components/alert/infoAlert/info-alert.component';
+import { AutomaticEvalComponent } from './components/generateEval/automatic/automatic-eval.component';
+import { ManualEvalComponent } from './components/generateEval/manual/manual-eval.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,6 @@ import { InfoAlertComponent } from './components/alert/infoAlert/info-alert.comp
     EvalInformationsComponent,
     EvalUserComponent,
     EvalImagesAndSoundsComponent,
-    ChooseSoundComponent,
     EvalGetZipComponent,
     EvalScoresComponent,
     MenuComponent,
@@ -42,7 +43,9 @@ import { InfoAlertComponent } from './components/alert/infoAlert/info-alert.comp
     DeleteAlertComponent,
     SettingsComponent,
     PlayerRecorderComponent,
-    InfoAlertComponent
+    InfoAlertComponent,
+    AutomaticEvalComponent,
+    ManualEvalComponent
   ],
     imports: [
         BrowserModule,
@@ -54,7 +57,8 @@ import { InfoAlertComponent } from './components/alert/infoAlert/info-alert.comp
         MatGridListModule,
         CdkDropListGroup,
         MatTooltipModule,
-        NgxDropzoneModule
+        NgxDropzoneModule,
+        NgxFileDropModule
     ],
   providers: [
     MatDialog
