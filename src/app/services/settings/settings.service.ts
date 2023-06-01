@@ -18,6 +18,8 @@ export class SettingsService {
   timeForMessageInfoAlert = 1000; // c'est en millisecondes
   messageInfoAlertObservable = new Subject<string[]>();
 
+  generateEvalAuto: boolean = false;
+
   constructor() { }
 
   openModal(value: boolean){

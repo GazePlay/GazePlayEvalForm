@@ -35,6 +35,13 @@ export class EvalImagesAndSoundsComponent implements OnInit {
     this.cardHeaderTheme = this.themeService.cardTheme[1];
     this.cardTextTheme = this.themeService.cardTheme[2];
     this.buttonTheme = this.themeService.cardTheme[3];
+
+    this.themeService.cardThemeObservable.subscribe(value => {
+      this.cardTheme = value[0];
+      this.cardHeaderTheme = value[1];
+      this.cardTextTheme = value[2];
+      this.buttonTheme = value[3];
+    });
   }
 
   ngOnInit(): void {
@@ -51,6 +58,7 @@ export class EvalImagesAndSoundsComponent implements OnInit {
   }
 
   manual(){
+    this.settingsService.generateEvalAuto = false;
     this.router.navigate(['/manual']);
   }
 
@@ -58,10 +66,6 @@ export class EvalImagesAndSoundsComponent implements OnInit {
     this.router.navigate(['/auto']);
   }
 
-  next() {
-    this.settingsService.saveAuto();
-    this.router.navigate(['/zip']);
-  }
 
   previous() {
     this.settingsService.saveAuto();

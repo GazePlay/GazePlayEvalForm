@@ -38,6 +38,7 @@ export class AutomaticEvalComponent implements OnInit{
   unzipImg: any[] = [];
   listImagesToDisplay: String[] = [];
   listImagesToZip: any[][] = [];
+  nbImgUpload: number = 0;
 
   nbItems: number = 1;
   minCols: number = 1;
@@ -79,6 +80,7 @@ export class AutomaticEvalComponent implements OnInit{
 
   ngOnInit() {
     //this.canAccess();
+    this.evalGenerationService.reset();
   }
 
   canAccess(){
@@ -89,7 +91,6 @@ export class AutomaticEvalComponent implements OnInit{
 
   dropFile(droppedFiles: NgxFileDropEntry[]){
     for (const droppedFile of droppedFiles) {
-
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
@@ -110,6 +111,7 @@ export class AutomaticEvalComponent implements OnInit{
       reader.onload = () => {
         this.listImagesToDisplay.push(String(reader.result));
         this.listImagesToZip.push([file.name, file]);
+        this.nbImgUpload ++;
       };
     } catch (e) {
       console.log("Error");
@@ -147,6 +149,7 @@ export class AutomaticEvalComponent implements OnInit{
           this.listImagesToDisplay.push(this.unzipImg[i][0]);
           this.listImagesToZip.push([this.unzipImg[i][1], this.unzipImg[i][2]])
         }
+        this.nbImgUpload = this.listImagesToDisplay.length;
       }
     }, 1000);
   }
@@ -265,11 +268,10 @@ export class AutomaticEvalComponent implements OnInit{
   }
 
   generate() {
-    console.log(this.listImagesToDisplay);
-    console.log(this.listImagesToZip);
+    this.settingsService.generateEvalAuto = true;
     this.settingsService.saveAuto();
     this.evalGenerationService.setupEvalGeneration(this.listImagesToDisplay, this.listImagesToZip);
-    //this.router.navigate(['/manual']);
+    this.router.navigate(['/manual']);
   }
 
   previous() {

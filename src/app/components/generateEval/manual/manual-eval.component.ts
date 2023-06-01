@@ -296,12 +296,15 @@ export class ManualEvalComponent implements OnInit{
 
   next() {
     this.settingsService.saveAuto();
-    console.log(this.evalJsonService.songToDisplay);
     this.router.navigate(['/zip']);
   }
 
   previous() {
     this.settingsService.saveAuto();
-    this.router.navigate(['/assets']);
+    if (this.settingsService.generateEvalAuto){
+      this.router.navigate(['/auto']);
+    }else {
+      this.router.navigate(['/assets']);
+    }
   }
 }
