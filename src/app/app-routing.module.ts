@@ -8,6 +8,7 @@ import {EvalGetZipComponent} from "./components/eval/evalGetZip/eval-get-zip.com
 import {EvalScoresComponent} from "./components/eval/evalScores/eval-scores.component";
 import {AutomaticEvalComponent} from "./components/generateEval/automatic/automatic-eval.component";
 import {ManualEvalComponent} from "./components/generateEval/manual/manual-eval.component";
+import {LoadingPageComponent} from "./components/loading/loading-page.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'zip', component: EvalGetZipComponent},
   {path: 'auto', component: AutomaticEvalComponent},
   {path: 'manual', component: ManualEvalComponent},
+  {path: 'loading', component: LoadingPageComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 

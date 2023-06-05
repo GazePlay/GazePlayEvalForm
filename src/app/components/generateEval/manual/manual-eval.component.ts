@@ -78,8 +78,8 @@ export class ManualEvalComponent implements OnInit{
       this.router.navigate(['/home']);
     }else {
       this.listScores = this.evalJsonService.skillToEvaluate;
-      this.updateImgAndSong();
       this.updateScores();
+      this.updateAccordionConstructor();
     }
   }
 
@@ -254,6 +254,11 @@ export class ManualEvalComponent implements OnInit{
     this.nbImgToSee = this.evalJsonService.nbImgToSee;
     this.imgToDisplay = this.evalJsonService.imgToDisplay;
     this.songToDisplay = this.evalJsonService.songToDisplay;
+  }
+
+  updateAccordionConstructor(){
+    this.nbItem++;
+    this.nbItem--;
   }
 
   getSrcAudioFile(index: number) {

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {EvalJsonService} from "../json/eval-json.service";
 import arrayShuffle from "array-shuffle";
+import {SettingsService} from "../settings/settings.service";
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,8 @@ export class EvalGenerationService {
   maxIndex = 0;
   indexImgUse: number[] = [];
 
-  constructor(private evalJsonService: EvalJsonService) { }
+  constructor(private evalJsonService: EvalJsonService,
+              private settingsService: SettingsService) { }
 
   setupEvalGeneration(displayImg: String[], zipImg: any[][]){
     this.listImagesToDisplay = displayImg;
@@ -46,6 +48,7 @@ export class EvalGenerationService {
     this.generateMinMaxValues();
     this.generateImg();
     this.updateGrid();
+    this.settingsService.onLoadingAlert();
 
     /*console.log("Img to display");
     console.log(this.imgToDisplay);
@@ -61,8 +64,8 @@ export class EvalGenerationService {
     let minRow = Math.ceil(this.minRows);
     let maxRow = Math.floor(Number(this.maxRows) + 1);
 
-    let minFixationLength = Math.ceil(this.minFixationLength);
-    let maxFixationLength = Math.floor(Number(this.maxFixationLength) + 1);
+    let minFixationLength = this.minFixationLength;
+    let maxFixationLength = Number(this.maxFixationLength) + 1;
 
     let minGoodAnswer = Math.ceil(this.minGoodAnswer);
     let maxGoodAnswer = Math.floor(Number(this.maxGoodAnswer) + 1);
@@ -70,12 +73,13 @@ export class EvalGenerationService {
     for (let i=0; i<this.nbItems; i++){
       this.cols.push(Math.floor(Math.random() * (maxCol - minCol) + minCol));
       this.rows.push(Math.floor(Math.random() * (maxRow - minRow) + minRow));
-      this.fixationLength.push(Math.floor(Math.random() * (maxFixationLength - minFixationLength) + minFixationLength));
+      this.fixationLength.push(Math.random() * (maxFixationLength - minFixationLength) + minFixationLength);
       this.nbImgToSee.push(Math.floor(Math.random() * (maxGoodAnswer - minGoodAnswer) + minGoodAnswer));
       this.imgToDisplay.push([]);
       this.imgToZip.push([]);
       this.songToDisplay.push(["", "", ""]);
     }
+    console.log(this.fixationLength);
   }
 
   generateImg(){

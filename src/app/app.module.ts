@@ -26,6 +26,7 @@ import {NgxFileDropModule} from 'ngx-file-drop';
 import { InfoAlertComponent } from './components/alert/infoAlert/info-alert.component';
 import { AutomaticEvalComponent } from './components/generateEval/automatic/automatic-eval.component';
 import { ManualEvalComponent } from './components/generateEval/manual/manual-eval.component';
+import { LoadingPageComponent } from './components/loading/loading-page.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ManualEvalComponent } from './components/generateEval/manual/manual-eva
     PlayerRecorderComponent,
     InfoAlertComponent,
     AutomaticEvalComponent,
-    ManualEvalComponent
+    ManualEvalComponent,
+    LoadingPageComponent
   ],
     imports: [
         BrowserModule,

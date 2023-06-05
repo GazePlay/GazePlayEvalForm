@@ -11,6 +11,8 @@ export class SettingsService {
 
   deleteElemWhitModalObservable = new Subject<boolean>();
 
+  onLoadingObservable = new Subject<boolean>();
+
   infoAlert: any;
   titleInfoAlertMessage: string = " Sauvegarde";
   contentInfoAlertMessage: string = "Une sauvegarde automatique a été effectuer !";
@@ -33,6 +35,10 @@ export class SettingsService {
 
   changeMessageInfoAlert(title: string, content: string){
     this.messageInfoAlertObservable.next([title, content]);
+  }
+
+  onLoadingAlert(){
+    this.onLoadingObservable.next(true);
   }
 
   saveAuto(){

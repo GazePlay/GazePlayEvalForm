@@ -79,7 +79,7 @@ export class AutomaticEvalComponent implements OnInit{
   }
 
   ngOnInit() {
-    //this.canAccess();
+    this.canAccess();
     this.evalGenerationService.reset();
   }
 
@@ -270,8 +270,9 @@ export class AutomaticEvalComponent implements OnInit{
   generate() {
     this.settingsService.generateEvalAuto = true;
     this.settingsService.saveAuto();
-    this.evalGenerationService.setupEvalGeneration(this.listImagesToDisplay, this.listImagesToZip);
-    this.router.navigate(['/manual']);
+    this.router.navigate(['/loading']).then(() => {
+      this.evalGenerationService.setupEvalGeneration(this.listImagesToDisplay, this.listImagesToZip);
+    });
   }
 
   previous() {
