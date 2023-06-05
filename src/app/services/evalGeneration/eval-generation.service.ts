@@ -65,7 +65,7 @@ export class EvalGenerationService {
     let maxRow = Math.floor(Number(this.maxRows) + 1);
 
     let minFixationLength = this.minFixationLength;
-    let maxFixationLength = Number(this.maxFixationLength) + 1;
+    let maxFixationLength = this.maxFixationLength;
 
     let minGoodAnswer = Math.ceil(this.minGoodAnswer);
     let maxGoodAnswer = Math.floor(Number(this.maxGoodAnswer) + 1);
@@ -73,13 +73,12 @@ export class EvalGenerationService {
     for (let i=0; i<this.nbItems; i++){
       this.cols.push(Math.floor(Math.random() * (maxCol - minCol) + minCol));
       this.rows.push(Math.floor(Math.random() * (maxRow - minRow) + minRow));
-      this.fixationLength.push(Math.random() * (maxFixationLength - minFixationLength) + minFixationLength);
+      this.fixationLength.push(Number(parseFloat(String(Math.random() * (maxFixationLength - minFixationLength) + minFixationLength)).toFixed(1)));
       this.nbImgToSee.push(Math.floor(Math.random() * (maxGoodAnswer - minGoodAnswer) + minGoodAnswer));
       this.imgToDisplay.push([]);
       this.imgToZip.push([]);
       this.songToDisplay.push(["", "", ""]);
     }
-    console.log(this.fixationLength);
   }
 
   generateImg(){
@@ -101,10 +100,15 @@ export class EvalGenerationService {
           tmpImg.push(["assets/images/NeedImage.png", this.evalJsonService.skillToEvaluate.length, "", ""]);
         }
       }
+
       tmpImg = arrayShuffle(tmpImg);
-      for (let k=0; k<tmpImg.length; k++){
-        this.imgToDisplay[k].push([tmpImg[0], tmpImg[1]]);
-        this.imgToZip[k].push(tmpImg[2], tmpImg[3]);
+      let indexTmp = 0;
+      for (let k=0; k<this.imgToDisplay.length; k++){
+        for (let l=0; l<(this.cols[k] * this.rows[k]); l++){
+          this.imgToDisplay[k].push([tmpImg[indexTmp][0], tmpImg[indexTmp][1]]);
+          this.imgToZip[k].push(tmpImg[indexTmp][2], tmpImg[indexTmp][3]);
+          indexTmp++;
+        }
       }
     }
   }
