@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {OrderProgressBarService} from "../../../services/orderProgressBar/order-progress-bar.service";
 import {EvalJsonService} from "../../../services/json/eval-json.service";
-import {MatDialog} from "@angular/material/dialog";
 import {DomSanitizer} from "@angular/platform-browser";
 import {ThemeService} from "../../../services/theme/theme.service";
 import {AudioRecorderService} from "../../../services/audioRecorder/audio-recorder.service";
@@ -20,11 +19,14 @@ export class ManualEvalComponent implements OnInit{
   nbItem: number = 0;
   cols: number[] = [];
   rows: number[] = [];
+  itemLength: number[] = [];
   fixationLength: number[] = [];
   nbImgToSee: number[] = [];
   imgToDisplay: any[][][] = [];
   songToDisplay: String[][] = [];
   listScores: String[][] = [];
+  randomizeImgPos: boolean[] = [];
+  songPosition: String[] = [];
 
   cardTheme: string = "";
   cardHeaderTheme: string = "";
@@ -38,7 +40,6 @@ export class ManualEvalComponent implements OnInit{
   constructor(private router: Router,
               private orderProgressBarService: OrderProgressBarService,
               private evalJsonService: EvalJsonService,
-              private dialog: MatDialog,
               public sanitizer: DomSanitizer,
               private themeService: ThemeService,
               private audioRecorderService: AudioRecorderService,
@@ -64,7 +65,7 @@ export class ManualEvalComponent implements OnInit{
       this.accordionElementsTheme = value[7];
     });
 
-    this.audioRecorderService.audioObservable.subscribe(value => {
+    this.audioRecorderService.audioObservable.subscribe(() => {
       this.updateImgAndSong();
     });
   }
@@ -92,10 +93,13 @@ export class ManualEvalComponent implements OnInit{
     this.evalJsonService.imgToDisplay.push([]);
     this.evalJsonService.cols.push(0);
     this.evalJsonService.rows.push(0);
+    this.evalJsonService.itemLength.push(0);
     this.evalJsonService.fixationLength.push(0);
     this.evalJsonService.nbImgToSee.push(0);
     this.evalJsonService.songToDisplay.push(["", "", ""]);
     this.evalJsonService.imgToZip.push([]);
+    this.evalJsonService.randomizeImgPos.push(false);
+    this.evalJsonService.songPosition.push("together");
     this.updateImgAndSong();
   }
 
@@ -132,8 +136,23 @@ export class ManualEvalComponent implements OnInit{
     this.updateImgAndSong();
   }
 
+  setItemLength(value: any, index: number) {
+    this.evalJsonService.itemLength[index] = this.checkValue(value.target.value);
+    this.updateImgAndSong();
+  }
+
   setFixationLength(value: any, index: number) {
     this.evalJsonService.fixationLength[index] = this.checkValue(value.target.value);
+    this.updateImgAndSong();
+  }
+
+  setRandomizeImgPos(value: boolean, index: number) {
+    this.evalJsonService.randomizeImgPos[index] = value;
+    this.updateImgAndSong();
+  }
+
+  setSongPosition(value: String, index: number){
+    this.evalJsonService.songPosition[index] = value;
     this.updateImgAndSong();
   }
 
@@ -209,6 +228,18 @@ export class ManualEvalComponent implements OnInit{
     }
   }
 
+  defineImgToBeGood(indexItem: number, indexGrid: number){
+      let isGoodImg = "-isGoodImg";
+      if (this.evalJsonService.imgToZip[indexItem][indexGrid * 2].includes(isGoodImg)){
+        let getNameImage = this.evalJsonService.imgToZip[indexItem][indexGrid * 2].split(isGoodImg);
+        this.evalJsonService.imgToZip[indexItem][indexGrid * 2] = getNameImage[0] + getNameImage[1];
+      }else {
+        let getNameImage = this.evalJsonService.imgToZip[indexItem][indexGrid * 2].split(".png");
+        this.evalJsonService.imgToZip[indexItem][indexGrid * 2] = getNameImage[0] + "-isGoodImg.png";
+      }
+      this.updateImgAndSong();
+  }
+
   resetImg(indexItem: number, indexGrid: number) {
     this.evalJsonService.imgToDisplay[indexItem][indexGrid][0] = "assets/image/NeedImage.png";
     this.updateImgAndSong();
@@ -217,7 +248,10 @@ export class ManualEvalComponent implements OnInit{
   removeOneItem(index: number) {
     let tmpCols: number[] = [];
     let tmpRows: number[] = [];
+    let tmpItemLength: number[] = [];
     let tmpFixationLength: number[] = [];
+    let tmpRandomizeImgPos: boolean[] =  [];
+    let tmpSongPosition: String[] = [];
     let tmpNbImgToSee: number[] = [];
     let tmpImgToDisplay: String[][][] = [];
     let tmpSongToDisplay: String[][] = [];
@@ -227,7 +261,10 @@ export class ManualEvalComponent implements OnInit{
       if (i != index) {
         tmpCols.push(this.evalJsonService.cols[i]);
         tmpRows.push(this.evalJsonService.rows[i]);
+        tmpItemLength.push(this.evalJsonService.itemLength[i]);
         tmpFixationLength.push(this.evalJsonService.fixationLength[i]);
+        tmpRandomizeImgPos.push(this.evalJsonService.randomizeImgPos[i]);
+        tmpSongPosition.push(this.evalJsonService.songPosition[i]);
         tmpNbImgToSee.push(this.evalJsonService.nbImgToSee[i]);
         tmpImgToDisplay.push(this.evalJsonService.imgToDisplay[i]);
         tmpSongToDisplay.push(this.evalJsonService.songToDisplay[i]);
@@ -237,7 +274,10 @@ export class ManualEvalComponent implements OnInit{
 
     this.evalJsonService.cols = tmpCols;
     this.evalJsonService.rows = tmpRows;
+    this.evalJsonService.itemLength = tmpItemLength;
     this.evalJsonService.fixationLength = tmpFixationLength;
+    this.evalJsonService.randomizeImgPos = tmpRandomizeImgPos;
+    this.evalJsonService.songPosition = tmpSongPosition;
     this.evalJsonService.nbImgToSee = tmpNbImgToSee;
     this.evalJsonService.imgToDisplay = tmpImgToDisplay;
     this.evalJsonService.songToDisplay = tmpSongToDisplay;
@@ -250,7 +290,10 @@ export class ManualEvalComponent implements OnInit{
     this.nbItem = this.evalJsonService.nbItem;
     this.rows = this.evalJsonService.rows;
     this.cols = this.evalJsonService.cols;
+    this.itemLength = this.evalJsonService.itemLength;
     this.fixationLength = this.evalJsonService.fixationLength;
+    this.randomizeImgPos = this.evalJsonService.randomizeImgPos;
+    this.songPosition = this.evalJsonService.songPosition;
     this.nbImgToSee = this.evalJsonService.nbImgToSee;
     this.imgToDisplay = this.evalJsonService.imgToDisplay;
     this.songToDisplay = this.evalJsonService.songToDisplay;
@@ -277,7 +320,10 @@ export class ManualEvalComponent implements OnInit{
     if (indexItem != 0) {
       moveItemInArray(this.rows, indexItem, indexItem - 1);
       moveItemInArray(this.cols, indexItem, indexItem - 1);
+      moveItemInArray(this.itemLength, indexItem, indexItem - 1);
       moveItemInArray(this.fixationLength, indexItem, indexItem - 1);
+      moveItemInArray(this.randomizeImgPos, indexItem, indexItem - 1);
+      moveItemInArray(this.songPosition, indexItem, indexItem - 1);
       moveItemInArray(this.nbImgToSee, indexItem, indexItem - 1);
       moveItemInArray(this.imgToDisplay, indexItem, indexItem - 1);
       moveItemInArray(this.songToDisplay, indexItem, indexItem - 1);
@@ -290,7 +336,10 @@ export class ManualEvalComponent implements OnInit{
     if (indexItem != (this.imgToDisplay.length - 1)) {
       moveItemInArray(this.rows, indexItem, indexItem + 1);
       moveItemInArray(this.cols, indexItem, indexItem + 1);
+      moveItemInArray(this.itemLength, indexItem, indexItem + 1);
       moveItemInArray(this.fixationLength, indexItem, indexItem + 1);
+      moveItemInArray(this.randomizeImgPos, indexItem, indexItem + 1);
+      moveItemInArray(this.songPosition, indexItem, indexItem + 1);
       moveItemInArray(this.nbImgToSee, indexItem, indexItem + 1);
       moveItemInArray(this.imgToDisplay, indexItem, indexItem + 1);
       moveItemInArray(this.songToDisplay, indexItem, indexItem + 1);

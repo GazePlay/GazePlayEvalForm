@@ -27,6 +27,7 @@ import { InfoAlertComponent } from './components/alert/infoAlert/info-alert.comp
 import { AutomaticEvalComponent } from './components/generateEval/automatic/automatic-eval.component';
 import { ManualEvalComponent } from './components/generateEval/manual/manual-eval.component';
 import { LoadingPageComponent } from './components/loading/loading-page.component';
+import {MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { LoadingPageComponent } from './components/loading/loading-page.componen
         CdkDropListGroup,
         MatTooltipModule,
         NgxDropzoneModule,
-        NgxFileDropModule
+        NgxFileDropModule,
+        MatRadioModule
     ],
   providers: [
     MatDialog

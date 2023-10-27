@@ -18,9 +18,12 @@ export class EvalJsonService {
   songToDisplay: String[][] = [];
   cols: number[] = [];
   rows: number[] = [];
+  itemLength:  number[] = [];
   fixationLength: number[] = [];
   nbImgToSee: number[] = [];
   imgToZip: String[][] = [];
+  randomizeImgPos: boolean[] = [];
+  songPosition: String[] = [];
 
   constructor() {
   }
@@ -65,6 +68,9 @@ export class EvalJsonService {
       config[i].push(this.songToDisplay[i][0]);
       config[i].push(this.nbImgToSee[i]);
       config[i].push(this.fixationLength[i] * 1000); //seconds to milliseconds
+      config[i].push(this.itemLength[i] * 1000);
+      config[i].push(this.randomizeImgPos[i]);
+      config[i].push(this.songPosition[i]);
     }
     return config;
   }
@@ -102,7 +108,10 @@ export class EvalJsonService {
     this.songToDisplay = [];
     this.cols = [];
     this.rows = [];
+    this.itemLength = [];
     this.fixationLength = [];
+    this.randomizeImgPos = [];
+    this.songPosition = [];
     this.nbImgToSee = [];
     this.imgToZip = [];
   }
@@ -128,7 +137,10 @@ export class EvalJsonService {
       this.songToDisplay,
       this.cols,
       this.rows,
+      this.itemLength,
       this.fixationLength,
+      this.randomizeImgPos,
+      this.songPosition,
       this.nbImgToSee,
       this.imgToZip
     ]
@@ -143,8 +155,11 @@ export class EvalJsonService {
     this.songToDisplay = value[5];
     this.cols = value[6];
     this.rows = value[7];
-    this.fixationLength = value[8];
-    this.nbImgToSee = value[9];
-    this.imgToZip = value[10];
+    this.itemLength = value[8];
+    this.fixationLength = value[9];
+    this.randomizeImgPos = value[10];
+    this.songPosition = value[11];
+    this.nbImgToSee = value[12];
+    this.imgToZip = value[13];
   }
 }
