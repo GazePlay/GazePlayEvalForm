@@ -9,6 +9,7 @@ import {EvalScoresComponent} from "./components/eval/evalScores/eval-scores.comp
 import {AutomaticEvalComponent} from "./components/generateEval/automatic/automatic-eval.component";
 import {ManualEvalComponent} from "./components/generateEval/manual/manual-eval.component";
 import {LoadingPageComponent} from "./components/loading/loading-page.component";
+import {ImportEvalComponent} from "./components/importEval/import-eval.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'auto', component: AutomaticEvalComponent},
   {path: 'manual', component: ManualEvalComponent},
   {path: 'loading', component: LoadingPageComponent},
+  {path: 'import', component: ImportEvalComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 

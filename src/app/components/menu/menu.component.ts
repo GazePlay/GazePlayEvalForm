@@ -4,6 +4,8 @@ import {ThemeService} from "../../services/theme/theme.service";
 import {OrderProgressBarService} from "../../services/orderProgressBar/order-progress-bar.service";
 import {EvalJsonService} from "../../services/json/eval-json.service";
 import {SettingsService} from "../../services/settings/settings.service";
+import {ImportEvalComponent} from "../importEval/import-eval.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-menu',
@@ -30,7 +32,8 @@ export class MenuComponent{
               private themeService: ThemeService,
               private orderProgressBarService: OrderProgressBarService,
               private evalJsonService: EvalJsonService,
-              private settingsService: SettingsService) {
+              private settingsService: SettingsService,
+              private dialog: MatDialog) {
 
     this.offcanvas = this.themeService.menuTheme[0];
     this.closeButton = this.themeService.menuTheme[1];
@@ -68,5 +71,9 @@ export class MenuComponent{
     this.delayForCloseInfoAlert = setTimeout(() => {
       this.infoAlert.style = "display: none !important";
     }, this.settingsService.timeForMessageInfoAlert);
+  }
+
+  import(){
+    this.router.navigate(['/import']);
   }
 }

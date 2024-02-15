@@ -28,6 +28,7 @@ import { AutomaticEvalComponent } from './components/generateEval/automatic/auto
 import { ManualEvalComponent } from './components/generateEval/manual/manual-eval.component';
 import { LoadingPageComponent } from './components/loading/loading-page.component';
 import {MatRadioModule} from "@angular/material/radio";
+import { ImportEvalComponent } from './components/importEval/import-eval.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import {MatRadioModule} from "@angular/material/radio";
     InfoAlertComponent,
     AutomaticEvalComponent,
     ManualEvalComponent,
-    LoadingPageComponent
+    LoadingPageComponent,
+    ImportEvalComponent
   ],
     imports: [
         BrowserModule,

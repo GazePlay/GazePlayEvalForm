@@ -162,4 +162,25 @@ export class EvalJsonService {
     this.nbImgToSee = value[12];
     this.imgToZip = value[13];
   }
+
+  logInfo() {
+    console.log("Name Eval = " + this.nameEval);
+    console.log("Info patient = " + this.infoPatient);
+    console.log("Skill To Evaluate = " + this.skillToEvaluate);
+    console.log("Output = " + this.output);
+    console.log("Img To Display = " + this.imgToDisplay);
+    console.log("Song To Display = " + this.songToDisplay);
+    console.log("Cols = " + this.cols);
+    console.log("Rows = " + this.rows);
+    console.log("Item Length = " + this.itemLength);
+    console.log("Fixation Length = " + this.fixationLength);
+    console.log("Randomize Img Pos = " + this.randomizeImgPos);
+    console.log("Song Position = " + this.songPosition);
+    console.log("Nb Img To See = " + this.nbImgToSee);
+    console.log("Img To Zip = " + this.imgToZip);
+  }
+
+  importZip(){
+
+  }
 }

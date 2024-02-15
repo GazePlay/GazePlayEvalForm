@@ -54,6 +54,8 @@ export class ManualEvalComponent implements OnInit{
     this.accordionItemTheme = this.themeService.cardTheme[6];
     this.accordionElementsTheme = this.themeService.cardTheme[7];
 
+    this.nbItem = this.evalJsonService.nbItem;
+
     this.themeService.cardThemeObservable.subscribe(value => {
       this.cardTheme = value[0];
       this.cardHeaderTheme = value[1];
@@ -210,7 +212,9 @@ export class ManualEvalComponent implements OnInit{
   }
 
   addImg(value: any, indexItem: number, indexGrid: number) {
+    console.log(this.evalJsonService.imgToDisplay)
     const image = value.target.files[0];
+    console.log(image)
     const reader = new FileReader();
     try {
       reader.readAsDataURL(image);
@@ -226,6 +230,7 @@ export class ManualEvalComponent implements OnInit{
     } finally {
       this.updateImgAndSong();
     }
+    console.log(this.evalJsonService.imgToDisplay)
   }
 
   defineImgToBeGood(indexItem: number, indexGrid: number){

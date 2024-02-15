@@ -1,0 +1,22 @@
+<div>
+  <div class="container">
+    <h1>Importer une évaluation</h1>
+    <p>
+      Déposer le dossier .zip contenant l'évaluation:
+    </p>
+    <div>
+      <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropFile($event)" [disabled]="startUnzip">
+        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+          {{dropZoneText}}
+        </ng-template>
+      </ngx-file-drop>
+    </div>
+  </div>
+  <br>
+  <p *ngIf="startUnzip">
+    Chargement en cours ! Merci de patienter...
+  </p>
+  <div class="progress center-block">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuemin="0" aria-valuemax="100" [style]="uploadFileProgress"></div>
+  </div>
+</div>

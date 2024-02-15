@@ -28,6 +28,9 @@
       <button [class]="navbarButton" data-bs-dismiss="offcanvas">
         <div><h5><span [class]="text"><i class="fa-solid fa-download"></i> Charger</span></h5></div>
       </button>
+      <button [class]="navbarButton" data-bs-dismiss="offcanvas" (click)="import()">
+        <div><h5><span [class]="text"><i class="fa-solid fa-download"></i> Importer</span></h5></div>
+      </button>
       <span class="navbar-text" [class]="text">
         <h4>
           Guide

@@ -60,4 +60,8 @@ export class EvalGetZipComponent implements OnInit {
     this.settingsService.saveAuto();
     this.router.navigate(['/assets']);
   }
+
+  getPreview() {
+    this.evalJsonService.logInfo();
+  }
 }
