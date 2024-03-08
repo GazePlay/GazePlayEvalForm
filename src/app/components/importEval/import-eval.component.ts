@@ -3,6 +3,7 @@ import {NgxFileDropEntry} from "ngx-file-drop";
 import * as JSZip from "jszip";
 import {EvalJsonService} from "../../services/json/eval-json.service";
 import {Router} from "@angular/router";
+import {Buffer} from 'buffer';
 
 @Component({
   selector: 'app-import-eval',
@@ -69,12 +70,12 @@ export class ImportEvalComponent {
                 clearInterval(intervalInfo);
                 setTimeout(() => {
                   this.setupZip();
-                  //this.logAll();
                 }, 2000);
               } else if (!this.onGettingInfo){
                 this.onGettingInfo = true;
                 this.imgToDisplay.push([]);
                 this.imgToZip.push([]);
+
                 this.getItems(startIndexInfo);
                 startIndexInfo++;
                 this.uploadFilePercentage += this.uploadFileStep;
@@ -114,7 +115,7 @@ export class ImportEvalComponent {
   extractJson(){
     this.unzipEval.forEach((item: any) => {
       if (item[1].includes(".json")){
-        this.unzipJson = JSON.parse(atob(item[0].replace("data:application/octet-stream;base64,", "")));
+        this.unzipJson = JSON.parse(Buffer.from(item[0].replace("data:application/octet-stream;base64,", ""), 'base64').toString('utf-8'));
       }
     });
   }
@@ -139,6 +140,7 @@ export class ImportEvalComponent {
   }
 
   extractImage(imageName: any, imageFile: any){
+
     const reader = new FileReader();
     this.onReading = true;
     try {
@@ -206,8 +208,9 @@ export class ImportEvalComponent {
       this.imgToZip[this.unzipIndex].push("", "");
     }else {
       this.unzipEval.forEach((item: any) => {
-        if (item[1].includes(nameImage)){
-          this.extractImage(nameImage, item[2])
+        let textToCheck = item[1].split("/").pop();
+        if (textToCheck == nameImage){
+          this.extractImage(nameImage, item[2]);
         }
       });
     }
@@ -222,7 +225,7 @@ export class ImportEvalComponent {
       console.log("Rows = " + this.rows);
       console.log("Cols = " + this.cols);
       console.log("Img To Display = " + this.imgToDisplay);
-      console.log("Img To Zip = " + this.imgToZip);
+      //console.log("Img To Zip = " + this.imgToZip);
       //console.log("Song To Display = " + this.songToDisplay);
       console.log("Nb Img To See = " + this.nbImgToSee);
       console.log("Fixation Length = " + this.fixationLength);
@@ -249,10 +252,13 @@ export class ImportEvalComponent {
     this.evalJsonService.randomizeImgPos = this.randomizeImgPos;
     this.evalJsonService.songPosition = this.songPosition;
 
-    //this.evalJsonService.createEval();
-    this.orderProgress = document.getElementById("orderProgressBar");
-    this.orderProgress.style = "";
-    this.startUnzip = false;
-    this.router.navigate(['/informations']);
+    //this.logAll();
+
+    setTimeout(() => {
+      this.orderProgress = document.getElementById("orderProgressBar");
+      this.orderProgress.style = "";
+      this.startUnzip = false;
+      this.router.navigate(['/informations']);
+    }, 2000)
   }
 }
